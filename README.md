@@ -191,6 +191,7 @@ OpenRelief welcomes contributions from NGO practitioners, disaster information w
 
 Before contributing, please read:
 
+- [VOLUNTEERS.md](./VOLUNTEERS.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Security Policy](SECURITY.md)
