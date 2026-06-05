@@ -4,11 +4,11 @@ OpenRelief is the next-stage open-source effort of a humanitarian relief initiat
 
 ## From NCP Relief to OpenRelief
 
-NCP Life Support developed experience in online support, help intake, volunteer coordination, medical and community assistance, and public-facing response workflows. OpenRelief aims to preserve this practical experience while building a more open, reusable, AI-assisted infrastructure for humanitarian response.
+NCP Relief developed experience in online support, help intake, volunteer coordination, medical and community assistance, and public-facing response workflows. OpenRelief aims to preserve this practical experience while building a more open, reusable, AI-assisted infrastructure for humanitarian response.
 
 ## Relationship to Zhuoming Info Aid
 
-Much of the team's experience and methodology comes from Zhuoming Disaster Information Service Center. Zhuoming's disaster information service practice emphasizes:
+Much of the team's experience and methodology comes from Zhuoming Info Aid. Zhuoming's disaster information service practice emphasizes:
 
 - collecting fragmented disaster information;
 - verifying and structuring reports;
