@@ -45,9 +45,9 @@ OpenRelief needs both technical volunteers and practice-based humanitarian infor
 
 These roles work together to transform fragmented disaster information into structured, reviewable, privacy-aware records for humanitarian action.
 
-See
+See:
 
-[volunteer-operations.md](volunteer-operations.md)
+* [volunteer-operations.md](volunteer-operations.md)
 
 ### AI, Technology, and Data Roles
 
