@@ -50,7 +50,7 @@ Their work helps preserve operational memory, clarify the role of self-organized
 - **[应急管理中众包的理论内蕴与实践价值](https://dylc.cbpt.cnki.net/portal/journal/portal/client/paper/f44d9af6bf2a57871072a8f4bd8f59d3)**  
   Notes: Discusses the theoretical meaning and practical value of crowdsourcing in emergency management.
 
-- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
+- **[联合国新闻: 人类在灾害中成长](https://news.un.org/zh/story/2023/08/1120742)**  
   Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
 
 #### Naming Note
