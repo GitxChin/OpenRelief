@@ -73,35 +73,72 @@ Application code is intentionally deferred until the product scope and implement
 OpenRelief/
 ├── README.md
 ├── ACKNOWLEDGEMENTS.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── SECURITY.md
-├── GOVERNANCE.md
-├── ROADMAP.md
 ├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── GOVERNANCE.md
+├── LICENSE
+├── ROADMAP.md
+├── SECURITY.md
+├── VOLUNTEERS.md
+│
 ├── product/
-│   ├── prd.md
+│   ├── acceptance-criteria.md
 │   ├── mvp-scope.md
 │   ├── personas.md
+│   ├── prd.md
 │   ├── user-journeys.md
-│   ├── workflows.md
-│   └── acceptance-criteria.md
+│   └── workflows.md
+│
 ├── docs/
-│   ├── project-background.md
-│   ├── architecture.md
-│   ├── research-foundations.md
-│   ├── humanitarian-use-cases.md
-│   ├── data-model.md
 │   ├── ai-workflows.md
+│   ├── architecture.md
+│   ├── data-model.md
+│   ├── humanitarian-use-cases.md
+│   ├── project-background.md
+│   ├── research-foundations.md
 │   ├── safety-privacy-and-ethics.md
 │   ├── threat-model.md
 │   └── volunteer-operations.md
+│
 ├── ai/
 │   ├── prompts/
+│   │   ├── help-request-structuring.md
+│   │   ├── needs-classification.md
+│   │   ├── report-drafting.md
+│   │   ├── resource-matching.md
+│   │   └── urgency-triage.md
+│   │
 │   ├── policies/
+│   │   ├── ai-output-policy.md
+│   │   ├── escalation-rules.md
+│   │   └── human-in-the-loop.md
+│   │
 │   └── evals/
+│       ├── README.md
+│       ├── scoring-rubric.md
+│       ├── test-cases/
+│       │   └── help-request-structuring.json
+│       └── safety-cases/
+│           └── unsafe-medical-advice.json
+│
 ├── examples/
+│   ├── demo-relief-workflow.md
+│   ├── sample-help-request.json
+│   └── sample-resource-offer.json
+│
+├── work/
+│   ├── aidr_text.txt
+│   ├── crisissense_llm_text.txt
+│   ├── deep_learning_rescue_scheduling_text.txt
+│   ├── extract_docx_text.py
+│   ├── extract_pdf_text.py
+│   ├── identify_emergency_messages_deep_learning_text.txt
+│   ├── intelligent_disaster_response_social_media_survey_text.txt
+│   ├── openrelief_ngo_repo_architecture_suggestion_text.txt
+│   ├── social_media_situation_awareness_text.txt
+│   └── socially_enhanced_sa_survey_text.txt
+│
 └── .github/
     ├── ISSUE_TEMPLATE/
     └── PULL_REQUEST_TEMPLATE.md
