@@ -21,44 +21,40 @@ Their work helps preserve operational memory, clarify the role of self-organized
 * **[Understanding the role of self-organizations in disaster relief during COVID-19](https://pmc.ncbi.nlm.nih.gov/articles/PMC8986543/)**
   ScienceDirect: [Link](https://www.sciencedirect.com/science/article/abs/pii/S2212420922001467)
   PMC Open Access: [Link](https://pmc.ncbi.nlm.nih.gov/articles/PMC8986543/)
-  Notes: Discusses self-organized disaster relief during COVID-19, including NCP Life Support Network-related practice.
+  Notes: Discusses self-organized disaster relief during COVID-19, including NCP Relief-related practice.
 
 * **[Digital volunteer services in emergency situations: typological characteristics, advantages, and challenges](https://www.sciencedirect.com/science/article/pii/S2666764924000389)**
   ScienceDirect: [Link](https://www.sciencedirect.com/science/article/pii/S2666764924000389)
-  Notes: Studies digital volunteer services in emergency situations and includes NCP life support network-related practice as part of its case analysis.
+  Notes: Studies digital volunteer services in emergency situations and includes NCP Relief-related practice as part of its case analysis.
 
 * **[Crisis crowdsourcing and China’s civic participation in disaster response: Evidence from earthquake relief](https://journals.sagepub.com/doi/10.1177/0920203X17735668)**
   SAGE: [Link](https://journals.sagepub.com/doi/10.1177/0920203X17735668)
   ResearchGate: [Link](https://www.researchgate.net/publication/320970813_Crisis_crowdsourcing_and_China%27s_civic_participation_in_disaster_response_Evidence_from_earthquake_relief)
-  Notes: Examines crisis crowdsourcing and civic participation in China’s disaster response, including Zhuoming-related disaster information practice.
+  Notes: Examines crisis crowdsourcing and civic participation in China’s disaster response, including Zhuoming Info Aid-related disaster information practice.
 
 * **[Civil Societies and Disaster Risk Reduction in China: Policy and Literature Analysis](https://www.mdpi.com/2071-1050/17/23/10644)**
   MDPI: [Link](https://www.mdpi.com/2071-1050/17/23/10644)
-  Notes: Reviews civil society participation in disaster risk reduction in China and discusses Zhuoming Disaster Information Service Centre as an example of web-enabled civil society practice.
+  Notes: Reviews civil society participation in disaster risk reduction in China and discusses Zhuoming Info Aid as an example of web-enabled civil society practice.
 
 * **[Building Up Alliances and Breaking Down the State Monopoly: The Rise of Non-Governmental Disaster Relief in China](https://www.cambridge.org/core/journals/china-quarterly/article/building-up-alliances-and-breaking-down-the-state-monopoly-the-rise-of-nongovernmental-disaster-relief-in-china/BB0BD19CA808472BE18A3D4EEA6FA2BE)**
   Cambridge Core: [Link](https://www.cambridge.org/core/journals/china-quarterly/article/building-up-alliances-and-breaking-down-the-state-monopoly-the-rise-of-nongovernmental-disaster-relief-in-china/BB0BD19CA808472BE18A3D4EEA6FA2BE)
-  Notes: Analyzes the rise of non-governmental disaster relief in China and references Zhuoming Disaster Information and Service Center-related materials.
+  Notes: Analyzes the rise of non-governmental disaster relief in China and references Zhuoming Info Aid-related materials.
 
 * **[Security Governance in East Asia and China’s Response to COVID-19](https://link.springer.com/article/10.1007/s40647-020-00312-4)**
   Springer: [Link](https://link.springer.com/article/10.1007/s40647-020-00312-4)
-  Notes: Provides context on China’s COVID-19 response and includes references to NCP Life Support-related civic action.
+  Notes: Provides context on China’s COVID-19 response and includes references to NCP Relief-related civic action.
 
 * **[Virtual care facing the COVID-19 outbreak in China in the digital age: from mutual support to structural inequality](https://bristoluniversitypressdigital.com/abstract/journals/ijcc/6/1-2/article-p275.xml)**
   Bristol University Press: [Link](https://bristoluniversitypressdigital.com/abstract/journals/ijcc/6/1-2/article-p275.xml)
   Notes: Discusses grassroots mutual aid and virtual care during the COVID-19 outbreak, including NCP Relief-related practice.
 
-* **[An ecosystem-oriented business model to promote well-being: the case of sustainable community regeneration in Xiamen, China](https://www.tandfonline.com/doi/full/10.1080/13602381.2024.2388243)**
-  Taylor & Francis: [Link](https://www.tandfonline.com/doi/full/10.1080/13602381.2024.2388243)
-  Notes: Provides related discussion on community regeneration, social support, and civil society collaboration.
-
 * **[China’s Disaster Diplomacy in Southeast Asia](https://www.jstor.org/stable/48635893)**
   JSTOR: [Link](https://www.jstor.org/stable/48635893)
-  Notes: Includes references to Chinese disaster response actors and Zhuoming-related technical support in disaster information contexts.
+  Notes: Includes references to Chinese disaster response actors and Zhuoming Info Aid-related technical support in disaster information contexts.
 
 * **[Effects of Alliance Process on Goal Achievement](https://www.jstor.org/stable/45147495)**
   JSTOR: [Link](https://www.jstor.org/stable/45147495)
-  Notes: Uses Zhuoming Disaster Information Service Center-related materials in the study of alliance processes and goal achievement.
+  Notes: Uses Zhuoming Info Aid-related materials in the study of alliance processes and goal achievement.
 
 ### Chinese Academic Materials
 
@@ -78,19 +74,15 @@ Their work helps preserve operational memory, clarify the role of self-organized
 
 * **[Comparative Research on Disaster Philanthropy Fundraising](https://daofengandangelafoundation.org/wp-content/uploads/2022/01/comparative-research-on-disaster-philanthropy-fundraising.pdf)**
   PDF: [Link](https://daofengandangelafoundation.org/wp-content/uploads/2022/01/comparative-research-on-disaster-philanthropy-fundraising.pdf)
-  Notes: Includes Zhuoming Disaster Information Service-related interview and background material in the context of disaster philanthropy and fundraising.
+  Notes: Includes Zhuoming Info Aid-related interview and background material in the context of disaster philanthropy and fundraising.
 
 * **[Plague Illuminates](https://chuangcn.org/books/social-contagion/ch4/)**
   Chuang: [Link](https://chuangcn.org/books/social-contagion/ch4/)
-  Notes: Provides background documentation on grassroots mutual aid and NCP Life Support Network-related practice during the COVID-19 outbreak.
-
-* **[Social Security and Informal Workers](https://www.actionaidindia.org/wp-content/uploads/2022/09/Social-Security-Monograph-I-E-book.pdf)**
-  ActionAid India PDF: [Link](https://www.actionaidindia.org/wp-content/uploads/2022/09/Social-Security-Monograph-I-E-book.pdf)
-  Notes: Provides broader context on social security, informal workers, and community support practices.
+  Notes: Provides background documentation on grassroots mutual aid and NCP Relief-related practice during the COVID-19 outbreak.
 
 * **[China and the Internet: Using New Media for Development and Social Change](https://ccsnews.ncl.edu.tw/news/218/04)**
   Catalog Page: [Link](https://ccsnews.ncl.edu.tw/news/218/04)
-  Notes: Includes the chapter “NCP Life Support Network: New Media Actions against Covid-19.”
+  Notes: Includes the chapter “NCP Relief: New Media Actions against Covid-19.”
 
 * **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**
   UN News Chinese: [Link](https://news.un.org/zh/story/2023/08/1120742)
