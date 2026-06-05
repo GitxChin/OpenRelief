@@ -39,9 +39,6 @@ Their work helps preserve operational memory, clarify the role of self-organized
 - **[Effects of Alliance Process on Goal Achievement](https://www.jstor.org/stable/45147495)**  
   Notes: Uses Zhuoming Info Aid-related materials in the study of alliance processes and goal achievement.
 
-- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
-  Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
-
 - **[New Impetus and New Approaches](https://southsouth-galaxy.org/wp-content/uploads/2023/05/UNOSSC-Digital-Publication-14.pdf)**  
   Notes: Mentions Zhuoming Info Aid as a Chinese civil society organization focused on disaster information services and reducing information asymmetry in disaster response.
 
@@ -52,6 +49,9 @@ Their work helps preserve operational memory, clarify the role of self-organized
 
 - **[应急管理中众包的理论内蕴与实践价值](https://dylc.cbpt.cnki.net/portal/journal/portal/client/paper/f44d9af6bf2a57871072a8f4bd8f59d3)**  
   Notes: Discusses the theoretical meaning and practical value of crowdsourcing in emergency management.
+
+- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
+  Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
 
 #### Naming Note
 
