@@ -96,8 +96,8 @@ This document is not a claim that OpenRelief implements the exact methods from t
 
 OpenRelief also acknowledges the practical foundation from:
 
-- NCP Life Support's experience in online medical support, community assistance, volunteer coordination, and public help channels.
-- Zhuoming Disaster Information Service Center's disaster information service methodology, including needs assessment, situation briefs, maps, volunteer coordination, and HEINA-style analysis.
+- NCP Relief's experience in online medical support, community assistance, volunteer coordination, and public help channels.
+- Zhuoming Info Aid's disaster information service methodology, including needs assessment, situation briefs, maps, volunteer coordination, and HEINA-style analysis.
 - The existing emergency help mini-program workflow, including public help requests, resource offers, field information, organization updates, situation briefs, affected-area views, and social force statistics.
 
 ## Citation Maintenance
