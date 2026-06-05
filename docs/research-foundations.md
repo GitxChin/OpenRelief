@@ -108,6 +108,5 @@ Future versions should add full bibliographic metadata for each paper:
 - authors;
 - year;
 - venue;
-- DOI or stable URL;
 - license or access notes where relevant.
 
