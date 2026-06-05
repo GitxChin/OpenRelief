@@ -104,9 +104,6 @@ OpenRelief also acknowledges the practical foundation from:
 
 Future versions should add full bibliographic metadata for each paper:
 
-- title;
-- authors;
-- year;
-- venue;
+- Future versions should expand this file with complete bibliographic metadata, including authors, year, venue, and stable URLs.
 - license or access notes where relevant.
 
