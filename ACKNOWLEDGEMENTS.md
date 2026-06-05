@@ -14,7 +14,7 @@ We acknowledge the experience and methodology inherited from:
 
 We are grateful to the researchers, practitioners, journalists, civil society organizations, and institutions that have documented, studied, and reflected on the practices connected to NCP Relief, Zhuoming Info Aid, and related volunteer and disaster information work.
 
-Their work helps preserve operational memory, clarify the role of self-organized and digital volunteer networks, and provide important references for OpenRelief’s continuing development.
+Their work helps preserve operational memory, clarify the role of self-organized and volunteer networks, and provide important references for OpenRelief’s continuing development.
 
 ### Academic Papers and Scholarly Articles
 
