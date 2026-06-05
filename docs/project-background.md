@@ -1,6 +1,6 @@
 # Project Background
 
-OpenRelief is the next-stage open-source effort of a humanitarian relief initiative formerly known as NCP Life Support.
+OpenRelief is the next-stage open-source effort of a humanitarian relief initiative formerly known as NCP Relief.
 
 ## From NCP Relief to OpenRelief
 
