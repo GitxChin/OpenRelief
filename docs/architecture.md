@@ -5,7 +5,7 @@ OpenRelief is designed as a humanitarian information-to-action system. Its purpo
 ## Design Goals
 
 - Support existing public intake channels, including the current emergency help mini-program workflow.
-- Preserve the disaster information service logic inherited from NCP Life Support and Zhuoming Disaster Information Service Center.
+- Preserve the disaster information service logic inherited from NCP Relief and Zhuoming Info Aid.
 - Use AI for structuring, classification, summarization, matching, and drafting.
 - Keep human review mandatory for high-risk decisions.
 - Track provenance, verification status, consent, and audit history.
