@@ -10,7 +10,7 @@ We acknowledge the experience and methodology inherited from:
 - Zhuoming Info Aid, including disaster information service practice, situation assessment, mapping, needs analysis, volunteer collaboration, and HEINA-style disaster information structuring.
 - The existing emergency help mini-program practice, including public help requests, resource offers, field information reporting, disaster briefs, affected-area views, rescue organization information, and social force statistics.
 
-- ## Research and Documentation of Related Practice
+## Research and Documentation of Related Practice
 
 We are grateful to the researchers, practitioners, journalists, civil society organizations, and institutions that have documented, studied, and reflected on the practices connected to NCP Relief, Zhuoming Info Aid, and related digital volunteer and disaster information work.
 
