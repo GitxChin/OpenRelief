@@ -6,8 +6,8 @@ OpenRelief stands on the work of humanitarian practitioners, digital volunteers,
 
 We acknowledge the experience and methodology inherited from:
 
-- NCP Life Support, including online help-seeking workflows, volunteer coordination, medical and community support experience, and public assistance channels.
-- Zhuoming Disaster Information Service Center, including disaster information service practice, situation assessment, mapping, needs analysis, volunteer collaboration, and HEINA-style disaster information structuring.
+- NCP Relief, including online help-seeking workflows, volunteer coordination, medical and community support experience, and public assistance channels.
+- Zhuoming Info Aid, including disaster information service practice, situation assessment, mapping, needs analysis, volunteer collaboration, and HEINA-style disaster information structuring.
 - The existing emergency help mini-program practice, including public help requests, resource offers, field information reporting, disaster briefs, affected-area views, rescue organization information, and social force statistics.
 
 ## Research Foundations
