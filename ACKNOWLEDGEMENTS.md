@@ -57,7 +57,7 @@ Their work helps preserve operational memory, clarify the role of self-organized
 
 **“NCP Life Support Network”, “NCP life support network”, “NCP Life Support”, and “NCP生命支援”** all refer to **NCP Relief**, the predecessor practice of **OpenRelief**.
 
-Similarly, **“Zhuoming”, “Zhuoming Disaster Information Service Center”, “Zhuoming Disaster Information Service Centre”, “Zhuoming Disaster Information and Service Center”, “卓明灾害信息中心”, and “卓明灾害信息服务中心”** all refer to **Zhuoming Info Aid**.
+**“Zhuoming”, “Zhuoming Disaster Information Service Center”, “Zhuoming Disaster Information Service Centre”, “Zhuoming Disaster Information and Service Center”, “卓明灾害信息中心”, and “卓明灾害信息服务中心”** all refer to **Zhuoming Info Aid**.
 
 
 ## Research Foundations
