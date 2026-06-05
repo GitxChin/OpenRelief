@@ -2,7 +2,7 @@
 
 ## Product Name
 
-OpenRelief: AI-Assisted Humanitarian Situation Awareness and Coordination Workspace
+OpenRelief: AI-enabled disaster information for humanitarian action
 
 ## Product Positioning
 
@@ -204,9 +204,9 @@ The MVP product definition is successful when:
 
 ## Dependencies
 
-- Existing OpenRelief/NCP Life Support operational knowledge.
+- Existing OpenRelief/NCP Relief operational knowledge.
 - Existing mini-program workflow and field forms.
-- Zhuoming disaster information methodology and HEINA-style analysis.
+- Zhuoming Info Aid disaster information methodology and HEINA-style analysis.
 - Research foundations documented in [../docs/research-foundations.md](../docs/research-foundations.md).
 - Safety policies documented in [../ai/policies](../ai/policies).
 
