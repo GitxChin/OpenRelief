@@ -41,7 +41,15 @@ Volunteers help transform this fragmented information into useful humanitarian a
 
 ## Volunteer Roles
 
-### AI Tool Operators
+OpenRelief needs both technical volunteers and practice-based humanitarian information volunteers.
+
+These roles work together to transform fragmented disaster information into structured, reviewable, privacy-aware records for humanitarian action.
+
+### AI, Technology, and Data Roles
+
+These roles focus on AI workflows, software systems, data infrastructure, model evaluation, and technical safety.
+
+#### AI Tool Operators
 
 AI tool operators help test and use different AI systems in real humanitarian information workflows.
 
@@ -61,7 +69,7 @@ Useful skills:
 * careful reading and fact-checking;
 * awareness that AI suggestions are not final decisions.
 
-### Prompt and Workflow Designers
+#### Prompt and Workflow Designers
 
 Prompt and workflow designers help create reusable AI workflows for disaster information processing.
 
@@ -84,7 +92,7 @@ Useful skills:
 * humanitarian or emergency response knowledge;
 * ability to design outputs that are easy for humans to review.
 
-### AI Agent Developers
+#### AI Agent Developers
 
 AI agent developers help build AI-assisted workflows and tools that support repetitive information-processing tasks.
 
@@ -109,7 +117,7 @@ Useful skills:
 * experience with OpenAI API or other LLM APIs;
 * understanding of safety boundaries for autonomous systems.
 
-### Software Developers
+#### Software Developers
 
 Software developers help build and maintain the OpenRelief platform.
 
@@ -136,7 +144,7 @@ Useful skills:
 * open-source collaboration;
 * secure software engineering.
 
-### Model Evaluation Volunteers
+#### Model Evaluation Volunteers
 
 Model evaluation volunteers help test whether AI outputs are safe, reliable, and useful for humanitarian work.
 
@@ -161,7 +169,7 @@ Useful skills:
 * statistics or machine learning basics;
 * ability to define clear evaluation criteria.
 
-### Data Analysts
+#### Data Analysts
 
 Data analysts help transform disaster-related information into structured insights.
 
@@ -187,7 +195,7 @@ Useful skills:
 * statistical thinking;
 * attention to data quality and privacy.
 
-### Data Modeling Volunteers
+#### Data Modeling Volunteers
 
 Data modeling volunteers help define the structure of OpenRelief’s information system.
 
@@ -214,33 +222,9 @@ Useful skills:
 * emergency management workflows;
 * careful naming and classification.
 
-### Disaster Information Analysts
+#### Mapping and GIS Volunteers
 
-Disaster information analysts help review and organize crisis-related information.
-
-They may work on:
-
-* monitoring public disaster information;
-* identifying help requests;
-* classifying needs;
-* checking duplicate reports;
-* comparing conflicting information;
-* preparing situation briefs;
-* supporting map-based or area-based views;
-* identifying affected communities and resource gaps.
-
-Useful skills:
-
-* disaster information analysis;
-* crisis informatics;
-* public-source research;
-* careful verification;
-* knowledge of floods, earthquakes, typhoons, landslides, epidemics, or other hazards;
-* ability to work with uncertainty.
-
-### Mapping and GIS Volunteers
-
-Mapping volunteers help turn disaster information into spatial understanding.
+Mapping and GIS volunteers help turn disaster information into spatial understanding.
 
 They may work on:
 
@@ -262,7 +246,7 @@ Useful skills:
 * privacy-aware location handling;
 * disaster mapping experience.
 
-### Safety, Privacy, and Ethics Reviewers
+#### Safety, Privacy, and Ethics Reviewers
 
 Safety and privacy reviewers help ensure OpenRelief protects affected people, volunteers, and partner organizations.
 
@@ -286,7 +270,7 @@ Useful skills:
 * experience with vulnerable populations or emergency response;
 * careful judgment.
 
-### Product and UX Volunteers
+#### Product and UX Volunteers
 
 Product and UX volunteers help make OpenRelief usable for real responders.
 
@@ -309,7 +293,7 @@ Useful skills:
 * Figma or similar tools;
 * experience with nonprofit or emergency response tools.
 
-### Documentation and Community Volunteers
+#### Documentation and Community Volunteers
 
 Documentation and community volunteers help make OpenRelief understandable and accessible.
 
@@ -332,6 +316,153 @@ Useful skills:
 * Markdown and GitHub;
 * open-source community experience;
 * clear and careful writing.
+
+### Humanitarian Information and Practice-Based Roles
+
+These roles come from disaster information practice, digital volunteer services, public crowdsourcing, and online emergency coordination.
+
+They help connect OpenRelief’s technical work with real humanitarian information workflows.
+
+#### Bridging Volunteers
+
+Bridging volunteers help connect affected people, public information channels, available resources, NGOs, community responders, and formal response actors.
+
+They may work on:
+
+* identifying public help requests;
+* connecting help seekers with appropriate responders;
+* linking resource offers to urgent needs;
+* routing information to NGO coordinators or official emergency channels;
+* reducing gaps between affected communities and response networks.
+
+#### Supportive Volunteers
+
+Supportive volunteers provide remote support to affected people, communities, and response teams.
+
+They may work on:
+
+* public information guidance;
+* epidemic-prevention or disaster-prevention information;
+* psychological support routing;
+* academic or community support during prolonged emergencies;
+* remote assistance for vulnerable individuals or families;
+* helping users understand available public assistance channels.
+
+#### Complementary Volunteers
+
+Complementary volunteers supplement formal emergency response by helping with information work that may be difficult for official systems to process quickly.
+
+They may work on:
+
+* collecting public reports;
+* verifying and sorting information;
+* classifying needs;
+* identifying resource gaps;
+* translating or summarizing information;
+* preparing structured records for human review;
+* supporting situational awareness.
+
+#### Collaborative Volunteers
+
+Collaborative volunteers work across NGOs, rescue teams, community responders, volunteer groups, and public institutions.
+
+They may work on:
+
+* coordinating help requests;
+* supporting resource matching;
+* assisting task dispatch;
+* tracking follow-up status;
+* maintaining communication between teams;
+* supporting cross-organization information sharing.
+
+#### Online Collaborative Document Volunteers
+
+Online collaborative document volunteers help manage shared documents, spreadsheets, forms, and public information boards during emergencies.
+
+They may work on:
+
+* organizing public help requests;
+* structuring resource offers;
+* removing duplicate entries;
+* marking urgent cases;
+* maintaining affected-area views;
+* supporting shared emergency information workflows;
+* preparing data for AI-assisted processing.
+
+#### Social Media Monitoring and Verification Volunteers
+
+Social media monitoring and verification volunteers help process crisis information from public communication channels.
+
+They may work on:
+
+* monitoring public disaster information;
+* identifying possible help requests;
+* classifying social media posts;
+* checking source reliability;
+* comparing conflicting reports;
+* summarizing verified information;
+* routing important reports to human reviewers.
+
+#### Remote Care and Support Volunteers
+
+Remote care and support volunteers help identify and route non-technical care needs.
+
+They may work on:
+
+* identifying requests involving medical, psychological, elderly, child, disability, or community support needs;
+* escalating professional-support cases;
+* helping affected people find appropriate support channels;
+* supporting follow-up records;
+* ensuring that AI outputs do not replace expert or coordinator review.
+
+#### Digital Mapping and Situation-Reporting Volunteers
+
+Digital mapping and situation-reporting volunteers help transform scattered reports into spatial and operational understanding.
+
+They may work on:
+
+* mapping affected areas;
+* organizing field reports;
+* preparing disaster briefs;
+* summarizing infrastructure damage;
+* visualizing resource gaps;
+* supporting situation reports;
+* protecting sensitive location information before public release.
+
+#### Disaster Information Analysts
+
+Disaster information analysts help review, organize, and interpret crisis-related information across channels.
+
+They may work on:
+
+* monitoring public disaster information;
+* identifying help requests;
+* classifying needs;
+* checking duplicate reports;
+* comparing conflicting information;
+* preparing situation briefs;
+* supporting map-based or area-based views;
+* identifying affected communities and resource gaps;
+* helping technical teams understand real-world humanitarian information needs.
+
+Useful skills:
+
+* disaster information analysis;
+* crisis informatics;
+* public-source research;
+* careful verification;
+* knowledge of floods, earthquakes, typhoons, landslides, epidemics, or other hazards;
+* ability to work with uncertainty.
+
+### How These Roles Work Together
+
+OpenRelief’s volunteer roles are complementary.
+
+AI, software, data, model evaluation, and safety volunteers help build the technical infrastructure.
+
+Practice-based humanitarian information volunteers help ensure that the system remains grounded in real disaster response workflows.
+
+Together, these roles support OpenRelief’s shared goal: transforming fragmented disaster information into structured, reviewable, privacy-aware records for humanitarian action.
 
 ## How Volunteers Work Together
 
