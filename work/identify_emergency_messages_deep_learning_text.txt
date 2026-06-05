@@ -1,0 +1,1366 @@
+
+
+--- PAGE 1 ---
+International Journal of Information Management Data Insights 3 (2023) 100164 
+Contents lists available at ScienceDirect 
+International Journal of Information Management Data 
+Insights 
+journal homepage: www.elsevier.com/locate/jjimei 
+Using artiﬁcial intelligence to identify emergency messages on social media 
+during a natural disaster: A deep learning approach 
+Courtney J. Powers a , ∗ , Ashwin Devaraj b , Kaab Ashqeen c , Aman Dontula b , Amit Joshi b , 
+Jayanth Shenoy d , Dhiraj Murthy e 
+a Department of Communication, College of Arts, and Communication, The University of Wisconsin-Whitewater, 180 North Prairie Street, Whitewater, WI 53190, United 
+States 
+b Department of Computer Science, The University of Texas at Austin, United States 
+c Department of Mathematics, The University of Texas at Austin, United States 
+d Department of Electrical and Computer Engineering, The University of Texas at Austin, United States 
+e School of Journalism and Media, The University of Texas at Austin, United States 
+a r t i c l e i n f o 
+Keywords: 
+Machine learning 
+Computational methods 
+Twitter 
+Supervised learning 
+Disaster 
+Crisis communication 
+Artiﬁcial intelligence 
+a b s t r a c t 
+During natural disasters, emergency communication systems become overloaded, and people are forced to turn 
+to social media to make requests for help. This study employs machine learning and artiﬁcial intelligence to 
+automatically detect, identify, and categorize tweets relevant to ﬁrst responders during Hurricane Harvey. We 
+curate a dataset of tweets, present a labeling scheme based on relevance and urgency, and develop neural and 
+non-neural machine learning models to automatically categorize tweets. Our best relevance classiﬁers, language 
+models BERT and XLNet, perform signiﬁcantly better than non-neural models and the deep convolutional neu- 
+ral network (CNN) and achieve comparable F1 scores. Ultimately, this study furthers machine learning and crisis 
+communication research by developing methods to automatically categorize tweets that can signal to ﬁrst respon- 
+ders of individuals’ requests for help in urgent, life-threatening disasters. Our work also ﬁnds large pretrained 
+language models promising for the development of well-performing disaster tweet classiﬁers in future work. 
+1. Introduction 
+With climate change, hurricanes are becoming more intense 
+and destructive on average, and they are projected to get worse 
+( Berardelli, 2019 ; Knutson et al., 2015 ). Yale Climate Connections pin- 
+points major hurricanes to be the costliest natural weather-related dis- 
+aster, both in expenses of damages and casualties, often due to the ex- 
+treme winds, rainfall, and resulting ﬂooding ( Berardelli, 2019 ). In nat- 
+ural disaster situations like major hurricanes, thousands of people may 
+ﬁnd themselves needing urgent, life-saving help, such as evacuation as- 
+sistance and/or medical attention. However, when major hurricanes hit, 
+it is not uncommon for emergency response dispatch systems (like US- 
+based 9–1-1 call centers) to become overloaded, making it nearly impos- 
+sible for individuals to request and have access to the emergency help 
+they need ( Jorgensen, 2017 ; Rhodan, 2017 ). 
+When disaster strikes and traditional forms of emergency commu- 
+nication, such as 9–1–1 systems are overloaded, individuals are forced 
+to use whatever means available to communicate and seek help from 
+others ( Rhodan, 2017 ; Glass, 2001 ). Often, the technology that is read- 
+ily available and familiar is social media sites and applications, such 
+∗ Corresponding author. 
+E-mail address: powersc@uww.edu (C.J. Powers) . 
+as Twitter. Previous work ﬁnds that individuals use social media dur- 
+ing disasters in attempts to communicate, connect, and even coordi- 
+nate rescue and resource eﬀorts ( Akter & Wamba, 2017 ; Devaraj et al., 
+2020 ; Guo, Liu, Wu, & Zhang, 2021 ; Kumar et al., 2020 ; Lindsay, 2011 ; 
+Paul, 2015 ; Rhodan, 2017 ; Tim, Pan, Ractham, & Kaewkitipong, 2017 ), 
+and this continues to remain true with 9–1–1 disruptions that accom- 
+panied the devastating Hurricane Ian that hit recently in the fall of 
+2022 ( Ives & Yoon, 2022 ). When Hurricane Harvey made landfall on 
+the coast of Texas in August 2017 and created catastrophic ﬂooding, this 
+was no diﬀerent ( Devaraj et al., 2020 ; Rachunok, Fan, Lee, Nateghi, & 
+Mostafavi, 2022 ; Robertson, Johnson, Murthy, Smith, & Stephens, 2019 ; 
+Smith et al., 2018 ; Yang et al., 2017 ); thousands of people turned to 
+Twitter to connect with others, share information, and even request ur- 
+gent help during the deadly and record-breaking storm. 
+Given that social media has been an instrumental communication 
+tool in connecting people in emergency situations, as previous research 
+suggests ( Ahn et al., 2021 ; Kim & Hastak, 2018 ; Lindsay, 2011 ; Murthy & 
+Longwell, 2013 ; Robertson, Johnson, Murthy, Smith, & Stephens, 2019 ; 
+Yang et al., 2017 ), it is more important than ever to develop data min- 
+ing and information systems techniques that help responders identify 
+https://doi.org/10.1016/j.jjimei.2023.100164 
+Received 30 June 2022; Received in revised form 3 February 2023; Accepted 6 February 2023 
+2667-0968/©2023  The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY-NC-ND license 
+( http://creativecommons.org/licenses/by-nc-nd/4.0/ ) 
+
+
+--- PAGE 2 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+urgent calls for help. Additionally, Ahn et al. (2021) found that tweets 
+related to support and disaster preparedness posted by individuals re- 
+ceive more engagement than even tweets from government institutions, 
+highlighting the need for tools that can analyze tweets from the general 
+public at scale. Machine learning methods can be especially valuable in 
+this quest, as they can be used to automatically identify and categorize 
+communication on social media that indicates individuals in need. As a 
+result, this study uses machine learning, artiﬁcial intelligence, and infor- 
+mation systems techniques to explore the following research questions: 
+• RQ1: How can machine learning be used to identify tweets relevant 
+to emergency response in a natural disaster? 
+• RQ2: How can machine learning be used to categorically encode 
+diﬀerent levels of relevance to emergency response in a natural dis- 
+aster? 
+This research speciﬁcally examines communication on Twitter dur- 
+ing a major disaster such as Hurricane Harvey, with the goal of develop- 
+ing and testing the eﬀectiveness of training models to detect and catego- 
+rize tweets and information relevant to ﬁrst responders. This research 
+aims to identify calls for help among the many other tweets through 
+automatic algorithmic categorization that can ultimately be used to sig- 
+nal to ﬁrst responder operations of what tweets are requests for help 
+in urgent, life-threatening disaster situations. In the following sections, 
+we will ﬁrst introduce Hurricane Harvey as the unique disaster con- 
+text, then we will discuss the previous literature about Twitter use and 
+data mining tweets during disasters, summarize research questions, the 
+methodology, and the results. Finally, the paper will conclude with a dis- 
+cussion of the ﬁndings, implications, and directions for future research. 
+1.1. Hurricane Harvey overview 
+Hurricane Harvey made landfall along the mid-Texas coast on Au- 
+gust 24, 2017 as a category four hurricane with winds of 130 miles per 
+hour ( Blake & Zelinsky, 2018 ; Carter, 2018 ). The storm caused catas- 
+trophic ﬂooding throughout southeastern Texas, aﬀecting the greater 
+Houston area ( Blake & Zelinsky, 2018 ). According to Blake & Zelin- 
+sky, 2018 report for the National Oceanic and Atmospheric Adminis- 
+tration, Hurricane Harvey was “the most signiﬁcant tropical cyclone 
+rainfall event in United States history both in scope and peak rainfall 
+amounts ”and caused damage to thousands of homes and businesses (p. 
+6). While many people were asked to evacuate in preparation for the 
+storm, many who did not became trapped and required rescue due to 
+dangerous rising ﬂoodwaters. By August 31, 2017, FEMA reported that 
+federal forces had rescued over 10,000 people ( Gallagher, 2017 ). This 
+storm, along with the record-breaking rain and ﬂooding, led to an esti- 
+mated $125 billion worth of damage and tragically resulted in at least 
+68 deaths ( NOAA, 2018 ; Blake & Zelinsky, 2018 ). 
+2. Review of the literature 
+2.1. Twitter use and its role in disasters 
+Within a large disaster situation, communication challenges can 
+arise. Traditional forms of communication, such as the US-based 9–1–
+1 emergency system, can fail due to an overwhelming inﬂux of calls 
+( Rhodan, 2017 ; Glass, 2001 ), and people can lose touch with family and 
+friends in the midst of evacuating. According to Glass (2001) , emergency 
+systems like U.S.’s 9–1–1 were never set up to handle the inﬂux of calls 
+that result in a large-scale natural disaster situation. And, in some cases, 
+disaster victims may turn to social media as their ﬁrst venue for assis- 
+tance, not even trying to use 9–1–1 ( Stephens, Robertson, & Murthy, 
+2019 ). 
+According to Palen and Hughes (2010) , social media, such as Twit- 
+ter, provides the opportunity for individuals to communicate, connect, 
+share and seek information, and even coordinate rescue and relief eﬀorts 
+during disasters. Historically, Twitter as an online microblog has been 
+particularly useful for sharing brief text and images during disasters 
+( Murthy, 2018 ; Robertson, Johnson, Murthy, Smith, & Stephens, 2019 ). 
+Given the widespread global use of social media and its ease of use on 
+both mobile and desktop platforms, Twitter has become a prominent 
+medium of communication ( Pew Research Center, 2018 ; Rathore, Kar, 
+& Ilavarasan, 2017 ), especially in disaster situations when other com- 
+munication channels like emergency helplines can have limited eﬃcacy. 
+Since Twitter’s emergence in 2007, Twitter has been used in diﬀerent 
+disasters ( Murthy, 2018 ), and research is beginning to analyze tweets 
+posted during and after disasters through data mining software tech- 
+niques ( Akter & Wamba, 2017 ; Devaraj et al., 2020 ; Rachunok, Fan, Lee, 
+Nateghi, & Mostafavi, 2022 ). Twitter, as a multi-media platform, allows 
+users the opportunity to share and reply to short text-based messages 
+and see content from other users on their ever-updating user dashboard 
+( Spence, Lachlan, Lin, & del Greco, 2015 ). Previous research about dis- 
+asters found that people use Twitter to share news and information, 
+reactions and feelings, and even call for help ( Devaraj et al., 2020 ; 
+Lindsay, 2011 ; Paul, 2015 ; Spence, Lachlan, Lin, & del Greco, 2015 ; 
+Yang et al., 2017 ). 
+2.2. Using Twitter as a tool to call for help 
+For the purpose of this paper, the deﬁnition of a “call for help ”o n 
+Twitter is largely based on Paul (2015) ’s work and is deﬁned as a person 
+issuing a tweet on Twitter during a disaster to request help, rescue, med- 
+ical assistance, or information for themselves or for someone else who 
+they believe is aﬀected by the disaster. Many studies have explored so- 
+cial media use during disasters, but only a handful of studies, some of 
+which are highlighted here, have speciﬁcally addressed calls for help 
+and rescue on Twitter during a disaster and leveraged data mining tech- 
+niques. For example, in their study of social media use in a Japanese 
+earthquake and tsunami, Peary, Shaw, & Takeuchi, 2012 found individ- 
+uals used Twitter to communicate whether they were safe or unsafe, and 
+there were even several “calls for help. ”Similarly, in a study of the On- 
+doy Typhoon ﬂooding, Morales (2010) collected Twitter data and found 
+that people used Twitter to make a call for help or rescue, explaining that 
+“during Ondoy, users sent a variety of messages pertaining to individual 
+calls for rescue and evacuation and the need for material donations, ef- 
+fectively transforming Twitter from a mere platform of social exchange, 
+into an active facilitator of relief and rescue ”(2010, p. 57). A more re- 
+cent study by David et al. (2016) also found evidence that Twitter was 
+used for rescue coordination in Typhoon Haiyan, noting that, of the total 
+Spritzer level data that was collected around the disaster and classiﬁed 
+as disaster relief, 12% were tweets about personal acts of disaster re- 
+lief, 67% were tweets about relief activities others engaged in, 8% were 
+tweets about asking for help, and 54% were tweets that attempted to co- 
+ordinate assistance. Furthermore, because of the use of Twitter for calls 
+of help and rescue coordination, David et al. (2016) consider Twitter to 
+be an important “…venue for mobilizing relief and response on a global 
+scale ”in disaster situations (p. 2). Given the previous research, it is clear 
+that Twitter has been used to make calls for help during disasters. Next, 
+we will discuss past research in the domain of disaster tweet classiﬁ- 
+cation and limited extant data mining research about calls for help on 
+social media during the speciﬁc disaster of focus, Hurricane Harvey. 
+2.3. Twitter data mining and calls for help during Hurricane Harvey 
+Researchers have used text-mining and classiﬁcation techniques 
+to understand Twitter data throughout the years ( Kumar, Kar, & 
+Ilavarasan, 2021 ; Neogi et al., 2021 ). In fact, research has been 
+done in the realm of disaster tweet text-mining and classiﬁca- 
+tion, with research using a wide variety of feature representations 
+of the tweets, such as n-gram and part-of-speech (POS) features 
+( Ashktorab et al., 2014 ; Imran et al., 2013 , 2016 ). For example, 
+Ashktorab et al. (2014) trained logistic regression models on unigram 
+features to determine whether tweets from multiple disasters contained 
+2 
+
+
+--- PAGE 3 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+information regarding infrastructural damage or human casualties. Ad- 
+ditionally, Imran et al. (2016) built SVM, random forest, and naive Bayes 
+models to classify tweets from various natural disasters (e.g., ﬂoods and 
+earthquakes) into diﬀerent information categories, such as whether a 
+tweet contains information about injured or deceased individuals, dis- 
+placed individuals, sympathy and emotional support, and irrelevant 
+topics. Furthermore, Imran et al. (2013) built a naive Bayes classiﬁer 
+trained on n-gram and POS features to classify tweets from the 2011 tor- 
+nado in Joplin, Missouri as informative or not, and also built a classiﬁer 
+to categorize the informative tweets as “caution, ”“donation, ”“advice, ”
+or “information source ”. 
+While some previous research focusing on classifying disaster-related 
+tweets has used n-grams and POS features, they are not without limita- 
+tions. The primary shortcoming of the “traditional ”n - g r a m and POS 
+features is that they are sparse since their respective feature vectors are 
+high-dimensional and most entries are 0. For example, if a feature vector 
+is created with each position corresponding to a unique bigram found 
+in a dataset of tweets, a given tweet only contains a very small num- 
+ber of those bigrams and thus has a sparse feature vector. A more ro- 
+bust representation of words is embeddings, which are derived from the 
+ﬁrst layer of a neural network trained on some language understand- 
+ing task, like predicting the distribution over possible next words in a 
+language given an n-gram ( Bengio et al., 2003 ). Word embeddings are 
+a particularly good representation of words since they are not sparse 
+and geometrically encode the semantic relationships between words. 
+This means that words with similar meanings have embeddings with 
+a small angle of separation, whereas those that are more semantically 
+dissimilar have a larger angle of separation. As a result, more recent 
+work in disaster tweet classiﬁcation leverages deep neural networks 
+trained on word embeddings ( Nguyen et al. 2016 ; Burel et al., 2018 ). 
+Burel et al. (2018) used the convolutional neural network (CNN) clas- 
+siﬁer developed by Kim (2014) to classify tweets from the CrisisLex26 
+dataset ( Olteanu et al., 2014 ) based on relevance, disaster type, and 
+information type. Nguyen et al. (2016) also used a similar CNN archi- 
+tecture on crisis-related datasets to classify whether tweets were useful 
+to ﬁrst responders. 
+Recently, there has also been some tweet-classiﬁcation research spe- 
+ciﬁc to Hurricane Harvey. Given the uniqueness of Harvey, both in 
+the scale of destruction as well as the unprecedented levels of volun- 
+teer rescues, research has speciﬁcally explored how social media was 
+used to make calls for help. According to Robertson, Johnson, Murthy, 
+Smith, & Stephens, 2019 , Twitter had 2.46 billion users during the time 
+of Hurricane Harvey. Robertson et al. explain that Harvey was consid- 
+ered “a unique natural disaster in which Twitter and other social media 
+provided citizens with a platform to communicate urgent information 
+quickly that ultimately led to life-saving rescues for those who were 
+ﬂooded ”(2019, p. 6; Stephens et al., 2018 ). 
+In their study, Robertson, Johnson, Murthy, Smith, & Stephens, 
+2019 speciﬁcally examined Twitter and calls for help during Hurricane 
+Harvey, looking exclusively at images tweeted before, during, and after 
+the landfall of the storm. Robertson and colleagues used a mixed-method 
+approach to compare the accuracy of human-coded and machine-coded 
+images. By using a deep learning VGG-16 convolutional neural network, 
+along with a construction of multilayered perceptron classiﬁers for clas- 
+sifying the urgency and time period for a given image, Robertson, John- 
+son, Murthy, Smith, & Stephens, 2019 found that computerized methods 
+can be used to “ﬁlter through the noise on social media and identify au- 
+thentic calls for help or urgent situations during a disaster ”(p. 29). 
+Yang et al. (2017) also studied tweets during Hurricane Har- 
+vey, this time looking speciﬁcally at the text, instead of images. 
+Yang et al. (2017) argue that 9–1–1 call centers can only serve a certain 
+number of people who need help at a time, as can rescuers with boats 
+during Hurricane Harvey. Because resources are limited and people’s 
+lives are in danger, their study aimed to identify and prioritize those in 
+need. Yang et al. (2017) manually labeled 1000 tweets to train a model 
+to be able to identify tweets that had requests for rescue. Their objec- 
+tive was to triage levels of need by using a ’scheduling algorithm’ to 
+try to optimize resource allocation to those who need it most based on 
+tweet data. In their study, 70% of the coded data was used for training, 
+while the rest was used for validation. Their best-performing support 
+vector machine classiﬁer has an F-measure of 0.687 and accuracy of 
+0.93, meaning that they had achieved some success in classifying tweets 
+with their relatively small dataset. 
+Similar to Yang et al. (2017) and Robertson, Johnson, Murthy, Smith, 
+& Stephens, 2019 , Kumar et al. (2020) also leveraged data mining, 
+proposing a multi-modal machine learning model to categorize tweets 
+that contained both text and images from multiple disasters including 
+Hurricane Harvey. Kumar et al. (2020) speciﬁcally aimed to categorize 
+tweets as informative for the disaster or not, and they deﬁned infor- 
+mative tweets as being text or image posts containing requests for help 
+for themselves or missing relatives, reports of damage, injuries, and/or 
+death. In their study, they used an LSTM and VGG-16 for tweets with 
+text and images and achieved F1 scores ranging between 0.74 and 0.93 
+across datasets from diﬀerent natural disasters. 
+2.4. Research questions 
+Previous research found machine learning is eﬀective in man- 
+aging data from tweets related to disasters ( O’Neal et al., 2018 ), 
+with Robertson, Johnson, Murthy, Smith, & Stephens, 2019 , 
+Yang et al. (2017) and Kumar et al. (2020) ﬁnding relevant disas- 
+ter tweets, including calls for help during Hurricane Harvey, can be 
+identiﬁed through deep learning methods and automatic categorization 
+methods. This research only incorporates Robertson, Johnson, Murthy, 
+Smith, & Stephens, 2019 and Kumar et al.’s (2020) research by using 
+a coding category technique, but it also expands upon the ﬁndings of 
+Yang et al. (2017) by using a larger Twitter dataset from Hurricane 
+Harvey. While Yang et al. (2017) tried to triage levels of need by using 
+a scheduling algorithm, we are optimizing the part of identifying tweets 
+relevant to rescue/rescuing itself rather than optimization within. By 
+using a computational machine learning method, along with detailed 
+preprocessing steps to improve model performance, this study applies 
+to similar categories identiﬁed in Robertson, Johnson, Murthy, Smith, 
+& Stephens, 2019 and Kumar et al.’s (2020) study, as well as draws 
+upon other categories regarding how individuals use Twitter to make 
+calls for help in Hurricane Harvey. We apply various preprocessing 
+techniques in order to help parse out important tweets from the large 
+amount of data generated on Twitter, so our machine learning models 
+can be eﬀective in detecting and categorizing tweets that are relevant 
+to ﬁrst responders. 
+Ultimately, by using a computational and machine learning ap- 
+proach, the goal of this research is to determine how machine learning 
+can be used to identify tweets relevant to emergency response in a natu- 
+ral disaster and ultimately train a computer to automatically be able to 
+identify calls for help in . Therefore, we explore the following research 
+questions: 
+RQ1: How can machine learning be used to identify tweets relevant 
+to emergency response in a natural disaster? 
+RQ2: How can machine learning be used to categorically encode dif- 
+ferent levels of relevance to emergency response in a natural dis- 
+aster? 
+3. Method 
+Using established and tested methods that apply machine learning 
+techniques to categorize textual tweets during previous hurricane events 
+(e.g. Ashktorab et al. 2014 ; Imran et al. 2014 ), we explore how Twit- 
+ter was used during Hurricane Harvey and whether Twitter was used to 
+make calls for help. We ﬁrst performed a preliminary pilot data analysis 
+in order to better understand the dataset. Then, we embarked on a multi- 
+phase labeling process similar to previous research ( Wadud et al. (2022) . 
+3 
+
+
+--- PAGE 4 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+Following previous work using machine learning on disaster-related 
+tweets ( Derczynski et al., 2018 ; Morstatter et al., 2014 ), we manually 
+coded a subset of the tweets as a team for the purpose of building, train- 
+ing, and ﬁne-tuning a machine-learned model. Afterward, we deployed 
+a larger subset of 4000 tweets on Amazon Mechanical Turk (MTurk) 
+for additional human coding to be used to reﬁne the computer-based 
+model, with the goal of making a more accurate classiﬁer. We employ 
+this crowd-based process of creating a much larger training set of la- 
+beled tweets based on recommendations from other successful studies 
+( Appling et al., 2014 ; Li et al., 2015 ) aimed at classifying disaster-related 
+tweets. 
+3.1. Data annotation and collection 
+3.1.1. The raw dataset 
+This study used a dataset collected at the University of North Texas 
+(UNT) which contains 7,041,866 total tweets related to the Hurricane 
+Harvey disaster and was created using the ‘twarc’ tweet archiving pack- 
+age via Twitter’s API ( Phillips, 2017 ). The data was collected from 
+the Texas-speciﬁc location coordinates (similar to Zou et al., 2019 ) 
+over 08/18/17 - 09/22/17, during which Hurricane Harvey made land- 
+fall and impacted the greater Houston area. The dataset is derived 
+from API searches based on seven hashtags and three additional key- 
+words that were included in the search query to collect the Twitter 
+data ( Phillips, 2017 ). These keywords include: #Harvey, #Harvey2017, 
+#HarveyStorm, #HoustonFlood, #HoustonFlooding, #HoustonFloods, 
+#HurricaneHarvey, #GulfCoast, Hurricane Harvey, and Twitter. This 
+data collection aligns with the guidelines and ﬁndings set forth by 
+Rachunok, Fan, Lee, Nateghi, & Mostafavi, 2022 , as this data set oﬀers 
+the beneﬁts of being both relevant location-based and keyword search- 
+based. 
+3.1.2. Initial ﬁltration by keywords 
+Because tweets during disaster events are both high volume and rife 
+with non-relevant posts ( Derczynski et al., 2018 ), we ﬁltered the orig- 
+inal set of 7 million tweets down to a dataset of around 300,000 by 
+only including tweets that contained at least one word or phrase related 
+to help, rescue, emergency, damage, ﬂooding, and emergency respon- 
+ders (based on a comprehensive list of 41 relevant words and phrases 
+created by the research team), and did not include words related to do- 
+nations. This ﬁltering helped ameliorate the bias toward non-relevant 
+tweets when searching for catchall hashtags such as #Harvey and in- 
+crease our chance of coding the types of tweets relevant to our research 
+questions. 
+3.1.3. Coding categories 
+For the purpose of this study, we had two main coding categories–
+relevance and urgency. While the UNT data should ideally be relevant 
+to Hurricane Harvey based on the data collection hashtags, not all of the 
+data in the over seven million tweet dataset, or even our ﬁltered subset, 
+was relevant to the hurricane or our research questions. As a result, we 
+relied on Paul’s (2015) coding structure to determine relevant tweets, 
+which was used by Robertson, Johnson, Murthy, Smith, & Stephens, 
+2019 study. 
+Paul’s (2015) typology of social media posts during disasters 
+guided what we deemed relevant or not relevant, and it is comprised 
+of the following categories: request, report, and reaction, or none. 
+Paul’s (2015) coding typology, which indicated relevant tweets, is a 
+good ﬁt for our study because it pertains to potential calls for help and 
+information that would be relevant to ﬁrst responders. 
+For example, Paul’s (2015) “request ”c a t e g o r y is essentially a “call 
+for help. ” Over the duration of the study, this deﬁnition was adapted 
+and simpliﬁed to “Asking for help or information as a result of Hurri- 
+cane Harvey, ”w i t h the exclusion of “Donations in the form of money 
+or news sources. ”I t is important to note that in this category, we left 
+the request category relatively loose to account for calls for help for 
+one’s self and calls for help for others who they may feel are in danger 
+and in need of rescuing. This is important because calls for help and 
+rescue can go beyond just the individual person ( Irman et al., 2013 ; 
+Morales, 2010 ), because those in immediate danger may not have the 
+ability to tweet, and may rely on others to do so for them. The sec- 
+ond coding category from Paul’s (2015) typology is “report, ”a n d this 
+was meant to capture reported thoughts and experiences pertaining to 
+Hurricane Harvey. This deﬁnition was adapted to “Reporting damage, 
+updates, injuries or deaths from Hurricane Harvey ”and excluded news 
+sources. The third coding category from Paul’s (2015) typology is “reac- 
+tion, ”a n d this was meant to assess individuals’ feelings, opinions, and 
+thoughts about emergency response workers and volunteers. This code 
+was also adapted and shortened to read “Referring to or talking about 
+performance or eﬀectiveness of emergency responders or volunteers. ”
+While only one category was labeled “request, ”a l l of the categories 
+broadly include potential calls for help; therefore, all three categories 
+were combined in the coding process and subsumed under the parent 
+category of “relevant ”. 
+The last category for relevance was none, and this was meant to 
+capture any tweets that were not relevant. Tweets asking for donations 
+to diﬀerent organizations like the Red Cross and most news sources fell 
+into this category. While data was coded into these typology categories, 
+we decided to focus on the classiﬁer of relevant or not relevant, as all 
+three categories, by deﬁnition, could include information relevant to 
+calls for help and emergency responders. 
+For the sake of this study, though tweets were labeled with multiple 
+relevance categories in mind, when building classiﬁers, we only tackle 
+the binary relevance classiﬁcation task. In other words, we treat all the 
+“none ”c a t e g o r y tweets as “not relevant ”a n d everything else as “rel- 
+evant. ”W e do this to establish baseline results and determine which 
+kinds of models are suitable for this classiﬁcation task. We leave the 
+multi-class relevancy classiﬁcation task for future work. 
+The second main coding category that we used was level of urgency. 
+Guided by Morales (2010) , we believe that calls for help include some 
+type of urgency, information about where the person is who needs help, 
+and some type of call to action. In the low cues Twitter environment, 
+Morales explains that urgency can be expressed through a variety of 
+diﬀerent textual elements including “exclamation marks, direct calls for 
+‘help!’, ”as well as the use of key verbs, or calls to action, such as “‘rescue’ 
+and ‘need’ ”(2010, p. 39). 
+In our initial round of team coding, we had three levels of ur- 
+gency, which were not urgent, somewhat urgent, and highly urgent. 
+Only tweets that were classiﬁed as relevant based on Paul’s (2015) cat- 
+egories of request, report, and reaction were then examined and coded 
+for urgency. Eventually, these coding categories were reﬁned and dis- 
+tilled down into two categories: urgent and not urgent, for the sake of 
+making it more clear for MTurk workers to be able to classify tweets. 
+This simply asked the user to determine if the tweet “is suggesting that 
+someone’s life in danger? ”with a response of yes or no. This deﬁnition 
+was purposely left open for interpretation with regards to the one being 
+impacted or in danger, as we wanted to include situations when people 
+are tweeting about things for themselves or on behalf of others. 
+3.1.4. Manually labeling a small dataset 
+After we completed data preprocessing and ﬁltration (steps de- 
+scribed following sections) we, as the research team, met and hand- 
+coded a subset of a random sample of 2000 tweets. For the purpose of 
+coding, single tweets were considered the unit-of-analysis for classiﬁca- 
+tion since they are in essence microblogs with short bursts of informa- 
+tion ( Ovadia, 2009 ). We followed Robertson, Johnson, Murthy, Smith, 
+& Stephens, 2019 approach and categorized textual tweets based on rel- 
+evance per Paul’s (2015) typology of social media posts during disasters. 
+Any tweets that were classiﬁed into a “request, ”“report, ”or “reaction, ”
+were considered relevant and further examined for the level of urgency. 
+In the coding process, we all met as a team and coded 150 tweets to- 
+gether to establish a baseline procedure. After, we split into three pairs 
+4 
+
+
+--- PAGE 5 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+and each person in the pair independently coded around 445 tweets. 
+In total, our team coded 1489 of the 2000 randomly-selected tweets, 
+and we had a strong inter-coder reliability of 95.6%. These 1489 tweets 
+were used for our preliminary model selection. 
+3.1.5. Crowdsourced labeling of a larger dataset 
+One of the shortcomings with the original hand-labeled was the class 
+imbalance: only 25.6% of the tweets were relevant and only 13.6% of 
+the tweets were urgent. Initially, this led many of the weaker models 
+to output mostly negative predictions, resulting in accuracies close to 
+the proportion of negative tweets in the dataset. We hypothesized that 
+providing a more balanced dataset to the classiﬁers would prevent this 
+behavior and result in better ﬁtting models. 
+To obtain a more balanced dataset of tweets with relevance labels, 
+we submitted a total of 4000 tweets to Amazon’s MTurk for rapid, 
+crowd-sourced labeling. To make sure that the dataset submitted to 
+MTurk would have a higher percentage of relevant and urgent tweets, 
+we took tweets from the original dataset of 1.4 million minus the 1489 
+that were hand-labeled and ran them sequentially through the multi- 
+layer perceptron classiﬁer trained on the 1489 hand-labeled tweets until 
+2400 tweets were encountered that the classiﬁer predicted to be positive 
+and 1600 were encountered that the classiﬁer predicted to be negative. 
+The multilayer perceptron was chosen for this ﬁltering process since it 
+had the highest recall (see the Evaluation Metrics section) of all the pre- 
+liminary classiﬁers. Before submitting all 4000 tweets to MTurk, 100 
+of them were used in trial runs to ensure MTurk functioned properly 
+and that our labeling categories were correctly interpreted by MTurk 
+workers. 
+On MTurk, the categorization of each tweet is known as a Human 
+Intelligence Task (HIT), which is a small task that MTurk workers can 
+complete for a few cents each ( Little et al., 2009 ). For our HITs, we 
+deployed an MTurk survey that randomized tweets and prompted two 
+people to code each tweet. A worker was asked to read descriptions for 
+relevance, which were displayed on the top of the survey, and was then 
+asked to code a tweet. After, they were presented with binary coding 
+categories for urgency (urgency and not urgent). MTurk workers were 
+compensated $.03 per coded tweet. We assigned 3 MTurk workers to 
+each tweet and only decided to keep the tweets in which at least 2 of 
+the 3 workers gave the same relevance and urgency labels. This ensured 
+that very ambiguous tweets with no aﬃrmed label would not add noise 
+to our ﬁnal dataset. 
+After looking at the preliminary results and analyzing the amount of 
+time workers spent, as well as the rating the workers had, it was clear 
+that most people were not experienced MTurk workers and they did not 
+spend time fully reading the categories. As a result, we made changes 
+to the format of the HITs with the goal of making it more user-friendly 
+to MTurk workers. 
+For the second coding deployment on MTurk, the coding categories 
+were simpliﬁed to the deﬁnitions (discussed above) for relevance and 
+urgency. Additionally, the coding descriptions were removed from the 
+top of the survey and were placed as answer responses under each tweet 
+to increase the likelihood that the participants would read the code de- 
+scription. We also changed the settings to allow only experienced MTurk 
+workers to complete the HITs, called MTurk Masters. This ensured that 
+only coders who have a high approval rate would receive our HITs. We 
+tested these changes by releasing the same 100 tweets to be coded by 
+at least three MTurk Masters each. Results were more promising, so we 
+released the remaining tweets to be coded. MTurk workers were com- 
+pensated between $.02 and $.05 per tweet. Similar to Khanday, Rabani, 
+Khan, & Malik, 2022 and Prasad, Udeme, Misra, & Bisallah, 2023 re- 
+search involving machine learning and tweet categorization, having the 
+assistance of human annotators was a necessary step in being able to 
+ultimately train machine learning models. 
+3.1.6. Creating ﬁnal datasets 
+The ﬁnal step in the creation of our datasets was to split the 4078 
+tweets (obtained from our manual labeling and ﬁltered from MTurk) 
+into a train set and test set for relevance and urgency. We made the split 
+so that both datasets would have the same fraction of relevant or urgent 
+tweets. The 4078 tweets consisted of 50% relevant tweets but only 5.7% 
+urgent tweets. We determined that 5.7% was too low of a percentage of 
+urgent tweets for our models to feasibly learn to detect urgent tweets, 
+even with oversampling,. As a result, we decided to sample a subset of 
+1160 tweets, in which 25% were urgent, and then we created the train- 
+test split on that sample. 
+3.2. Data preprocessing 
+3.2.1. Model name conventions 
+For clarity going forward, we use the following naming conventions 
+when referring to the diﬀerent models mentioned. “Non-neural ”m o d - 
+els are those that are not convolutional neural networks (i.e. the CNN 
+developed by Kim (2014) ) or language models (i.e. BERT and XLNet). 
+The multilayer perceptron (MLP) is technically a neural network, but 
+it is categorized as “non-neural ”s i n c e it shares the same input repre- 
+sentation as the other non-neural models, including averaged word em- 
+beddings (discussed below). We refer to the CNN and language model 
+classiﬁers as the “neural ”models. 
+3.2.2. Tweet tokenization for non-neural models and CNN 
+The ﬁrst and fundamental step in preprocessing the tweets to be us- 
+able by machine learning models is to tokenize their text ( Neogi et al., 
+2021 ). To do this, we ﬁrst applied a tweet preprocessing script 
+( Wu, 2017 ) provided by the authors of the GloVe method of produc- 
+ing word embeddings, discussed later in the Data Preprocessing sec- 
+tion ( Pennington et al., 2014 ). This script makes the tweet lowercase 
+and replaces URLs, numbers, hashtags, user handles (e.g., @johndoe), 
+and common facial expression emojis with special generic tokens rep- 
+resenting each of these classes. Furthermore, if a letter repeats three or 
+more times, then repetition is replaced with the single letter followed 
+by an ‘ < elong > ’ symbol (i.e., “aaa ”is replaced with “a < elong > ”), and 
+if a word is in all caps, then ‘ < allcaps > ’ symbol is inserted after the 
+lowercase word; for example, “HELLO ”w o u l d be replaced with “hello 
+< allcaps > ”. 
+After the above preprocessing, we use the NLTK natural language 
+processing package’s TweetTokenizer class ( NLTK 2014 ) to convert each 
+tweet into a list of tokens. Since these tokens are eventually substituted 
+with their respective GloVe word embeddings, the ﬁnal preprocessing 
+step is to make sure each token is converted into one of the tokens in 
+the vocabulary on which GloVe was trained. To achieve this, we looped 
+through the tokens in each tweet and did the following: (1) if a token 
+was in the GloVe corpus, keep it unchanged, (2) if a token was a con- 
+traction, break it up into 2 separate work tokens (e.g. “don’t ”becomes 
+“do not ”), (3) if a token was not a contraction and still not in the corpus, 
+use a Python implementation of the SymSpell word segmentation tool 
+( Garbe, 2014 ; Mammothb, 2018 ) to see if spelling correction and/or the 
+breaking up of run-on words (e.g. “helloworld ”becomes “hello world ”) 
+produces tokens in the corpus, (4) if none of the above steps worked, re- 
+place the token with a custom ‘ < UNK > ’ token, which is just the average 
+of all the embedding vectors in the GloVe corpus. 
+3.2.3. Word embeddings for non-neural models and CNN 
+After tokenization, the next step in preprocessing is to take each to- 
+kenized tweet and convert it to a numerical representation usable by 
+machine learning models. One such representation is word embeddings, 
+which represent each token (not just word tokens) as a vector capturing 
+the semantic meaning of the token. The semantic relationships between 
+tokens are geometrically encoded in the vectors such that tokens with 
+similar meanings have embeddings vectors with a high cosine similarity. 
+The main beneﬁt of using word embeddings is that they allow models 
+5 
+
+
+--- PAGE 6 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+to generalize well to new inputs ( Bengio et al., 2003 ). This is because, 
+if a model receives a text input with tokens not seen at train time and 
+if those new tokens have similar meanings to seen tokens, their embed- 
+dings will look similar to those of the previously-seen tokens, allowing 
+the model to generalize eﬀectively. 
+In this paper, we used 200-dimensional GloVe embeddings (where 
+200-dimensional embeddings were experimentally determined to work 
+the best) trained on a corpus of two billion tweets ( Pennington et al., 
+2014 ). The tweet corpus not only included tokens for words, but also 
+for punctuation, hashtags, user handles, and common text emojis (e.g. 
+“:) ”and “: ˆ) ”). The way in which word embeddings are used to feature 
+the tokenized tweets depends on the kind of model being trained. The 
+CNN model by Kim (2014) takes a matrix of word embeddings as an 
+input, where each row represents a token in the tweet and the columns 
+represent the diﬀerent dimensions of each embedding. Since the CNN 
+takes a ﬁxed-length input and 93% of our dataset has fewer than 30 
+tokens, we truncated tweets with more than 30 tokens and padded each 
+tweet with fewer than 30 tokens with zero vectors (since GloVe does not 
+provide a dedicated ‘ < pad > ’ token). The non-convolutional models (e.g. 
+decision tree and SVM, discussed below) do not operate on embeddings 
+matrices, so we averaged the embeddings of all the tokens in a tweet to 
+produce a ﬁxed-length 200-dimensional vector. 
+3.2.4. Preprocessing for language models 
+The large language models BERT ( Devlin et al., 2018 ) and XLNet 
+(Yang et al., 2019) use more sophisticated methods of tokenization. 
+These models are trained on vocabularies of word pieces, including both 
+whole words and segments (as small as individual letters). Text is then 
+tokenized greedily with respect to the word piece corpus. In this pro- 
+cess, the next token generated is the longest one matching the current 
+text. For example, the next token generated for “the dog ”would be the 
+word “the, ”not the letter “t ”. The advantage of using a word piece cor- 
+pus is that every text can be tokenized into tokens that are present in 
+the corpus, since single letters are a part of the corpus. This obviates the 
+need for an unknown token as we used when tokenizing for GloVe. 
+3.3. Data analysis 
+3.3.1. Machine-Learning models 
+We compare the performance of a diverse set of machine-learning 
+models on the relevance and urgency classiﬁcation tasks. The non-neural 
+models we use are the naive Bayes classiﬁer ( Rish, 2001 ), AdaBoost 
+( Freund & Shapire, 1997 ), support vector machine (SVM) ( Cortes & 
+Vapnik, 1995 ), multilayer perceptron (MLP) ( Pal & Mitra, 1992 ), logis- 
+tic regression, and ridge regression ( Tikhonov, 1943 ). These non-neural 
+models were selected from a larger set of diverse models based on their 
+performance on a small manually-labeled trial dataset prior to crowd- 
+sourced labeling via Amazon MTurk (discussed above). 
+The CNN we use is the one developed by Kim (2014) , which takes 
+n x k matrix as input, where the n rows correspond to the n tokens in a 
+tweet, and k refers to the dimensionality of the GloVe word embeddings. 
+In our study, n = 30 and k = 200. The single convolutional layer of the 
+CNN uses the spatial relationships between the words to better produce 
+features used by its downstream layers for the classiﬁcation task. 
+There has been a recent trend in natural language processing in 
+which large language models are pretrained on a very large corpus and 
+are ﬁne-tuned for downstream tasks like classiﬁcation and translation, 
+rather than just extracting their embedding layer as feature represen- 
+tations to be used in separate models, as done with models like GloVe 
+( Devlin et al., 2018 ). The reason for this paradigm shift is that ﬁne- 
+tuning an entire model rather than just borrowing its embeddings allows 
+all the information about the language encoded in the model architec- 
+ture to be leveraged by the downstream task, resulting in signiﬁcantly 
+better performance. 
+We use two such models to build text classiﬁers, namely BERT 
+( Devlin et al., 2018 ) and XLNet (Yang et al., 2019). BERT is a model 
+inspired by the Transformer architecture proposed by Vaswani et al. 
+(2017) . It was pretrained on the Masked Language Model (MLM), and 
+Next Sentence Prediction (NSP) tasks over a corpus of 3.3 billion words. 
+XLNet is similarly inspired by the Transformer, but it is pretrained on a 
+diﬀerent task-namely the Permutation Language Model (PML) objective 
+over a dataset that is even larger than the one BERT is trained on. The 
+BERT and XLNet models come in diﬀerent sizes (i.e. with a diﬀerent 
+number of Transformer layers), but the versions we used both have 12 
+Transformer layers, plus a couple layers on top to adapt the pretrained 
+models for text classiﬁcation. 
+3.3.2. Oversampling 
+One drawback of the dataset used in the urgency classiﬁcation task 
+is that urgent tweets are quite infrequent, which would allow models to 
+achieve high accuracy by naively classifying every tweet as not urgent. 
+One method of forcing models to avoid this pathological behavior is to 
+generate new urgent examples using the small number present in the 
+dataset. The simplest version of this is random oversampling, in which 
+urgent tweets are randomly duplicated until they make up some larger 
+percentage of the dataset (in this study we experiment with 33% and 
+50%). One shortcoming of this approach is that since only existing data 
+points are repeatedly added to the ﬁnal training set, models trained on 
+such a dataset are highly prone to overﬁtting ( Chawla et al., 2002 ). 
+We attempted to alleviate this problem by also trying out more 
+sophisticated oversampling methods when training non-neural mod- 
+els, speciﬁcally SMOTE, SVM-SMOTE, Borderline SMOTE, and ADASYN 
+( Chawla et al., 2002 ; Han et al., 2005 ; He et al., 2008 ; Nguyen et al., 
+2009 ). Surprisingly, every model we tested achieved the best perfor- 
+mance using 50% naive oversampling (i.e., duplicating urgent tweets 
+until they make up 50% of the dataset), so we only report the results for 
+models trained with 50% naive oversampling. 
+3.3.3. Model selection 
+One of the biggest challenges in developing a machine learning 
+model is the vast number of models available to choose from, as well 
+as the numerous hyperparameters to tune in each model. We used the 
+Scikit-learn machine learning package ( Pedregosa et al., 2011 ) to per- 
+form 5-fold cross-validation (see the Training and Evaluation section) 
+with numerous common non-neural classiﬁcation models and recorded 
+their average accuracy, precision, recall, and F1 across the 5 folds with 
+respect to relevance. The suite of classiﬁers that we used includes K- 
+nearest neighbors, decision tree, ensemble methods (AdaBoost, ran- 
+dom forests, extremely randomized trees), XGBoost ( Chen et al., 2015 ), 
+support vector machine, Gaussian Naive Bayes, and Multilayer percep- 
+tron. Of these models, AdaBoost, multilayer perceptron, Gaussian Naive 
+Bayes, logistic regression, ridge regression, and the SVM had signiﬁ- 
+cantly higher F1 scores than the other classiﬁers, so we decided to nar- 
+row the scope of our study to those models. 
+4. Results 
+This section describes the performance of both the non-neural and 
+neural models on both the relevance and urgency classiﬁcation tasks. 
+The results reported for each task are the performance of the models 
+trained on the train set and evaluated on the test set, after their hyperpa- 
+rameters are ﬁrst tuned on the train set via gridsearch and 5-fold cross- 
+validation. The ﬁnal hyperparameters for each model are described in 
+the Appendix. 
+4.1. Evaluation and robustness checks 
+4.1.1. Evaluation metrics 
+When assessing the performance of machine learning models, only 
+recording accuracy presents an incomplete picture. For example, if a 
+rare disease only occurs in 0.01% of the population, a naive detection 
+system that predicts “not sick ”for everyone is 99.9% accurate, but it is 
+6 
+
+
+--- PAGE 7 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+undesirable because it misses the people who are sick; in other words, 
+the system exhibits high precision but suﬀers from very poor recall. We 
+thus evaluate our models using metrics that quantify both accuracy and 
+how well the model captures truly positive examples. 
+The metrics we use are accuracy, precision, recall, F1, and area under 
+the receiving operator characteristic curve (AUC). We use F1 because it 
+captures the tradeoﬀ between precision (how often a tweet is actually 
+relevant or urgent if a model classiﬁes it as such) and recall (the frac- 
+tion of truly relevant or urgent tweets that a model correctly classiﬁes as 
+such). We also include the AUC metric because it shows how well a clas- 
+siﬁer performs over all possible decision thresholds, where the decision 
+threshold is a number used along with a model’s output to determine 
+the ﬁnal classiﬁcation output. 
+Although a good model scores well in all ﬁve metrics, we prioritize 
+F1 since it is an intermediate metric that takes into account both pre- 
+cision and recall. For a ﬁxed F1 score, we prioritize recall since from 
+the perspective of a ﬁrst responder, it is preferable to sift through some 
+false positive tweets rather than entirely miss many tweets from people 
+who truly do need help. While F1 is the main metric by which we com- 
+pare model performance, we still include the other metrics so that our 
+models can be better compared to related work and future work has a 
+wider variety of options to compare against our models’ performance. 
+4.1.2. Training and evaluation 
+A very important consideration when evaluating the performance 
+of machine learning models is that their performance on the training 
+dataset is often much better than that on a test set. Known as overﬁtting, 
+this occurs because models have a tendency to learn spurious patterns 
+and anomalies in the training set to achieve high training performance, 
+while not learning enough of the general patterns required to perform 
+well on unseen data. To alleviate the eﬀects of overﬁtting on model 
+evaluation results, we split our dataset into a training set and a test 
+set. We make the split such that both sets contain the same fraction of 
+either relevant or urgent tweets. For this reason, we created a separate 
+train-test pair for relevance and urgency. 
+To tune the hyperparameters for each model, we performed grid- 
+search over all combinations of hyperparameters that we considered. 
+For each combination, we evaluated the model on the training dataset 
+using stratiﬁed k-fold cross-validation, which works by randomly par- 
+titioning the dataset into k subsets (such that each subset has the same 
+fraction of positive (i.e. urgent or relevant) data points, and it included 
+training the model on the other k -1 subsets and measuring the metrics 
+on the single chosen test subset). This procedure is done k times by se- 
+lecting each of the subsets as the test set, and the k values for each metric 
+are averaged. Cross-validation is a good way to measure generalization 
+performance since for each of the k splits, the model is evaluated only 
+on the data subset not seen by the model during training. Furthermore, 
+since each metric is calculated as an average over many test partitions 
+of the data, cross-validation reduces the likelihood of a model “getting 
+lucky ”with a particularly favorable train-test split. 
+Each model’s hyperparameters are thus chosen to be the combination 
+that maximizes cross-validated F1. To evaluate the model’s generaliza- 
+tion performance, we trained the model on the entire training dataset 
+and evaluated it on the test dataset, which has no role in the hyperpa- 
+rameter selection process. We report results on a test set not involved 
+in cross-validation since the mere act of searching over many combina- 
+tions of parameters, while evaluating on a particular dataset, could lead 
+to the selection of a hyperparameter combination overﬁt to that dataset. 
+4.1.3. Relevance classiﬁcation 
+Table 1 displays the results of the non-neural relevance classiﬁers 
+explored in this study. The SVM achieved the highest F1 score, indicat- 
+ing that it strikes the best balance between precision and recall of all 
+the non-neural classiﬁers. 
+Table 2 displays the analogous results for the neural classiﬁers. The 
+BERT and XLNet language model achieve signiﬁcantly higher F1 scores 
+Table 1 
+Results of non-neural models trained on average word embeddings for the 
+relevance classiﬁcation task. 
+Models Accuracy Precision Recall F1 AUC 
+Naive Bayes 0.64 0.61 0.77 0.68 0.64 
+AdaBoost 0.66 0.66 0.66 0.66 0.66 
+SVM 0.72 0.71 0.75 0.73 0.72 
+MLP 0.70 0.69 0.73 0.70 0.70 
+Logistic Regression 0.70 0.71 0.70 0.70 0.70 
+Ridge Classiﬁer 0.71 0.71 0.72 0.71 0.71 
+Table 2 
+Results of neural models trained for the relevance classiﬁcation task. 
+Models Accuracy Precision Recall F1 AUC 
+CNN 0.72 0.72 0.72 0.72 0.72 
+BERT 0.78 0.78 0.79 0.78 0.78 
+XLNet 0.77 0.77 0.77 0.77 0.77 
+Table 3 
+Results of non-neural models trained on average word embeddings, with 
+50% naive oversampling, for the urgency classiﬁcation task. 
+Models Accuracy Precision Recall F1 AUC 
+Naive Bayes 0.71 0.37 0.66 0.47 0.69 
+AdaBoost 0.77 0.42 0.38 0.40 0.62 
+SVM 0.71 0.35 0.51 0.42 0.64 
+MLP 0.72 0.34 0.45 0.39 0.62 
+Logistic Regression 0.74 0.38 0.53 0.45 0.66 
+Ridge Classiﬁer 0.68 0.32 0.53 0.40 0.62 
+than all the other neural and non-neural classiﬁers, with BERT narrowly 
+achieving ﬁrst place with a score of 0.78. This is likely due to the fact 
+that BERT and XLNet are language models pretrained on a very large 
+corpus and then ﬁne-tuned in their entirety on the relevance classiﬁca- 
+tion task. This is starkly diﬀerent from the other models, whose only 
+prior information about the English language comes from the word em- 
+beddings used to represent the tweets. The fact that BERT and XLNet 
+encode signiﬁcant prior knowledge in their entire architectures is likely 
+why they achieve such strong results despite the small size of our tweet 
+dataset. 
+4.1.4. Urgency classiﬁcation 
+As mentioned in the Methods section, only results for urgency clas- 
+siﬁers that are provided include those for 50% naive oversampling. 
+The results without oversampling are not reported since they exhibit 
+the pathological behavior in which the classiﬁers naively classify most 
+tweets as “not urgent ”to achieve high accuracy at the expense of recall. 
+As Table 3 indicates, among the non-neural classiﬁers, the naive 
+Bayes classiﬁer achieves the highest F1 score with a signiﬁcantly larger 
+recall than any other non-neural classiﬁer, with only the logistic regres- 
+sion model coming in close second. The remarkably good performance 
+of the naive Bayes classiﬁer compared to the other non-neural classiﬁers 
+is likely due to the fact that the naive Bayes model makes predictions 
+based on conditional probabilities directly observed in the dataset as 
+opposed to indirectly learning patterns in the data by tuning parame- 
+ters, making the naive Bayes model perform relatively better on smaller 
+datasets. 
+Table 4 clearly indicates that all three non-neural classiﬁers achieved 
+signiﬁcantly higher F1 scores than any of the non-neural models, with 
+the worst-performing of the three, the CNN, still achieving a F1 score 
+0.07 higher than that achieved by the naive Bayes model. The CNN likely 
+achieved better results since its input format indicates the embedding 
+of each token in the tweet in order, allowing the convolutional layer to 
+use spatial relationships between words to make classiﬁcation decisions. 
+Both language models achieved even higher scores than the CNN, likely 
+7 
+
+
+--- PAGE 8 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+Table 4 
+Results of neural models trained with 50% naive oversampling for the ur- 
+gency classiﬁcation task. 
+Models Accuracy Precision Recall F1 AUC 
+CNN 0.93 0.57 0.53 0.54 0.53 
+BERT 0.76 0.66 0.70 0.67 0.70 
+XLNet 0.77 0.67 0.71 0.68 0.71 
+Table 5 
+Results of our language model performance compared to performance of 
+models in the literature. 
+Model F1 Score 
+BERT - R 0.78 
+XLNet - R 0.77 
+BERT - U 0.67 
+XLNet - U 0.68 
+CNN + LSTM - KUM 0.77 
+CNN - BUR 0.84 
+SVM - BUR 0.83 
+SVM - YAN 0.69 
+Logistic Regression - ASH 0.65 
+due to the fact that their extensive pretraining allowed them to leverage 
+prior knowledge of the English language to learn to detect urgent tweets 
+from a small dataset. 
+4.1.5. Comparing performance of models 
+To better frame our study in the context of the existing research on 
+disaster tweet classiﬁcation, we compare our best results (i.e. perfor- 
+mance of the language models) to those achieved by a few related stud- 
+ies addressing similar classiﬁcation problems. The studies we compare 
+against are Ashktorab et al. (2014) , who trained logistic regression mod- 
+els on unigrams to classify tweets from a small custom dataset as con- 
+taining mentions of human or infrastructure damage; Burel et al. (2018) , 
+who used SVMs, decision trees, and CNNs to build relevance classiﬁers 
+on the CrisisLexT26 dataset; Yang et al. (2017) , who built SVM classi- 
+ﬁers to determine whether tweets sent during Hurricane Harvey con- 
+tained requests for rescue or not; and Kumar et al. (2020) , who used 
+both text and image data from tweets sent during Hurricane Harvey to 
+classify them as informative or not. 
+Table 5 displays the F1 scores achieved by a couple of the models 
+trained in each of the related work, as well as our own BERT and XL- 
+Net relevance and urgency classiﬁers. Each model in the table is listed 
+followed by a hyphen and an abbreviation of the corresponding study. 
+Kumar et al.’s (2020) model’s results refer to the F1 score achieved on a 
+Hurricane Harvey dataset when the multi-modal model (with a major- 
+ity voting procedure) was trained on a dataset of tweets from Hurricane 
+Maria. The abbreviations we use, along with the corresponding classi- 
+ﬁcation task, are as follows. (Our own models are not followed by any 
+abbreviation, but an R for “relevance ”and a U for “urgency ”is used): 
+• Ashktorab et al. (2014) : (ASH) - whether tweet mentions casualties 
+or infrastructural damage 
+• Burel et al. (2018) : (BUR) - whether tweet is related to a crisis or not 
+• Yang et al. (2017) : (YAN) - whether a tweet sent during Hurricane 
+Harvey contains a request for rescue 
+• Kumar et al. (2020) : (KUM) - whether tweet sent during Hurricane 
+Harvey is informative or not 
+5. Discussion 
+By examining ‘calls for help’ on Twitter through machine learning 
+methods, we ﬁrst identiﬁed how Twitter is used during disasters like 
+Hurricane Harvey. Furthermore, we built both non-neural and neural 
+machine-learning models, taking a variety of embeddings-based feature 
+representations of tweets, to classify tweets related to Hurricane Harvey 
+as relevant,urgent, or not. 
+5.1. Comparison to previous literature 
+To make sense of our results, it is important to compare them to pre- 
+vious research with similar classiﬁcation tasks. Our results displayed in 
+Table 5 indicate that our relevance classiﬁers do better than the mod- 
+els built by Yang et al. (2017) and Ashktorab et al. (2014) , and they 
+perform similarly to the model by Kumar at al. (2020) . However, the 
+classiﬁers created by Burel et al. (2018) do markedly better. One rea- 
+son for this disparity with Burel et al.’s models could be the sizes of 
+the datasets on which the models are trained and tested. Our relevance 
+dataset (train and test) collectively contains about 4000 tweets, whereas 
+the CrisisLexT26 dataset used by Burel et al. contains around 28,000 
+tweets. 
+Furthermore, Burel et al.’s (2018) classiﬁcation task is simpler in 
+that models merely determine whether a tweet is about a disaster or 
+not, whereas our more nuanced task requires classiﬁers to determine 
+whether tweets satisfy very speciﬁc criteria, such as containing requests 
+for help (excluding charity donations) or reactions to the eﬀorts of vol- 
+unteers and ﬁrst responders. 
+Our urgency classiﬁers do not achieve the same level of performance 
+as the relevancy classiﬁers, but this likely has to do with the rarity of 
+urgent requests for help in our dataset, which then motivated us to re- 
+duce the size of the urgency dataset and employ oversampling. Based 
+on the strong performance of our language model classiﬁers on the rel- 
+evance dataset, we would expect the urgency performance to improve 
+with more data. 
+5.2. Contributions to literature 
+This study makes several contributions to the ﬁeld of disaster tweet 
+classiﬁcation and crisis communication in disasters. While Twitter has 
+been found to be an instrumental communication tool during disasters 
+to share news and information, document experiences, and connect with 
+others, an important ﬁnding is that Twitter has been used to request and 
+coordinate lifesaving rescue eﬀorts ( David et al., 2016 ; Devaraj et al., 
+2020 ; Rhodan, 2017 ; Robertson, Johnson, Murthy, Smith, & Stephens, 
+2019 ; Yang et al., 2017 ). This study examines a particular instance of 
+this phenomenon, namely calls for help during Hurricane Harvey, and 
+presents machine learning models that classify tweets related to the dis- 
+aster as relevant or irrelevant and urgent or not urgent. 
+Another important contribution is that we demonstrate that aver- 
+aged word embeddings are a feasible way to produce ﬁxed-length fea- 
+tures on which non-neural models (like SVMs and logistic regression 
+models) can be trained. Furthermore, to our knowledge, our work is the 
+ﬁrst to use modern language models like BERT and XLNet in the dis- 
+aster tweet classiﬁcation domain and demonstrate that they are by far 
+the best-performing among the variety of non-neural and neural models 
+that we explored. Our promising results thus open the door to future 
+work in which the wealth of large-scale modern language models that 
+have been developed in the past couple years, like RoBERTa, BART, and 
+GPT-2, can be harnessed to produce state-of-the-art results in disaster 
+tweet classiﬁcation ( Lewis et al., 2019 ; Liu et al., 2019 ; Radford et al., 
+2019 ). Given that pretrained large language models often perform well 
+on downstream tasks with limited or even no training data ( Brown et al., 
+2020 ; Devlin et al., 2018 ; Radford et al., 2019 ), it would be fruitful for 
+future work to explore the ability for these models to generalize to new 
+disasters with very little to no training data. 
+5.3. Implications for practice 
+Our work has the potential to improve emergency response eﬀorts 
+signiﬁcantly by providing an automated framework capable of sifting 
+8 
+
+
+--- PAGE 9 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+through large-scale and noisy Twitter data to identify information rel- 
+evant to ﬁrst responders. First, our relevance classiﬁcation model can 
+directly provide emergency response relevant tweets to help coordinate 
+their rescue eﬀorts. Second, our proposed data preprocessing strate- 
+gies such as word embeddings and tokenization help improve the in- 
+terpretability of the dataset from the perspective of the machine learn- 
+ing model. Third, we provide a framework for deﬁning relevance on 
+a spectrum (from least to most urgent), providing even greater insight 
+to emergency response on how to best coordinate their eﬀorts. Lastly, 
+our large-scale evaluation and comparison with state-of-the-art mod- 
+els demonstrate the eﬃcacy of our model in providing relevant tweets, 
+while at the same time minimizing the false negatives that may occur 
+from noise in the dataset. Our demonstration that pretrained large lan- 
+guage models can achieve reasonable performance on the classiﬁcation 
+task with limited training data indicates the potential to custom-develop 
+such models for new disasters in a timely manner. We believe the tech- 
+niques in our work can be generalized to datasets in the future that deal 
+with other types of natural disaster and emergency response situations 
+outside of ﬂooding. 
+6. Limitations and future directions 
+One potential avenue of improvement in our work would be the size 
+and comprehensiveness of the dataset, which only included 4000 coded 
+tweets posted during Hurricane Harvey to train relevance and urgency 
+classiﬁers. Our neural models (CNN and language models), which al- 
+ready performed markedly better than the non-neural ones, would likely 
+have beneﬁted from a larger dataset as deep learning models generally 
+perform better with more data. This is especially true of the urgency 
+dataset, which only consisted of 1160 tweets due to the rarity of urgent 
+tweets in the dataset of 4000 tweets. Thus, an intuitive future improve- 
+ment of our project would be to signiﬁcantly increase the size of our 
+dataset such that our models would have enough urgent training exam- 
+ples to achieve F1 scores comparable to those achieved by the relevance 
+classiﬁers in our study. 
+Another avenue of improvement regarding our dataset would be 
+to collect similar relevancy and urgency datasets from other disas- 
+ters, including disasters similar to and diﬀerent from Hurricane Har- 
+vey. This expanded dataset could then be used to gage how well a 
+model trained on one disaster generalizes to diﬀerent disasters, since 
+a model capable of detecting relevant and urgent tweets in novel situa- 
+tions would be of great use to ﬁrst responders, as it would obviate the 
+need to collect and manually label a new dataset for every new disas- 
+ter. The concept of training machine-learning models that generalize to 
+new domains is known as domain adaptation, and Ganin et al. (2015) , 
+Glorot et al. (2011) , and Hoﬀman et al. (2018) describe methods of 
+domain adaptation that could be tried on the models evaluated in this 
+study. 
+Finally, our classiﬁers could be potentially more useful to ﬁrst re- 
+sponder operations if trained in a multi-class setting. In this study, we 
+limited ourselves to the simpler binary classiﬁcation case for the sake of 
+identifying which types of machine learning models are generally best 
+suited to the classiﬁcation of disaster tweets. Future work could tune the 
+most promising models we identiﬁed to create classiﬁers that signal to 
+ﬁrst responders not only which tweets are relevant or urgent, but what 
+speciﬁc category they correspond to. 
+7. Conclusion 
+Because Twitter is so readily available in comparison to traditional 
+emergency phone services, it is often used as a way to request help and 
+connect with others during large-scale disasters. Using recorded data 
+from Hurricane Harvey, a highly signiﬁcant and recent natural disas- 
+ter in the United States, this study aims to help detect posts on Twitter 
+that are relevant to ﬁrst responders-requests for help, reports of damage, 
+and reactions to other ﬁrst responders’ eﬀorts. Using a variety of neu- 
+ral and non-neural machine learning models trained on 4000 unique 
+coded tweets related to Hurricane Harvey, this study developed rele- 
+vance classiﬁers from large-scale language models which detected rel- 
+evant tweets at a rate competitive with existing classiﬁers. Although 
+the classiﬁers did not achieve F1 scores competitive with those devel- 
+oped by Burel et al. (2018) , we believe that some contributing factors 
+to this could be their signiﬁcantly larger dataset and simpler classiﬁca- 
+tion task of discerning whether tweets are relevant to a disaster at all, 
+rather than those tweets satisfying speciﬁc conditions of importance to 
+ﬁrst responders, as our task required. The urgency classiﬁers we trained 
+on the same dataset did not achieve recall or F1 scores competitive with 
+the related work and thus have room for improvement, which we be- 
+lieve would be possible with a larger dataset of urgent tweets. To our 
+knowledge, our work is the ﬁrst to present the use of large pretrained 
+language models like BERT and XLNet to built disaster tweet classiﬁers, 
+and their superior performance compared to the non-neural models and 
+CNN suggests that they are a viable option for future work seeking to 
+achieve state-of-the-art results in disaster tweet classiﬁcation. 
+Declaration of Competing Interest 
+The authors declare that they have no known competing ﬁnancial 
+interests or personal relationships that could have appeared to inﬂuence 
+the work reported in this paper. 
+Acknowledgments 
+University of North Texas Libraries Hurricane Harvey 
+Dataset (2017–08–18/2017–09–22) from https://digital.library. 
+unt.edu/ark:/67531/metadc993940/digital.library.unt.edu 
+( Phillips, M. E. 2017 ) 
+Appendix. : Tables & Figures 
+Optimal hyperparameters 
+The following are the optimal hyperparameters discovered for each 
+model using 5-fold cross-validation on the training relevance and ur- 
+gency datasets. For the non-neural models, the parameter names are 
+those used in version 0.21.1 of the Scikit-learn documentation. Each ta- 
+ble corresponds to a single model, and each row corresponds to either 
+the relevance or urgency classiﬁcation task. Models that have no tables 
+did not have any signiﬁcant hyperparameters to tune. 
+The following is an explanation of the hyperparameters used in the 
+CNN model architecture, since it is not implemented in the Scikit-learn 
+library: 
+• dropout : The probability that one of the input nodes to the dropout 
+layer is zeroed out 
+• n_ﬁlters : The number of convolutional ﬁlters of each size used 
+• ﬁlter_sizes : The set of ﬁlter widths used, with n_ﬁlters number of 
+each ﬁlter size in the architecture 
+For example, if n_ﬁlters = 100 and ﬁlter_sizes = [1,2], then the CNN 
+has 200 ﬁlters in total, with 100 having a width of 1 word and 100 
+having a width of 2 words. Tables A1 , A2 , A3 , A4 , A5 , A6 , A7 
+Table A1 
+Optimal Hyperparameters for the CNN. 
+Experiment dropout n_ﬁlters ﬁlter_sizes epochs batch_size 
+Relevance 0.3 100 1, 1 10 8 
+Urgency 0.3 100 1, 1 50 8 
+9 
+
+
+--- PAGE 10 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+Table A2 
+Optimal hyperparameters for AdaBoost. 
+Experiment learning_rate n_estimators 
+Relevance 1.0 50 
+Urgency 1.0 100 
+Table A3 
+Optimal hyperparameters for SVM. 
+Experiment C gamma kernel 
+Relevance 10 0.1 rbf 
+Urgency 10 0.1 linear 
+Table A4 
+Optimal hyperparameters for MLP. 
+Experiment activation alpha early_stopping 
+Relevance relu 0.01 False 
+Urgency tanh 0.001 False 
+Table A5 
+Optimal hyperparameters for ridge classiﬁer. 
+Experiment alpha 
+Relevance 1.0 
+Urgency 0.1 
+Table A6 
+Optimal hyperparameters for BERT. 
+Experiment learning rate epochs batch size 
+Relevancy 3e-5 20 8 
+Urgency 3e-5 10 16 
+Table A7 
+Optimal hyperpameters for XLNet. 
+Experiment learning rate epochs batch size 
+Relevancy 3e-5 5 4 
+Urgency 3e-5 5 4 
+References 
+Ahn, J., Son, H., & Chung, A. D. (2021). Understanding public engagement on 
+Twitter using topic modeling: The 2019 Ridgecrest earthquake case. Interna- 
+tional Journal of Information Management Data Insights, 1 (2), Article 100033. 
+10.1016/j.jjimei.2021.100033 . 
+Akter, S., & Wamba, S. (2017). Big data and disaster management: A systematic review 
+and agenda for future research. Annals of Operations Research, 283 (1–2), 939–959. 
+10.1007/s10479-017-2584-2 . 
+Appling, S., Briscoe, E., Ediger, D., Poovey, J., & McColl, R. (2014). Deriving disaster-re- 
+lated information from social media. In Proceedings of the 1st KDD Workshop on Learn- 
+ing about Emergencies from Social Information (pp. 16–22). KDD (KDD-LESI) . 
+Ashktorab, Z., Brown, C., Nandi, M., & Culotta, A. (2014, May). Tweedr: Mining Twitter 
+to inform disaster response. In ISCRAM. (pp. 269–272). 
+Bengio, Y., Ducharme, R., Vincent, P., & Jauvin, C. (2003). A neural probabilistic language 
+model. Journal of Machine Learning Research, 3 , 1137–1155 . 
+Berardelli, J. (2019). How climate change is making hurricanes more danger- 
+ous. Yale Climate Connections. https://yaleclimateconnections.org/2019/ 
+07/how-climate-change-is-making-hurricanes-more-dangerous/ 
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., et al., (2020). 
+Language models are few-shot learners. Advances in Neural Information Processing Sys- 
+tems, 33 , 1877–1901 . 
+Burel, G., & Alani, H. (2018). Crisis event extraction service (CREES): Automatic detection 
+and classiﬁcation of crisis-related . Content on Social Media . 
+Blake, E. S., & Zelinsky, D. A.. National hurricane center tropical cyclone report: Hurricane 
+Harvey . https://www.nhc.noaa.gov/data/tcr/AL092017_Harvey.pdf . 
+Carter, L. (2018, July 31). Timeline: Hurricane Harvey brings catastrophic rain, ﬂood- 
+ing to Gulf Coast. Retrieved from https://www.khou.com/article/news/timeline- 
+hurricane-harvey-brings-catastrophic-rain-ﬂooding-to-gulf-coast/285-579150393 
+Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE: Syn- 
+thetic minority over-sampling technique. Journal of Artiﬁcial Intelligence Research, 16 , 
+321–357 . 
+Chen, T., He, T., Benesty, M., Khotilovich, V., & Tang, Y. (2015). Xgboost: Extreme gradi- 
+ent boosting. R Package Version 0.4-2 , 1-4. 
+Cortes, C., & Vapnik, V. (1995). Support-vector networks. Machine Learning, 20 (3), 
+273–297 . 
+David, C. C., Ong, J. C., & Legara, E. F. T. (2016). Tweeting Supertyphoon Haiyan: Evolv- 
+ing functions of Twitter during and after a disaster event. PloS one, 11 (3), Article 
+e0150190 . 
+Derczynski, L., Meesters, K., Bontcheva, K., & Maynard, D. (2018). Helping crisis respon- 
+ders ﬁnd the informative needle in the tweet haystack. ArXiv preprint 
+Devaraj, A., Murthy, D., & Dontula, A. (2020). Machine-learning methods for identifying 
+social media-based requests for urgent help during hurricanes. International Journal of 
+Disaster Risk Reduction, 51 , Article 101757. 10.1016/j.ijdrr.2020.101757 . 
+Devlin, J., Chang, M.W., Lee, K., & Toutanova, K. (2018). Bert: Pre-training of deep bidi- 
+rectional transformers for language understanding. arXiv preprint 
+Freund, Y., & Schapire, R. E. (1997). A decision-theoretic generalization of on-line learn- 
+ing and an application to boosting. Journal of Computer and System Sciences, 55 (1), 
+119–139 . 
+Gallagher, J. J.. 01). Hurricane Harvey wreaks historic devastation: By the numbers . 
+https://abcnews.go.com/US/hurricane-harvey-wreaks-historic-devastation-numbers/ 
+story?id = 49529063 . 
+Garbe, W. (2014, March 25). SymSpell (Version 6.3) [Computer software]. Retrieved April 
+15, 2019, from https://github.com/wolfgarbe/SymSpell 
+Ganin, Y., Ustinova, E., Ajakan, H., Germain, P., Larochelle, H., Laviolette, F., . . . Lempit- 
+sky, V. (2016). Domain-adversarial training of neural networks. The Journal of Machine 
+Learning Research, 17 (1) 2096–2030 . 
+Glass, T. A. (2001). Understanding public response to disasters. Public Health Reports, 116 , 
+69 . 
+Glorot, X., Bordes, A., & Bengio, Y. (2011). Domain adaptation for large-scale sentiment 
+classiﬁcation: A deep learning approach. In Proceedings of the ICML . 
+Guo, J., Liu, N., Wu, Y., & Zhang, C. (2021). Why do citizens participate on government 
+social media accounts during crises? A civic voluntarism perspective. Information & 
+Management, 58 (1), 103286. 10.1016/j.im.2020.103286 . 
+Han, H., Wang, W. Y., & Mao, B. H. (2005). Borderline-SMOTE: A new over-sampling 
+method in imbalanced data sets learning. In Proceedings of the international conference 
+on intelligent computing (pp. 878–887). Springer . 
+He, H., Bai, Y., Garcia, E. A., & Li, S. (2008). ADASYN: Adaptive synthetic sampling ap- 
+proach for imbalanced learning. In Proceedings of the IEEE international joint conference 
+on neural networks (pp. 1322–1328). IEEE. (IEEE World Congress on Computational In- 
+telligence) . 
+Hoﬀman, J., Tzeng, E., Park, T., Zhu, J. Y., Isola, P., Saenko, K., . . . Darrell, T. (2018). 
+Cycada: Cycle-consistent adversarial domain adaptation. In International Conference 
+on Machine Learning (pp. 1989–1998) . 
+Imran, M., Mitra, P., & Castillo, C. (2016). Twitter as a lifeline: Human-annotated twitter 
+corpora for NLP of crisis-related messages. arXiv preprint 
+Imran, M., Castillo, C., Lucas, J., Meier, P., & Rogstadius, J. (2014, May). Coordinating 
+human and machine intelligence to classify microblog communications in crises. In 
+ISCRAM. 
+Imran, M., Elbassuoni, S., Castillo, C., Diaz, F., & Meier, P. (2013, May). Extracting infor- 
+mation nuggets from disaster-Related messages in social media. In ISCRAM . 
+Ives, M., & Yoon, J. (2022, September 29). Ian strains emergency services in 
+Southwest Florida. New York Times. Retrieved October 12, 2022, from 
+https://www.nytimes.com/2022/09/29/us/hurricane-ian-emergency-services- 
+southwest-ﬂorida.html 
+Jorgensen, D. (2017). 911 centers overwhelmed during disasters August 28. Keloland Media 
+Group https://www.keloland.com/news/911-centers-overwhelmed-during-disasters/ . 
+Khanday, A. M. U. D., Rabani, S. T., Khan, Q. R., & Malik, S. H. (2022). Detecting twitter 
+hate speech in COVID-19 era using machine learning and ensemble learning tech- 
+niques. International Journal of Information Management Data Insights, 2 (2), 100120. 
+10.1016/j.jjimei.2022.100120 . 
+Kim, Y. (2014). Convolutional neural networks for sentence classiﬁcation. ArXiv preprint 
+Kim, J., & Hastak, M. (2018). Social network analysis: Characteristics of online social 
+networks after a disaster. International Journal of Information Management, 38 (1), 86–
+96. 10.1016/j.ijinfomgt.2017.08.003 . 
+Knutson, T. R., Sirutis, J. J., Zhao, M., Tuleya, R. E., Bender, M., Vecchi, G. A., et al., 
+(2015). Global projections of intense tropical cyclone activity for the late twenty-ﬁrst 
+century from dynamical downscaling of CMIP5/RCP4. 5 scenarios. Journal of Climate, 
+28 (18), 7203–7224. 10.1175/JCLI-D-15-0129.1 . 
+Kumar, A., Singh, J., Dwivedi, Y., & Rana, N. (2020). A deep multi-modal neural network 
+for informative Twitter content classiﬁcation during emergencies. Annals of Operations 
+Research , 1–32. 10.1007/s10479-020-03514-x . 
+Kumar, S., Kar, A. K., & Ilavarasan, P. V. (2021). Applications of text mining in services 
+management: A systematic literature review. International Journal of Information Man- 
+agement Data Insights, 1 (1), 100008. 10.1016/j.jjimei.2021.100008 . 
+Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O. et al. (2019). 
+Bart: Denoising sequence-to-sequence pre-training for natural language generation, 
+translation, and comprehension. arXiv preprint 
+Li, H., Guevara, N., Herndon, N., Caragea, D., Neppalli, K., Caragea, C. et al. (2015, May). 
+Twitter mining for disaster response: A domain adaptation approach. In ISCRAM. 
+10 
+
+
+--- PAGE 11 ---
+C.J. Powers, A. Devaraj, K. Ashqeen et al. International Journal of Information Management Data Insights 3 (2023) 100164 
+Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D. et al. (2019). Roberta: A robustly 
+optimized bert pretraining approach. arXiv preprint 
+Lindsay, B.R. (2011). Social media and disasters: Current uses, future options, and policy 
+considerations. CRS Report for Congress. 
+Little, G., Chilton, L. B., Goldman, M., & Miller, R. C. (2009). Turkit: Tools for iterative 
+tasks on Mechanical Turk. In Proceedings of the ACM SIGKDD workshop on human com- 
+putation (pp. 29–30). ACM . 
+Mammothb. (2018, August 13). SymSpell (Version 6.3) [Computer software]. https:// 
+github.com/mammothb/symspellpy 
+Morales, X.Y.Z.G. (2010). Networks to the rescue: Tweeting relief and aid during typhoon 
+ondoy (Thesis, Georgetown University). 
+Morstatter, F., Lubold, N., Pon-Barry, H., Pfeﬀer, J., & Liu, H. (2014). Finding eyewitness 
+tweets during crises. arXiv preprint 
+Murthy, D. (2018). Twitter: Social communication in the twitter age . Cambridge: Polity Press . 
+Neogi, A. S., Garg, K. A., Mishra, R. K., & Dwivedi, Y. K. (2021). Sentiment 
+analysis and classiﬁcation of Indian farmers’ protest using Twitter data. Inter- 
+national Journal of Information Management Data Insights, 1 (2), Article 100019. 
+10.1016/j.jjimei.2021.100019 . 
+Murthy, D., & Longwell, S. (2013). Twitter and disasters: The uses of Twitter during 
+the 2010 Pakistan ﬂoods. Information Communication & Society, 16(6), 837–855. 
+https://doi.org/10.1080/1369118X.2012.696123 . 
+Nguyen, D.T., Joty, S., Imran, M., Sajjad, H., & Mitra, P. (2016). Applications of online 
+deep learning for crisis response using social media information. arXiv preprint 
+Nguyen, H. M., Cooper, E. W., & Kamei, K. (2009). Borderline over-sampling for imbal- 
+anced data classiﬁcation. In Proceedings of the ﬁfth international workshop on computa- 
+tional intelligence & applications (pp. 24–29). IEEE SMC Hiroshima Chapter. Vol. 2009, 
+No. 1 . 
+NOAA. (2018, January 26). Costliest U.S. tropical cyclones tables updated. Retrieved from 
+https://www.nhc.noaa.gov/news/UpdatedCostliest.pdf 
+Olteanu, A., Castillo, C., Diaz, F., & Vieweg, S. (2014). Crisislex: A lexicon for collecting 
+and ﬁltering microblogged communications in crises. In Proceedings of the 8th interna- 
+tional AAAI conference on weblogs and social media (ICWSM’14) (No. CONF) . 
+O’Neal, A., Rodgers, B., Segler, J., Murthy, D., Lakuduva, N., Johnson, M., et al., (2018). 
+Training an Emergency-Response Image Classiﬁer on Signal Data. In Proceedings of 
+the 17th IEEE international conference on machine learning and applications (ICMLA) 
+(pp. 751–756). IEEE . 
+Ovadia, S. (2009). Exploring the potential of Twitter as a research tool. Behavioral & Social 
+Sciences Librarian, 28 (4), 202–205 . 
+NLTK. (2014). Accessing text corpora and lexical resources. Retrieved from 
+https://www.nltk.org/book/ch02.html 
+Pal, S.K., & Mitra, S. (1992). Multilayer perceptron, fuzzy sets, classiﬁcation. 
+Palen, L., & Hughes, A. L. (2010). Social media in disaster communication. In Handbook 
+of disaster research –2nd edition (pp. 497–520). Cham, Switzerland: Springer . 
+Paul, A. (2015). Identifying relevant information for emergency ser- 
+vices from twitter in response to natural disaster. Retrieved from 
+https://eprints.qut.edu.au/89220/1/Avijit_Paul_Thesis.pdf 
+Peary, B. D., Shaw, R., & Takeuchi, Y. (2012). Utilization of social media in the east Japan 
+earthquake and tsunami and its eﬀectiveness. Journal of Natural Disaster Science, 34 (1), 
+3–18. 10.2328/jnds.34.3 . 
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., et al., 
+(2011). Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 
+12 (Oct), 2825–2830 . 
+Pennington, J., Socher, R., & Manning, C. (2014). Glove: Global vectors for word repre- 
+sentation. In Proceedings of the 2014 conference on empirical methods in natural language 
+processing (EMNLP) (pp. 1532–1543) . 
+Pew Research Center (2018, March 1). Social media use in 2018 . Retrieved from 
+http://www.pewinternet.org/2018/03/01/social-media-use-in-2018/ 
+Phillips, M.E. (2017). Hurricane Harvey Twitter dataset, dataset, 2017-08-18/2017-09- 
+22; ( https://digital.library.unt.edu/ark:/67531/metadc993940 /: Accessed January 
+29, 2018), University of North Texas Libraries, Digital Library, digital.library.unt.edu 
+Prasad, R., Udeme, A. U., Misra, S., & Bisallah, H. (2023). Identiﬁcation and classiﬁcation 
+of transportation disaster tweets using improved bidirectional encoder representations 
+from transformers. International Journal of Information Management Data Insights, 3 (1), 
+100154. 10.1016/j.jjimei.2023.100154 . 
+Rachunok, B., Fan, C., Lee, R., Nateghi, R., & Mostafavi, N. (2022). Is the data suit- 
+able? The comparison of keyword versus location ﬁlters in crisis informatics us- 
+ing Twitter data. International Journal of Information Management Data Insights, 
+2. https://doi.org/10.1016/j.jjimei.2022.100063 . 
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., & Sutskever, I. (2019). Language 
+models are unsupervised multitask learners. OpenAI Blog, 1(8), 9. 
+Rathore, A. K., Kar, A. K., & Ilavarasan, P. V. (2017). Social media analytics: Litera- 
+ture review and directions for future research. Decision Analysis, 14 (4), 229–249. 
+10.1287/deca.2017.0355 . 
+Rhodan, M. (2017). Please send help: Hurricane harvey victims turn to twit- 
+ter and facebook. Time . http://time.com/4921961/hurricane-harvey-twitter- 
+facebook-social-media/ . 
+Rish, I. (2001). An empirical study of the naive Bayes classiﬁer. In Proceedings of the IJCAI 
+2001 workshop on empirical methods in artiﬁcial intelligence : 3 (pp. 41–46) . 
+Robertson, B. W., Johnson, M., Murthy, D., Smith, W. R., & Stephens, K. K. (2019). Using 
+a combination of human insights and ‘deep learning’ for real-time disaster communi- 
+cation. Progress in Disaster Science, 2 , 100030. 10.1016/j.pdisas.2019.100030 . 
+Smith, W. R., Stephens, K. K., Robertson, B. W., Li, J., & Murthy, D. (2018). Social media 
+in citizen-led disaster response: Rescuer roles, coordination challenges, and untapped 
+potential. In Proceedings of the 15th international ISCRAM conference (pp. 639–648) . 
+Spence, P. R., Lachlan, K. A., Lin, X., & del Greco, M. (2015). Variability in Twitter con- 
+tent across the stages of a natural disaster: Implications for crisis communication. 
+Communication Quarterly, 63 , 171–186. 10.1080/01463373.2015.1012219 . 
+Stephens, K. K., Li, J., Robertson, B. W., Smith, W. R., & Murthy, D. (2018). Citizens com- 
+municating health information: Urging others in their community to seek help during 
+a ﬂood. In K. Boersma, & B. Tomaszewski (Eds.), Proceedings of the 15th international 
+ISCRAM conference May 2018 . 
+Tikhonov, A.N. (1943). On the stability of inverse problems. In Doklady Akademii nauk 
+SSSR (Vol. 39, pp. 195–198). 
+Stephens, K. K., Robertson, B. W., & Murthy, D. (2019). Throw me a lifeline: 
+Articulating mobile social network dispersion and the social construction of 
+risk in rescue communication. Mobile Media & Communication, 8 (2), 149–169. 
+10.1177/2050157919846522 . 
+Tim, Y., Pan, S. L., Ractham, P., & Kaewkitipong, L. (2017). Digitally enabled disaster 
+response: The emergence of social media as boundary objects in a ﬂooding disaster. 
+Information Systems Journal, 27 (2), 197–232. 10.1111/isj.12114 . 
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., . . . Polo- 
+sukhin, I. (2017). Attention is all you need. Advances in Neural Information Processing 
+Systems , 30 . 
+Wadud, M. A. H., Kabir, M. M., Mridha, M. F., Ali, M. A., Hamid, M. A., & 
+Monowar, M. M. (2022). How can we manage oﬀensive text in social media-a text 
+classiﬁcation approach using LSTM-BOOST. International Journal of Information Man- 
+agement Data Insights, 2 (2), 100095. 10.1016/j.jjimei.2022.100095 . 
+Wu, M. (2017, February 20). Preprocess-twitter.py [Computer software]. 
+https://gist.github.com/tokestermw/cb87a97113da12acb388 
+Yang, Z., Nguyen, L. H., Stuve, J., Cao, G., & Jin, F. (2017). Harvey ﬂooding rescue in 
+social media. In Proceedings of the IEEE international conference on big data (Big Data) 
+(pp. 2177–2185). IEEE . 
+Zou, L., Lam, N. S. N., Shams, S., Cai, H., Meyer, M. A., Yang, S., et al., (2019). Social and 
+geographical disparities in Twitter use during hurricane Harvey. International Journal 
+of Digital Earth, 12 (11), 1300–1318. 10.1080/17538947.2018.1545878 . 
+11 

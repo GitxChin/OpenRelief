@@ -1,0 +1,22 @@
+{
+  "resource_offer_id": "RES-EXAMPLE-001",
+  "provider_type": "community_group",
+  "resource_type": "temporary_shelter",
+  "quantity": {
+    "unit": "people",
+    "value": 20
+  },
+  "availability_window": {
+    "starts_at": "2026-01-01T12:00:00Z",
+    "ends_at": "2026-01-03T12:00:00Z"
+  },
+  "service_area": {
+    "city": "Example City",
+    "districts": ["Example District"]
+  },
+  "constraints": ["requires coordinator confirmation", "not suitable for medical isolation"],
+  "contact_visibility": "restricted",
+  "review_status": "needs_review",
+  "notes": "This is fictional example data."
+}
+

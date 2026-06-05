@@ -1,0 +1,2000 @@
+
+
+--- PAGE 1 ---
+77
+Socially Enhanced Situation Awareness from Microblogs
+Using Artificial Intelligence: A Survey
+RABINDRA LAMSAL, AARON HARWOOD, and MARIA RODRIGUEZ READ,
+School of Computing and Information Systems, University of Melbourne, Australia
+The rise of social media platforms provides an unbounded, infinitely rich source of aggregate knowledge of
+theworldaroundus,bothhistoricandreal-time,fromahumanperspective.Thegreatestchallengewefaceis
+howtoprocessandunderstandthisrawandunstructureddata,gobeyondindividualobservationsandseethe
+“big picture”—the domain of Situation Awareness. We provide an extensive survey of Artificial Intelligence
+research, focusing on microblog social media data with applications to Situation Awareness, that gives the
+seminal work and state-of-the-art approaches across six thematic areas:Crime, Disasters, Finance, Physical
+Environment, Politics,a n dHealth and Population. We provide a novel, unified methodological perspective,
+identify key results and challenges, and present ongoing research directions.
+CCS Concepts: •Information systems→Data stream mining;Data analytics;
+Additional Key Words and Phrases: Social media, Twitter analytics, short text processing, machine learning,
+deep learning, applied statistics, social computing
+ACM Reference format:
+Rabindra Lamsal, Aaron Harwood, and Maria Rodriguez Read. 2022. Socially Enhanced Situation Awareness
+fromMicroblogsUsingArtificialIntelligence:ASurvey. ACMComput.Surv. 55,4,Article77(November2022),
+38 pages.
+https://doi.org/10.1145/3524498
+1 INTRODUCTION
+Being able to understand the state of the world around us—referred to assituation awareness—
+is a fundamental capability for making effective decisions affecting our future. The role of “Social
+Media,”sometimesattributedtoas“Web2.0,”isattheforefrontofthisendeavortoday.Socialmedia
+referstothoseinternetandmobile-basedservicesthatfacilitateonlineexchangesofconversations,
+social networking, and forming online communities for contributing user-created content among
+their users [41]. Arguably, the vast uptake of social media platforms has revolutionized the way
+people interact socially with each other. These platforms allow individuals, organizations, and
+governments to interact with a large number of people, all in real-time, through the exchange of
+texts, photos, videos, and social network cues such as liking and following.
+This study was supported by the Melbourne Research Scholarship from the University of Melbourne, Australia.
+Authors’ address: R. Lamsal, A. Harwood, and M. R. Read, School of Computing and Information Systems, University
+of Melbourne, Melbourne Connect, 700 Swanston Street, Melbourne, Victoria, Australia, 3010; emails: rlamsal@student.
+unimelb.edu.au, {aharwood, maria.read}@unimelb.edu.au.
+Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee
+provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and
+the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored.
+Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires
+prior specific permission and/or a fee. Request permissions frompermissions@acm.org.
+© 2022 Association for Computing Machinery.
+0360-0300/2022/11-ART77 $15.00
+https://doi.org/10.1145/3524498
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 2 ---
+77:2 R. Lamsal et al.
+The billions of active social media users per month [132] provide a big data processing chal-
+lenge that is infeasible without employing high-performance, large-scale distributed computa-
+tionalmethods—witharapidlyincreasingdemandfor machinelearning [21]approaches. Machine
+Learning(ML) isasubsetof ArtificialIntelligence (AI)thatprimarilyfocusesonmakingasys-
+temlearnandimproveitselfwithoutinvolvingexplicitprogramming,byutilizingconceptsprimar-
+ily from statistics, probability, linear algebra, and differential calculus. ML shares its application
+scopewithmanyinter-disciplinaryareas,includingmedical[ 76],linguistics[ 92],timeseriesfore-
+casting [8], and computer vision [141]. The various learning paradigms associated with ML are
+discussed later in Section2.
+1.1 Situation Awareness from Social Media
+Speed, transparency, and ubiquity, aided by the proliferation of mobile technology, are the main
+reasons for the growth of social media. For example, situations that would have otherwise re-
+mainedrelativelyunknownforanindefiniteperiodarenowbeingreportedandsharedworldwide
+within minutes [94]. It literally takes only a few seconds to report a situation globally on social
+media:takeaphoto,writeafewwords,andshareitonline.Thisreportingmethodismoreefficient
+than individual cellular communication (e.g., making individual calls to friends and family), since
+socialmediaeffectivelyprovidesapublicbroadcastplatformforindividuals.Effectiveinclusionof
+informationdrawnfromsocialmediahasbecomeanecessityforgovernmentauthoritiestobetter
+understand the environment and people that they govern. The online interaction between users
+withtheexchangeofstatusupdates,newsstories,andothermediahaspotentialtobesignificantly
+advantageous forsituation awareness.
+As defined in Reference [42], situation awareness is a three-stage process:Perception, Compre-
+hension,and Projection.Inthe Perceptionstage,informationregardinganeventiscollectedandun-
+wantedinformationisfilteredout.The Comprehensionstage involvesintegratingmultiplepiecesof
+informationcollectedfromtheearlierstageandstudyingitsrelevanceandvalidity.Thelaststage
+ofsituationawarenessisthe Projectionstage,andithasbeenfoundthatevenexperiencedindividu-
+alsrelyonfutureprojectionsheavilywhiledealingwithsituations.Projectingthecurrentscenarios
+and dynamics to their future implications gives space for timely and effective decision-making.
+A situation is traditionally perceived using observations, questionnaires, interviews, checklists,
+andmeasurements[ 42].Socialmediaconversationsintheformoftext,photos,andvideosoverlap
+the observation, questionnaire, and interview methods of collecting data. Previous studies have
+shown that such socially generated data contributes to a better understanding of an ongoing situ-
+ation [62]. For example, during a disastrous event people tend to use social media excessively, as
+theysharetheirsafetystatusandexchangeconversationstoquerythesafetystatusoftheirfriends
+and family. People also share what they have seen, felt, or heard from others. During such critical
+hours of a disaster, the use of social media can peak to unprecedented levels, and based on these
+public conversations first responders and decision-makers can visualize a more comprehensive
+real-time picture of the situation to aid in formulating actionable plans.
+1.2 The Social Media Spectrum
+Figure 1 classifies some of the popular [132] social media services.Social Network Servicesare
+platforms that allow users to create profiles and develop a network of connections so their ex-
+changed conversations are shared effectively within the network. Instant Messaging Services are
+a subclass of Social Network Services, considering their main feature of creating users’ networks.
+Online Journals, commonly referred to as “blogs,” let their users publish stories/ideas usually in
+a reverse chronological order.Social Bookmarking Servicesallow users to bookmark links to web-
+sites.Theseservicescangenerateenormoustraffictothebookmarkedwebcontent. Microblogsare
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 3 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:3
+Fig. 1. Classification of some popular [ 132] social media services. Notes: +in millions, unless mentioned
+otherwise (as of January 2021);∗R represents restricted usage (restricted to a limited set of publishers); N/A
+represents not available; A represents available;∗∗Places API for accessing global point of interest (POI) data.
+online broadcasting services that allow users to post updates with a limited number of words or
+characters. Wikis are collaborative platforms powered by wiki engines where their users can edit
+andmanagethecontent.Unlikecontentmanagement systemsuchasWordPress,thecontentpro-
+duction in a wiki is not limited to a sole author.Media-sharing Servicesallow their users to share
+media contents such as images and videos. This classification does not have strict boundaries, be-
+cause one way or another, these services borrow features from the other side of the spectrum to
+keeptheirusersengaged.ConsiderTwitter—itisamicrobloggingplatform,butitalsoactsasaSo-
+cial Network and also allows sharing of images and short videos just like Media-Sharing Services.
+1.2.1 SuitabilityforSituationAwareness. Tobeaneffectivesourceofsocialmediaforenhancing
+situation awareness, we consider three key attributes (shown in Figure1): The content should
+carry real-time descriptions, there should be a significantly large and active userbase, and the
+service must provide a public streaming API. With these criteria in mind, we focused this survey
+on Microblog services, primarily research that uses Twitter data. Some social media services may
+nothavereal-timeattributes,i.e.,theircontentisupdatedoveralongtimeintervals,buttheystill
+contribute to enhancing situation awareness by enriching the data obtained from their real-time
+peers. Consider, for example, an event associated with theEiffel Tower; during the processing of
+socialmediaconversations,aparallelanalysisfromwikiscanhelpMLmodelsunderstandthatthe
+event is closely associated withFrance,Paris,a structure,a monument, and so on.
+1.3 Scope and Organization
+There are existing surveys related to social media analytics concerning its techniques, tools, plat-
+forms [16], and applications—disasters [62, 98], visual analytics [156], politics [133], health [1],
+business [57], false information and rumor detection [80,176]. Based on our literature search, the
+previous surveys either focus on social media in general and/or are application/analysis-specific.
+To the best of our knowledge, this survey is the first that studies the use of AI for extracting sit-
+uation awareness from microblogs without limitations on both the application and analysis. As
+major contributions of this survey, we:
+—discusstheessentialaspectsofmicrobloganalyticsandpresentahigh-levelmethodological
+view of the literature (in Section2),
+—survey AI research that extract situational information from microblog data (in Section3),
+—provide a commentative review of the literature and present challenges and research direc-
+tions in the domain (in Section4).
+2 BACKGROUND AND PRELIMINARY CONCEPTS
+In this section, we discuss high-level aspects of microblog analytics that are common across the
+surveyedliterature.Westartwithareviewofdifferingtasks,associatedalgorithms/methods,some
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 4 ---
+77:4 R. Lamsal et al.
+advancedMLmethods,andlaterprovideabroaddescriptionofcommonlyusedmicroblogdataand
+its uses, followed by basic and advanced methods for representation learning. We refrain fromen
+massecitationstotheliteratureinthissection;adetailedliteraturebreakdownisgiveninSection 3.
+2.1 Fundamental Machine Learning
+Manyoftheapplications/problemsdescribedinthesurveyedliteraturewereaddressedusingfun-
+damental applications of machine learning and/or applied statistics.
+2.1.1 Supervised Learning Problems. In this set of problems, the task is to learn a function
+that maps an input to output based on previously recorded examples [21]; therefore, requir-
+ing labelled data for training purposes. Considering a set ofN previously recorded examples,
+{(x1,y1 ),..., (xn ,yn )}, such thatxi represents the feature vector of theith example andyi repre-
+sents the corresponding output class, a supervised learning problem aims at modelling a function
+f : X →Y,w h e r eX represents the input space andY represents the output space. Supervised
+learning problems are further divided into two types:Regression (continuous output) andClas-
+sification (discrete output or categories). The literature employs different variants of regression-
+basedalgorithmssuchasLinear/PolynomialRegression,StepwiseRegression,PoissonRegression
+[17,34,86,149],andclassification-basedalgorithmssuchas LogisticRegression(LR) [14,32,46],
+Naive Bayes (NB) [37, 51, 100, 117, 121, 143], K-Nearest Neighbors (KNN) [2], Decision
+Trees (DT)[37, 121], Random Forest (RF)[10, 90, 117, 136], Support Vector Machine (SVM)
+[37, 100, 117, 121], andArtificial Neural Network (ANN)(refer to Section4.2 for recent trends
+in the use of neural models).
+2.1.2 UnsupervisedLearningProblems. Thissetofproblemsdealswiththetaskoflearninginter-
+nalpatternsfromunlabelleddata[ 21]:clustering—findinggroupsofsimilarexamples; densityesti-
+mation—determiningthedistributionofdata; visualization—projectinghigh-dimensionaldatatoa
+two-orthree-dimensionalspace; outlierdetection—detectinganomalies; topicmodelling —learning
+latent variables; and understanding opinions from texts using lexicon-based methods (some liter-
+ature classify lexicon-based methods as semi-supervised, as these methods maintain a predefined
+dictionaryofwordsandphrases).Commonlyusedmethodsinunsupervisedlearningare K-Means
+[88], Hierarchical Clustering, Isolation Forest,Latent Dirichlet Allocation (LDA)[3, 46, 149],
+KernelDensityEstimation(KDE) [32,46],PrincipalComponentAnalysis(PCA) ,andANN.
+Thereisathirdlearningparadigm,aninstanceof weaksupervision [174],knownas Semi-supervised
+learning, where a small set of labelled data is used alongside a large set of unlabelled data during
+training.Oneofitscasesis Activelearning (discussedshortlyinSection 2.2.2),whichaimsattrain-
+ing models during situations when labelled data may not be available promptly.
+2.1.3 Applied Statistical Problems. Besides the learning problems discussed above, some sur-
+veyedliteratureusescomputationallyintensiveappliedstatisticalmethods.Examplesincludeclas-
+sicaltimeseriesforecastingmethods[ 4,45](e.g., auto-regressive(AR) models,movingaverage
+(MA) models, and their variants) for forecasting the future using historical data, Markov models
+[15] for modelling systems with pseudo-random characteristics, resampling methods for estimat-
+ing the precision of statistics, generalized additive models [39, 148] for modelling interpretable
+predictor functions, the Granger causality test for causality analysis [23, 172] in multiple time
+series data.
+2.2 Advanced Machine Learning
+Ofthesurveyedliterature,themorerecentworkstendtoutilizeanensembleoftechniquesforfo-
+cusingfundamentallyonthe“learning”perspectivetodealwithlarge-scaledata,discussedbelow.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 5 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:5
+2.2.1 Representation Learning. Also known asfeature learning, representation learning [18]
+allows a system to automatically learn meaningful and useful representations of data. This set
+of techniques replaces traditional manual feature engineering, thus enabling systems to learn
+featuresbythemselvesandtrainforspecifictasks.ExamplesincludeANN,SparseCoding,Indepen-
+dent Component Analysis, and Clustering methods.Deep learning[85] is a representation learn-
+ing method based on ANN, used for both supervised and unsupervised tasks, where each layer in
+thenetworklearnstotransformtheinputdataintoamoreabstractandcompositerepresentation.
+Nowadays, deep learning architectures are the go-to methods for dealing with large-scale data,
+as these architectures often capture sophisticated non-linear relationships and outperform their
+traditional counterparts in numerous tasks further in. Deep learning architectures such asMul-
+tilayer Perceptron (MLP), Convolutional Neural Network (CNN),a n dRecurrent Neural
+Network (RNN)are supervised models. Architectures such asSelf-Organizing Maps (SOMs),
+Boltzmann Machines, and AutoEncoders are unsupervised models.
+2.2.2 Active Learning. In Active learning [123], a case of semi-supervised learning, a learning
+algorithm (learner) interactively queries a human to label sampled examples. Since the learner it-
+self determines the examples for labelling, the number of labelled data needed in active learning
+is often less than the number required in normal supervisedlearning. The learner uses probabilis-
+tic methods for uncertainty sampling of examples from the unlabelled dataset. The uncertainty
+sampling approach includes strategies such as least confidence, margin sampling, and entropy
+sampling.OthermethodsincludeQuery-by-Committee,ExpectedErrorReduction,andWeighted
+Methods.
+2.2.3 Few-shotLearning. InFew-shotlearning(FSL) [151]thetrainingsetcontainsalimited
+number of labelled examples. FSL is mainly applied to supervised tasks such as image classifica-
+tion, text classification, and object recognition. There is another instance of FSL—Few-shot rein-
+forcement learning—that aims to find a policy given only a few state-action pairs. The literature
+classifies FSL tasks into three categories:Data-based, where training data is augmented by prior
+knowledge;Model-based,wherethehypothesisspaceislimitedbypriorknowledge;and Algorithm-
+based, where search methods in the hypothesis space are altered by prior knowledge.
+2.2.4 Transfer Learning. In Transfer learning (TL)[175] knowledge is transferred across re-
+lated source domains. Data labelling in the case of microblogs can be time-consuming, expensive,
+or unrealistic during events such as disasters and riots. Semi-supervised learning does utilize a
+smallchunkoflabelleddataalongsidealargeunlabelledsetforimprovinglearningaccuracy.How-
+ever,obtainingunlabelleddataitselfcanbedifficultinmanycases.Duringsuchascenario,TLhas
+been reported to show promising results. In TL, a base network is trained for a base task using a
+dataset,andthenthelearnedfeaturesaretransferredtoadifferentnetworkfortrainingonatarget
+datasetconcerningatargettask[ 163].TLworksifthefeaturesaregenerictobothbaseandtarget
+tasks. Some examples of TL include the Inception model [134] and ResNet model [54] for image
+data, and Word2vec [97] and GloVe [105] for text data.
+2.3 Microblog Data
+The most common surveyed uses of microblog data are shown in Figure2 as a taxonomy ofmi-
+croblog data objects-specific tasks. From the literature, we have identified five main categories of
+microblogdata: Dataobjects includefundamentalattributessuchastextcontent,contentcreation
+time, content identifier, a resharing flag, and so on;User objects include details that reference
+a user’s profile, for example, user ID, user biography, location, followers/following list, and so
+on; Geo objects, available when content is geo-tagged, include attributes related to geographic
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 6 ---
+77:6 R. Lamsal et al.
+Fig. 2. Taxonomy of microblog data objects-specific tasks.
+information,suchasprecisegeo-coordinates,boundingboxcoordinates,andplacetype; Entityob-
+jectsprovideadditionalcontextualinformationregardingthecontent,forexamplehashtags,URLs,
+usermentions,media,andsoon;and Miscellaneousobjects containdiverseattributes,includingin-
+teraction metrics, machine-identified language of the content and service specific data.
+2.4 Word Vectorization
+Word vector representation methods found in the literature are broadly eitherFrequency-based,
+where the components of the vectors associate to the frequency attribute of words and word se-
+quences, orPrediction-based, where the vectors are trained weights of a neural network.
+2.4.1 Frequency-based. (a) Bag of words.In the Bag of words(BoW)model, each document
+(text object) is represented by a vector of dimension|V| whereV is the vocabulary, and theith
+componentofthevectorrepresentsthefrequencyofthecorresponding ithwordinthedocument.
+(b) Bag ofn-grams. In this model, the vocabulary consists ofn-grams, wheren represents the
+sizeofthecontinuoussequence.The n-gramofsize2isa bigramandsize3isa trigram.TheBo W
+model is a special case wheren = 1, i.e., aunigram. (c) Term Frequency-Inverse Document
+Frequency(TF-IDF). TheTF-IDFmodelusesthe“importanceofawordtoadocument”factorfor
+computing the vector representation of the document. The TF-IDF value, defined as the product
+of TF (w,d ) = frequencyd (w ) and IDF (w,D) = ln |D|
+1+|dϵD:wϵd|, increases proportionally to the
+frequency of a wordw in a documentd and is penalized based on the number of documents in
+the corpusD containing the wordw. Frequency-based methods introduce high dimensionality
+and sparsity issues due to vocabulary size. Furthermore, they fail to capture the true semantics of
+words and do not deal without-of-vocabulary (OOV)words.
+2.4.2 Prediction-based. (a) Static Embeddings. In 2013, Mikolov et al. [ 97]p r o p o s e d
+Word2vec, a neural network-based text representation model that learns word vectors of a given
+dimensionwhilemaintainingsemanticsimilaritybetweenthewords,thussolvingthedimensional-
+ity,sparsity,andcontextissuesassociatedwithfrequency-basedmethods. GloVe[105]isasimilar
+technique,butexploitsbothglobalstatisticsandlocalstatisticsofatextcorpus,whereasWord2vec
+usesonlythelocalstatistics.BothWord2vecandGloVeconsiderwordsasthesmallestunitstotrain
+on.ThisresultsinaninabilitytodealwithOOVwords.In2016,Facebookproposed FastText[22]
+to address the OOV words issue by representing each word as a bag of charactern-grams. These
+modelsgeneratestaticembeddings(vectors)i.e.,thesameembeddingisassignedtothesamewords
+used across different contexts.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 7 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:7
+(b) Contextual (Dynamic) Embeddings.Recent progress inNatural Language Process-
+ing (NLP)has led to the design of contextualized embedding models that address the issue of
+polysemous. Some widely used such models include seq2seqNMT (Neural machine transla-
+tion) model-based Contextualized Word Vectors(CoVe)[ 95]; two-layer bidirectional LSTM-
+based Embeddings from Language Models(ELMo)[106]; ASGD Weight-Dropped LSTM-based
+UniversalLanguageModelFine-tuning (ULMFiT)[58];andTransformer-based[ 138]Bidirec-
+tionalEncoderRepresentationsfromTransformers (BERT)[40]and GenerativePre-trained
+Transformer-3(GPT-3)[109].
+2.5 Image Representation
+Inrecentyears,numerousmethodshavebeenproposedforlearningimagerepresentations.Some
+methodstovisualfeaturelearningincludelearningthroughimagecolorization,imageinpainting,
+imagesuper-resolution,imagegenerationwith GenerativeAdversarialNetworks(GANs) [50]
+andgameengines,contextsimilarityandspatialrelationsbetweenimagepatches,shufflingofim-
+agepatches,imageclustering,andTL[ 68].In2020,Chenetal.[ 31]proposed SimCLR,asimplified
+framework for contrastive learning of visual representations, that outperforms the existing state-
+of-the-artmethod[ 55]forself-supervisedandsemi-supervisedlearning,andperformsonparwith
+or better than the supervised baseline method [77].
+2.6 Graph Representation
+Based on the encoder-decoder framework proposed by Hamilton et al. [52], and depending on
+thetypeofinformationusedintheencodernetwork,graphsrepresentationlearningmethodsare
+majorly classified into four classes:shallow embeddings,graph auto-encoders,graph-based regular-
+ization,a n dgraph neural networks[29]. Shallow embeddings, auto-encoders, and graph neural
+networksareunsupervisedembeddingmethodsthatmapagraphontoavectorspacewiththeob-
+jective of learning an embedding that preserves the graph structure. Graph-based regularization
+is a supervised graph embedding method; shallow embeddings and graph neural networks also
+have their use in supervised settings. The supervised methods, however, besides learning the rep-
+resentations,also predictnode or graph labels that could be valuable particularlyfor downstream
+supervised tasks such as node or graph classification.
+Mining of microblog data objects introduces various social networks of unprecedented scales:
+networksoffriends,hashtags,keywords,followers,bots,geographiclocations,andsoon.Theliter-
+ature represents a social network as agraph—a nonlinear data structure consisting of entities and
+theirrelationships.Normally,anetworkisagraph G (V ,E),where V denotesvertexes(entities)and
+E denotes edges (relationships), and it is represented mathematically using matrices such asInci-
+denceMatrix,(Weighted) AdjacencyMatrix,DegreeMatrix,LaplacianMatrix [24].Socialnetworks
+are a means to study the behavior of entities such as people, organizations, and events; for exam-
+ple, a network analysis of users’ pool is modeled by distinguishing the individuals as nodes and
+theirrelationshipsasedges.Graphmininghasapplicationtosocialnetworkanalysisacrossmulti-
+ple tasks [135], including:Centrality analysis, identifying the most influential nodes in a network;
+Community detection, identifying communities/groups through public discourse and/or interac-
+tionpatterns; Informationdiffusion,studyinghowinformationpropagates/flowsinanetwork;and
+Outlier detection—identifying rare entities and/or relationships.
+2.7 Evaluation Metrics
+There is no consistent use of evaluation metrics across the surveyed literature and this makes it
+hard to numerically compare different studies.R-squared (R2), Mean Absolute Error (MAE),
+Root Mean Square Error (RMSE), Relative Absolute Error (RAE),a n dRoot Relative
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 8 ---
+77:8 R. Lamsal et al.
+Squared Error (RRSE)are some common evaluation metrics for regression problems. Consider
+aproblemwhere a1,..., an representsactualvaluesand p1,..., pn representspredictedtargetval-
+ues. Letϵ= ∑(ai−pi )2 and the notationx≡1
+n
+∑xi. Then the evaluation metrics are defined:R2
+is 1− ϵ∑(ai−p )2 ; MAE is 1
+n
+∑|pi −ai|; RMSE is
+√
+ϵ
+n; RAE is
+∑|pi−ai|∑|ai−a| ;a n dRRSE is
+√
+ϵ∑(ai−a)2 . Some
+studies use Pearson’s Correlation Coefficient (PCC),r =
+∑(xi −x )(yi −y)/
+√∑(xi −x )2 ∑(yi −y)2 wheren is
+samplesize,and xi,yi aredatapoints,tofindameasureoffitforlinearregression,andtimeseries
+problems.
+Accuracy, Precision, Recall (a.k.a. sensitivity), Specificity, F-measure,a n dArea under the ROC
+Curve (AUC) are the commonly used evaluation metrics for classification problems.True Posi-
+tive(TP),TrueNegative(TN),FalsePositive(FP) ,and FalseNegative(FN) aremeasuresused
+forcomputingthosemetrics.TPrepresentsthenumberofsamplespredictedpositiveandthatare
+actually positive. TN represents the number of samples predicted negative and that are actually
+negative. FP represents the number of samples predicted positive but that are actually negative.
+FN represents the number of samples predicted negative but that are actually positive. Accuracy
+is the number of correct predictions to the total number of samples,TP +TN
+TP +TN +FP +FN . Accuracy is
+not applicable if the dataset is imbalanced (unequal distribution of samples between classes). Pre-
+cision gives the percentage of positive samples out of the total predicted positive samples and is
+computedas TP
+TP +FP .Recallgivesthepercentageofpositivesamplesoutofthetotalactualpositive
+samples and is computed as TP
+TP +FN . Specificity gives the percentage of negative samples out of
+the total actual negative samples and is computed asTN
+TN +FP . F-measure is the harmonic mean of
+precision and recall and is computed asFβ= (1+β2 )×precision ×recall
+(β2×precision )+recall . The AUC is a plot ofSensitiv-
+ityversus1-Specificityacrossvaryingthresholdvalues.The ReceiverOperatingCharacteristics
+(ROC)curveisaprobabilitycurve.AmodelwithagoodmeasureofseparabilityhasanAUCscore
+near 1.
+Common evaluation metrics for clustering areSilhouette Coefficient(SC) and Dunn’s Index
+(DI). SC is computed ass = b−a
+max (a,b ),w h e r ea is the average distance between a sample and all
+otherdatapointsinthesamecluster,and bisthedistancebetweenasampleandallotherdatapoints
+inthenextnearestcluster.Thedistancemetriccanbeanydistancefunction,suchasEuclideanor
+Manhattan. DI is the ratio of the minimum inter-cluster distance to the maximum cluster size.
+2.8 A High-level Methodological View of the Literature
+To better understand how the surveyed literature relates to the common problem of enhancing
+situation awareness from microblog data, we present a high-level methodological view of the lit-
+erature, shown in Figure3, that embodies the microblog data objects and range of techniques
+discussed above, and we provide theme-specific methodological examples in Section3.
+2.8.1 The Perception Stage. This stage involves the collection of relevant data. The first step
+to curating a large-scale microblog dataset starts with pre-determining a set of “seed”keywords
+(words and phrases) andhashtags (keywords preceded by a hash sign). Next, asearch queryis
+created. A search query contains keywords, hashtags, and conditions for requesting relevant data
+from API endpoints. For example, a search query usingtwarc1 on Twitter’sfull-archive endpoint
+c a nb ea ss i m p l ea s :“(covid OR quarantine OR lockdown OR pandemic OR #covid-19 OR #covid
+OR mask OR ppe OR flu) -filter:nativeretweets lang:en” --archive --since-id 1372953264359145481 --
+until-id 1407693866816393223. This query searches for original (not re-shared) English language
+Twittercontentsthatinclude thequeriedkeywordsandhashtagswithintheirtext bodyandwere
+1https://github.com/DocNow/twarc.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 9 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:9
+Fig. 3. A high-level methodological view of the literature.
+createdbetweenthetwotime-based“Snowflake”identifiers.Whenaconnectionisestablished,the
+microblog API endpoint returns a continuous data stream—payload—based on the search query.
+The payload is stored in a central database. Additional data such as discussions, headlines, and
+reports from other sources can also be considered for enriching the existing corpora.
+High-volume endpoints such as Twitter’sCOVID-19 stream endpointutilizes four partitions to
+split the overall volume of payload over multiple connections to consume the entire stream. File-
+based databases such asSQLite are equally effective for handling large-scale data, but they come
+with demerits of their own compared to their distributed peers. Therefore, the selection of the
+database is up to the user. Next, an on-demand dataset is created and labelled (if the problem is
+supervised)eitherbyexpertsorthroughcrowdsourcing.Theresultingdataisfinallypre-processed
+as per requirements.
+2.8.2 The Comprehension Stage. This stage deals with data modelling and analyses and is
+problem-specific(refertoSection 2.1)andrelatestotaskssuchasTextClassification,TextCluster-
+ing, Image Classification, Sequence Labelling, and so on. Refer to Figure2 f o ral i s to fm i c r o b l o g
+objects and their corresponding tasks.
+2.8.3 The Projection Stage. This stage involves observing visualizations and summaries gener-
+ated during the comprehension stage for projecting current scenarios to their future implications
+and making decisions. Activities in this stage include: (i) observing abstractive summarization of
+the data stream and quantitative assessments on maps/charts and (ii) analyzing real-time convex
+closures (generated using geo-tagged content) of a situation.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 10 ---
+77:10 R. Lamsal et al.
+Fig. 4. The citation network. Yellow nodes represent papers in the survey, manually clustered into thematic
+area, and black nodes represent papers that cite the surveyed papers. The 20 most cited papers are labelled.
+Some nodes have irregularities due to limitations at the API end.
+3 SURVEY OF AI APPROACHES FOR SITUATION A W ARENESS
+Weundertookanextensivesearchinthedigitallibrariesof ACM,Elsevier,IEEE,Springer,andother
+major publishers while also utilizing theWeb of Scienceand Scopus databases to identify relevant
+papers published between 2010–21 (the early 2010s mark the emergence of microblog APIs2). We
+discarded papers from the initial set if: (i) primary data source was not microblog, (ii) extracting
+“situationalinformation”wasnottheprimaryobjective,(iii)AIwasnotemployedsignificantly,and
+(iv) published before 2020 and had <5 citations.Crossref’s public API3 was used for querying the
+list of papers that cited a set of 78 papers initially collected during the filtering stage of the paper
+selectionprocess.Thisdatawasusedtocreateacitationnetwork,showninFigure 4,wherenodes
+represent papers and are weighted based on the number of citations they receive from within the
+network. Under the hypothesis that the most influential papers are likely to have many citations,
+we manually identified 19 additional papers that were either foundational papers or significantly
+related to the scope of this survey. Out of the surveyed papers, the nodes corresponding to the
+most prominent papers in terms of citations are highlighted and labelled in the citation network.
+Literature breakdown.We reviewed 97 papers out of which 28 were fromElsevier,1 5f r o m
+IEEE,13from ACM,9from JMIR,6from Springer,and26(combined)fromjournalssuchas Taylor&
+Francis,Wiley,SAGE,Emerald,andBMC.Outof97papers,thissurveyinvolved63journalpapers,
+29 conference and symposium papers, 2 workshop papers, 2 book chapters, and 1 thesis article.
+Amongthe20mostcitedpapers,15ofthemwerepublishedbefore2016.Outofthose,7arejournal
+2https://blog.twitter.com/developer/en_us/a/2011/streaming-api-turning-ssl-only-september-29th .
+3https://www.crossref.org/documentation/retrieve-metadata/rest-api/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 11 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:11
+Table 1. Abbreviations Used in Tables 2–7
+SmPar Semantic Parsing TpMd Topic
+Modelling
+SmEx Semantic Extraction
+SpTmMd Spatio-temporal Modelling Cf Classification SeqLbl Sequence Labelling
+Reg Regression SnAn Sentiment
+Analysis
+WoVec Word Vectors
+DnEs Density Estimation AdSt Advanced
+Statistics
+CoFqAn Content Frequency
+Analysis
+LLVFE Low Level Visual Features
+Extraction
+NetAn Network
+Analysis
+NER Name Entity
+Recognition
+papers, 6 are conference papers, 1 is a book chapter, and 1 is a workshop paper. The remaining 5
+out of the 20 most cited papers published after 2015 are all journal articles.
+Thematic areas.The papers identified for the survey are classified into six thematic areas:
+Crime, Disasters, Finance, Physical Environment, Politics, and Health and Population. Each the-
+maticareaisfurtherdividedintosub-thematicareasbasedonresearchdirections.Tables 2–7pro-
+vide an overview of the essential elements of the literature in each thematic area, and we use
+abbreviations throughout, as shown in Table1.
+3.1 Crime
+This thematic area surveys microblog data as a “social crime sensor” that helps detect geograph-
+ical regions that are more likely to show criminal conduct. Such analysis can assist agencies and
+governments in producing persistent solutions to counter crimes such as theft, burglary, robbery,
+cyberbullying, and harassment. Table2provides an overview of the literature in this theme.
+3.1.1 Predicting Future Crime. A Generalized Linear Regression Model (GLM)was de-
+signedbyWangetal.[ 149]forpredictingfuturehit-and-runincidents.TheauthorsusedLDAfor
+topic modelling andSemantic Role Labeling (SRL)for extracting events, entities, and their re-
+lationships from tweets. Their results showed that training an LDA/GLM model on event-specific
+words has higher predictive capability than training the same model on a complete vocabulary.
+Wang et al. [148] extended this work while incorporating spatio-temporal, geographic, and de-
+mographic data. The extended work proposed a new modelling approach, theSpatio-Temporal
+Generalized AdditiveModel(STGAM),thatusedafeature-basedapproachtopredicttheprob-
+ability of criminal activities alongside their space and time attributes.
+Gerber [46] collected geo-tagged Twitter data, used LDA for topic modelling and designed a
+binary LR model using KDE + the features derived from the Twitter topics. In 19 of the 25 crime
+types,theTwitterdata+KDEfeaturesimprovedthemodel’sperformancecomparedtousingjust
+theKDEfeatures.Similarly,Chenetal.[ 32]consideredcrimedensity,thesentimentoftweets,the
+last threedays’ sentiment trend, andweather factorssuch as temperature,dew, precipitation,and
+so on, as explanatory variables for designing a model to predict future crimes. The authors used
+KDEtocomputecrimedensityandlexicon-basedmethodsforsentimentanalysisandreportedthe
+KDE + Twitter + weather data model surpassing the base model that used only KDE features.
+B e n d l e re ta l .[17] used predictive analytics to show that Twitter data can assist in predicting
+future crimes. The authors selected a small region within San Francisco with higher Twitter ac-
+tivity, divided the area chosen into a 10× 10 grid, and performed regression analysis to provide
+evidencefortherelationshipbetweenTwitterdataandcriminalactivities.TheytrainedSVMmod-
+els to predict burglary and robbery crimes while including and excluding tweets’ volume feature.
+The inclusion of volume feature for training showed improvement in prediction performance.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 12 ---
+77:12 R. Lamsal et al.
+Table 2. Overview of the Literature in “Crime” Thematic Area
+Direction Year Study Primary Dataset Geo
+Scope
+Tasks Best outcome
+Predicting
+crimes
+2012 [ 149] 3.65K tweets United
+States
+SmPar,TpMd Wide confidence
+intervals
+2012 [ 148]s a m e a s [149] United
+States
+SmPar,SpTmMd,
+TpMd
+AUC: 0.7616
+2014 [ 17] 60K geo-tagged
+tweets
+United
+States
+Cf,Reg Accuracy: 0.66
+2014 [ 46] 1.52K geo-tagged
+tweets
+United
+States
+DnEs,TpMd AUC: 0.71
+2015 [ 32] 1.06M tweets United
+States
+Cf,DnEs,SnAn AUC: 0.67
+2015 [ 145] 1.23M tweets, 224K
+POI from
+Foursquare
+United
+States
+Cf,Reg Accuracy: 71%
+2018 [ 140] 6-month period
+tweets, 47K POI
+from Foursquare
+United
+States
+Reg 19% improvement over
+baseline model
+2020 [ 2] 150K tweets Global Cf Accuracy: 92.0%
+Analyzing
+crime
+rates
+2016 [ 5] 101M tweets United
+States
+Cf F-measure: 0.83
+2018 [ 6] 1.13M tweets United
+States
+Cf,SnAn,TpMd F-measure: 0.94
+2020 [ 139] 3.80K tweets India Clu Accuracy: 70%
+Space-
+time
+Analysis
+2019 [ 108] 26K tweets, 2.57K
+tweets after
+filtering
+Mexico AdSt,Reg Absolute errors for
+80% & 95% coverage:
+3.796 & 2.933
+2019 [ 130] 979K geo-tagged
+tweets
+Mexico
+City
+SnAn,WoVec F-measure: 0.80
+2020 [ 115] 9.43K geo-tagged
+tweets
+Mexico
+City
+DeEs,SnAn AUC upper limit:
+0.72–0.77
+2021 [ 103] 123K tweets Mexico
+City
+Clu,SnAn,TpMd Statistical analysis
+presented
+Foursquare data has also been used in combination with Twitter data to study the correlation
+between the predicted masses of people at different venues and the occurrence of real crimes at
+those venues. Wang and Gerber [145] designed two text-enriched models, one for predicting the
+typeofvenue(e.g.,restaurantortransportationhub)theuserislikelytovisitnextandanotherfor
+predictingthespatialinformation.Theirmodels outperformedallbaselinemodels—threeMarkov
+models and an SVM model—trained on historical visiting details. They reported that geo-tagged
+tweets do correlate with users’ next venue visits.
+Similarly, data from Foursquare and Twitter has been combined with taxi trip data to analyze
+human activity patterns. Vomfell et al. [140] presented a multi-model solution using a Simultane-
+ous Autoregressive Model, a Conditional Autoregressive Model, and a Generalized Linear Mixed
+Modelassomeofthepredictorsfortheirspatiallinearregressionmodels.TheauthorstrainedRF,
+Ensemble-based, and ANN models and reported that the heterogeneous data sources they consid-
+eredcontributetoabetterpredictionofpropertycrimescomparedtousingjustdemographicdata.
+Abbass et al. [2] developed ann-gram language model to predict cybercrimes using Twitter.
+Theauthorscollectedtweetscontaininghashtagssuchas #harassment, #metoo, #sexualassualt,
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 13 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:13
+#cyberbullying, #victim for training Multinomial NB, KNN, and SVM models to find the best
+value ofn forthe n-grammodel. Theirresultsshowedthatthebigramlanguage modelperformed
+better than the network-based feature selection approach, and SVM outperformed other models.
+3.1.2 Analyzing Crime Rates. Relationships between Twitter data and crime rates have been
+examined in multiple studies. Aghababaei and Makrehchi [5] trained a linear SVM model using
+features extracted from historical Twitter data. Their model achieved anF-measure of 0.83 for
+crimessuchastheft,burglary,andsexoffenses;however,theresultsforcrimessuchasmurderand
+vandalism correlated poorly. The same work was later extended with a temporal topic model [6]
+thatoutperformedthebatchmodelin17outof22crimetypes.Voetal.[ 139]analyzedTwitterdata
+fromsevenmajorcitiesofIndiatoconfirmthattweetscontributetoabetterunderstandingofcrime
+rates.TheauthorsusedtheTwitterpart-of-speechtagger 4 andaclass-based n-gramclustering[ 25]
+to build a crime rate detection model that predicted nearly 70% of the crime rates.
+3.1.3 Space-time Analysis. An exploratory study was done by Piña-García and Ramírez-
+Ramírez [108] using Twitter data alongside Google Trends on 13 different crimes, including theft,
+robbery,rape,andhomicide.TweetswerefilteredattheAPIlevelusingSpanishkeywordssuchas
+‘‘inseguridad,’’ ‘‘violencia,’’ ‘‘robo,’’ ‘‘crimen,’’ and ‘‘víctima.’’ Their results
+showedthepairwisecorrelationoftheofficialcrimedataandthetweetsasalmostnegligible.The
+authors asserted that Twitter data should be considered merely observative and not representa-
+tive. However, they acknowledged the effectiveness of Twitter data in understanding the spatio-
+temporal patterns of crime data.
+A crime analysis tool was developed by Siriaraya et al. [130] to provide contextual information
+regarding crimes through visualization. The tool uses a binary linear SVM trained on GloVe for
+identifying negative sentiment tweets to explore the negative characteristics of crime associated
+areas. The tool visualizes situational information based on crime type and period. Tweets specific
+toacrimeora regionareshownonaninteractivemap,andawordcloudisgeneratedtodescribe
+the spatial and temporal aspects of the crime area.
+Concerning sporting events, Ristea et al. [115] studied the spatial relationship between geo-
+tagged tweets and crime occurrences alongside demographic and environmental aspects. The
+authors used crowd-sourced databases related to “hate words” and “swearing” to extract tweets
+containing at least one word from those databases. Feature selection was done using RF, and sen-
+timent analysis was performed based on lexicon methods. They computed the density estimate
+based on the center points of each grid and then trained an LR model. Their result showed im-
+provedAUCinallcrimetypesduringeventdaysandnon-eventdayswiththeadditionofTwitter
+data to the base model.
+Similarly, Park et al. [103] examined the spatial distribution of sentiments and the level of hap-
+piness using geo-tagged Twitter data, census data, and geospatial data on one of the shrinking
+cities in the United States—Detroit. The authors collected username, text, geo-coordinates and
+used theComplete Automation Probability (CAP)technique to filter out bot-involved tweets.
+Cluster and hotspot analyses were performed to study the spatial distribution of sentiments, LDA
+was implemented for topic modelling, and the AFINN lexicon dictionary5 was used for comput-
+ing sentiments of tweets. Their results reported that areas with less crime tend to be happier and
+suggested that areas with negative sentiments should be prioritized for regeneration efforts.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure5.
+4http://www.cs.cmu.edu/~ark/TweetNLP/.
+5https://pypi.org/project/afinn/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 14 ---
+77:14 R. Lamsal et al.
+Fig. 5. A methodological view of the literature in “Crime” thematic area.
+3.2 Disaster
+Peopledisseminatesituationalinformationbefore,during,andafternatural/human-madedisasters
+and hazards such as earthquakes, floods, cyclones, fires, terrorist attacks, and nuclear explosions.
+Researchers have used such socially generated data for enhancement of situation awareness and
+predictionandrapidassessmentofdisasterswithacommonpurposetofacilitatelawenforcement
+agenciesandhumanitarianbodiestogetfirsthandknowledgeaboutanongoingsituation.Table 3
+provides an overview of the literature in this theme.
+3.2.1 Identifying Relevant Data. Imran et al. [65] applied a classification-extraction approach,
+also presented in their previous work [64], for extracting informative tweets. The authors imple-
+mented a sequence labelling algorithm to tokenize tweets to form a sequence of word tokens and
+assignlabelsbasedonclassificationrequirements.Thestudyintendedtodetectinformativetweets
+and distinguish those tweets as reported by direct eyewitnesses or simply the repetitive blocks of
+earlier reported situations. The classification task was validated against tweets labelled by volun-
+teers to show that their approach could extract 40%–80% of informative tweets.
+A keyword relevance scoring approach was developed by Joseph et al. [69] for identifying and
+ranking keywords that might assist in finding tweets that describe a situation. The authors used
+reports generated on Ushahidi, a crowd-sourced platform, to identify keywords associated with
+actions, entities, and location aspects of a disaster. The relevance of each keyword was computed
+based on its frequency in Ushahidi reports and its use in other contexts besides disaster.
+A real-time multi-level damage assessment model was proposed by Shan et al. [124]. In the
+first level, dictionaries specific to physical damage and sentiments were constructed. LDA was
+used on infrastructure, industry, people, and so on, related documents retrieved from the Baidu
+searchengine.Inthesecondlevel,thesituation(what),time(when),andentity(who)information
+gathered from Weibo posts were summarized and the physical dictionary was used for assessing
+the level of physical damages, and the sentiment dictionary for assessing emotional damage. In
+the third level, a semantic web was created to extract semantic patterns by analyzing prominent
+“noun” based nodes such as building, factory, and so on. Similarly, Karami et al. [72]p r o p o s e da
+Twitter data analysis framework, TwiSA, that implements lexicon-based sentiment analysis and
+LDA-based temporal topic discovery. The framework concentrates on text analysis for extracting
+situationalinformationtosupportthepreparedness,response,andrecoveryphasesofthedisaster
+management cycle.
+A two-stage classification model was proposed by Rizk et al. [116] for identifying tweets that
+reportdamagestoeitherhuman-madestructuresorthenaturalenvironment.First,visualfeatures
+andsemanticfeatureswereextractedindependentlyfromtweets.Theextractedfeatureswerethen
+passedontothenextstageofclassifiersforthefinalclassification.SVM,Ensemble-based,andANN
+modelsweretrainedonadisastertweetscorpusandascenedataset.Adomain-specificdenseBoW
+model was generated for building semantic descriptors. The authors reported that the addition of
+semantic features alongside low-level visual features improved classification performance.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 15 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:15
+Table 3. Overview of the Literature in “Disaster” Thematic Area
+Direction Year Study Primary Dataset Geo Scope Tasks Best outcome
+Identifying
+relevant
+data
+2013 [ 65] 346K tweets Joplin T,S a n d yH Cf,SeqLbl Accuracy:
+80%–90%
+2014 [ 69] 1K Ushahidi
+reports, 90M
+tweets
+Haiti AdSt Qual. disc.
+presented
+2018 [ 10] 9M tweets, 191K
+images
+HarveyH,I r m aH,
+MariaH
+Cf,NER,TpMd Accuracy:
+76%–90%
+2019 [ 116] 1.34K tweets Nepal, Chile,
+Japan, Kenya
+Cf,LLVFE,
+SemExt
+Accuracy: 92.43%
+2019 [ 124] 67K Weibo posts China SmEx, TpMd 5/8 close
+predictions
+2020 [ 166] 20M tweets Global Cf F-measure:
+0.69–0.95
+2020 [ 72] 1M tweets South Carolina SnAn,TpMd Qual. disc.
+presented
+Mining
+systems
+2012 [ 119] 597 tweets Japan Cf,SemExt,
+SnAn
+F-measure: 0.73
+2014 [ 63] 200 tweets Global Cf AUC: 80%
+2014 [ 61] 700–850 images Global Cf AUC: 78%
+2014 [ 14] 17M tweets North America Cf,Clu AUC: 88%
+Assessment
+of disasters
+2016 [ 78] 52.5M Sandy H AdSt,SnAn Stat. analysis
+presented
+2017 [ 100] 12.9M tweets Sandy H Cf,SnAn Accuracy: 75.91%
+2018 [ 113]1 . 5 K t w e e t s
+(subset)
+California TpMd Fleiss kappa
+score: 0.886
+2018 [ 155] 970K tweets Sandy H AdSt,SnAn,
+TpMd
+Corr. coef.: 0.989
+2019 [ 56] 7.76K unique
+tweets
+Mexico City Cf,DnEs Avg. F-measure:
+0.84
+2020 [ 168] 39K geo tweets Florence H Cf,TpMd Avg. Accuracy:
+74.23
+Benchm-
+arking
+2016 [ 27] 2.82K tweets Global Cf Accuracy:
+75.90%–82.52%
+2017 [ 101] 21K tweets Global Cf AUC:
+81.21%–94.17%
+2018 [ 111] 70K tweets India, Pakistan Cf F-measure:
+0.72–0.94
+2020 [ 117] 2.18K/60K tweets Chile, Catalonia Cf Accuracy:
+81.2%–85.8%
+T represents tornado.Hrepresents hurricane.
+Zahra et al. [166] trained multiple classifiers for four different disasters—floods, hurricanes,
+earthquakes, and wildfires—using crowd-sourced labelled data to classify disaster specific tweets
+into three categories: eyewitness, non-eyewitness, and don’t know. The authors used different
+combinations of textual features and domain-expert selected features. The study reported that
+perceptual senses are usually found in tweets created by direct eyewitnesses, whereas emotions
+and prayer-specific terms are found in tweets from indirect eyewitnesses.
+Similarly,Alametal.[ 10]performedatextualcontentanalysisonTwitterdatacollectedduring
+threehurricanes—Harvey,Irma,andMaria.Thestudyinvolvedunderstandinghumanitarianneeds
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 16 ---
+77:16 R. Lamsal et al.
+byusingRFclassifiers,learningtheconcernsofaffectedpopulationthroughsentimentusingStan-
+ford’ssentimentanalysisclassifier, 6 trackingincidentsbyimplementingLDAfortopic-modelling,
+and identifying notable entities through name entity recognition. The authors also performed a
+multimedia analysis using a TL-based deep image recognition model to identify the relevance of
+images to disastrous events.
+3.2.2 Mining Systems. Imran et al. [63] presented a data-mining platform,Artificial Intelli-
+gence for Disaster Response (AIDR), for the automatic classification of crisis-specific Twitter
+data into categories related to community needs, loss of lives, and damages. The platform utilizes
+threecorecomponents:acollectorforretrievingtweets,ataggerforclassificationoftweets,anda
+trainerfortrainingtheclassifierpresentinthetaggercomponent.Theplatformautomaticallycol-
+lects tweets created during humanitarian crises and trains on a sample of labelled data. A similar
+classification platform with an SVM classifier, MicroFilters, was developed by Ilyas [61] for classi-
+fying images present in tweets. Tweedr [14] is also a Twitter data-mining tool that engages three
+operations in its data analysis pipeline: classification for classifying disaster specific tweets into
+categories such as damages and casualties, clustering for merging similar tweets, and extraction
+for extracting words and phrases corresponding to damages and casualties.
+Sakaki et al. [119] studied the real-time nature of tweets for event detection. The authors pro-
+posed an earthquake reporting system that analyzes disaster-related tweets for detecting and
+estimatingthelocationofearthquakeevents(spatialestimation).Theybuiltaprobabilisticspatio-
+temporal model using features such as the essential keywords in a tweet, the number of words in
+a tweet, and the context of the words specific to an event.
+3.2.3 Assessment of Disasters. Resch et al. [113] presented an approach to combine semantic
+information extracted from tweets with spatial and temporal analysis to assess the affected ar-
+eas and damages caused by natural disasters. The authors employed LDA for topic-modelling in
+two iterations—LDA was further applied to the results from the first iteration to identify granu-
+lar topics. When validated against a manually annotated sample of tweets, their results showed
+thattheaffectedareasanddamagescausedbydisasterscouldbereliablyidentifiedbydiscovering
+similarities in spatial, temporal, and semantic details extracted from tweets.
+HierarchicalmultiscaleanalysiswasconductedbyWuandCui[ 155]tounderstandtheroleofso-
+ciallygenerateddatabefore,during,andafteradisasterandinvestigateifthejointuseofsuchdata
+alongside spatial information helps in disaster assessment. The authors used an opinion lexicon
+resource to compute sentiment polarity and performed hashtag and keyword frequency analysis
+for topic discovery. Results from the textual analysis were combined with spatio-temporaldata to
+assessthedamagesdonebyHurricaneSandy.Theresultsshowedtheintensityofdisaster-specific
+conversations originating from a region significantly correlating with the severity of damages.
+Neppalli et al. [100] showed that the sentiment of a population changes based on its distance
+from a disaster. The authors used lexicon methods to compute the polarity of tweets. Next, they
+classifiedpolartweetsaspositiveandnegativeusingNBandSVMclassifiers.Thestudyconcluded
+that the mapping of sentiments during a disaster could uncover more vital situation awareness.
+Similarly,Kryvasheyeuetal.[ 78]showedthatthespatio-temporalanalysisofTwitterdataassists
+in the rapid assessment of disaster damage. The authors performed sentiment analysis on tweets
+createdbefore,during,andafterHurricaneSandytoexamineifsentimentcanbeusedasapredic-
+tor for assessing damages. The study showed negative sentiments correlating with damages and
+concluded that the proximity of the hurricane’s path was highly correlated with tweet activity.
+6https://nlp.stanford.edu/sentiment/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 17 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:17
+Fig. 6. A methodological view of the literature in “Disasters” thematic area.
+InReference[ 168],Zhaietal.categorizedneighborhoodsbasedonpoorandnon-poorattributes
+and used geo-tagged tweets alongside socio-demographic data to understand disaster situation
+awareness from the perspective of neighborhood equity. They implemented LDA to identify spe-
+cific topics associated with each neighborhood and trained an LR model for sentiment analysis.
+Their results showed that poor areas are more likely to share negative opinions, as people from
+those communities are more likely to have their work affected during disasters.
+Hernandez-Suarez et al. [56] used word vectors derived from a corpus of tweets to train aBidi-
+rectional Long Short-Term Memory (biLSTM)network. They used aConditional Random
+Field (CRF)output layer for improving classification accuracy. A toponym was formed based on
+labelledwordsandwasgeocodedandfinallyscoredbyaKDEfunction.Theauthorsvisualizedthe
+results on a map to identify concentration of disasters.
+3.2.4 Benchmarking. Disaster-specific tweets were analyzed by Ragini et al. [111] to identify
+the best feature set for sentiment analysis using: (i) BoW +Parts of Speech (POS)tagging and
+(ii) bigram and trigram subjective phrases. The authors used multiple lexicon-based methods to
+extract subjective tweets, as such tweets contain the sentiments of people compared to objective
+ones. Their results showed that the combination of subjective phrases and ML models trained on
+bigram features performs best for disaster-specific Twitter data.
+The performance of Bayesian network classifiers was benchmarked by Ruz et al. [117] against
+sentiment analysis on disaster-specific tweets. The authors trained multiple learning models on
+tweetsrelatedtotheChileanearthquakeandtheCatalanindependencereferendum.Theirresults
+favored SVM and RF models; however, the tree augmented NB model was seen to produce com-
+petitiveresults,thusvalidatingtheapplicabilityofBayesiannetworksforanalyzingsentimentsof
+disaster-related tweets.
+CNN models have been shown to outperform BoW models in the task of identifying informa-
+tive messages from a stream of tweets during disastrous events. Caragea et al. [27]u s e dt h eB o W
+modelasafeaturerepresentationfortrainingmultipleSVMandANNmodelsusingvariouscombi-
+nationsof n-grams.TheresultsshowedtheirCNNmodeloutperformingallANNandSVMmodels.
+The ANN model trained on unigrams and bigrams achieved the second-best accuracy; however,
+the margin was <2%. Similar results were obtained in another study [101], where CNN models
+outperformed non-neural network models.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure6.
+3.3 Finance
+The stock markets, startups, and company-specific events are often discussed topics across so-
+cial media. The discourse generated by financial communities on microblogs has been shown to
+correlate with stock options pricing, market movements, events’ popularity, stock returns, and
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 18 ---
+77:18 R. Lamsal et al.
+Table 4. Overview of the Literature in “Finance” Thematic Area
+Direction Year Study Primary Geo Scope Tasks Best outcome
+Dataset
+Stock
+market
+analysis
+2011 [ 23] 9.85M tweets United
+States
+Reg,
+SnAn
+Direction Accuracy: 86.7%
+2012 [ 172] 3.8M retweets United
+States
+Reg,
+SnAn
+Retweets are predictive of
+market movements
+2015 [ 88] Twitter metrics
+of firms
+United
+States
+AdSt, Clu Twitter metrics predict stocks
+comovement
+2016 [ 34] ≈160K tweets Global Reg,
+SnAn
+Tweets’ volume is an essential
+feature for financial forecasting
+models.
+2016 [ 171] 50M tweets Global Reg,
+SnAn
+Happiness sentiments can
+Granger-cause the changes in
+index return
+2016 [ 152] 3.28K Twitter
+volume spikes
+United
+States
+AdSt Volume spikes correlate with
+stock pricing when price
+change is extreme
+2017 [ 89] 133K tweets United
+States
+Reg,
+SnAn
+Goodness-of-fit: 0.9776
+2017 [ 164] Daily happiness
+index
+Global Reg,
+SnAn
+Investors’ sentiment correlate
+to stock returns
+2018 [ 102] 60K tweets United
+Kingdom
+Reg,
+SnAn
+Presence of correlation
+between public sentiment and
+investment behavior
+Company-
+specific
+analysis
+2017 [ 38] 192K tweets United
+States
+Cf,SnAn Case study-specific results
+2017 [ 86] 17K tweets United
+States
+Reg,
+SnAn
+Negative relationship between
+sentiment and stock return.
+2019 [ 129] 53K tweets India TpMd,
+SnAn
+Indian startup ecosystem is
+more inclined towards positive
+sentiments.
+2019 [ 122] 35K tweets Global TpMd,
+SnAn
+Qualitative results presented
+sustainable startups and business models. Table4 provides an overview of the literature in this
+theme.
+3.3.1 StockMarketAnalysis. Liuetal.[ 88]proposedamodelforpredictingstockcomovement
+based on social media metrics. The authors reported that firms with official Twitter accounts had
+highercomovement.AfteranalyzingdatafromtheNYSEandtheNASDAQstockexchanges,they
+concluded that Twitter metrics, such as the number of followers and number of tweets created,
+highly correlate with the comovement of stocks. Further, they created homogeneous groups of
+firms usingK-Means based on their Twitter metrics to show that they contribute to a better pre-
+diction of comovement than industry-specific label.
+Wei et al. [152] investigated the relationship between Twitter content volume spikes and stock
+pricing. They considered a volume spike when the number of tweets in a day was greater than
+the average number of tweets in the lastN days. They used the relative value of the number of
+tweets and added thresholds against the number of unique users and their diversity to avoid false
+volume spikes. Their analysis revealed that the volume spikes correlate with stock pricing when
+the change in the price is extreme.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 19 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:19
+Bollen et al. [23] extracted seven public mood time series from tweets to investigate if those
+mood descriptors are predictive of future stock values. The authors used Granger causality analy-
+sistocorrelatetheextractedmoodtimeserieswithDJIAvalues.Theyreportedthatnotallbutsome
+among the seven mood descriptors were Granger-causative of the stock exchange’s values. Simi-
+larly,Zhangetal.[ 172]triedtoidentifytherelationshipbetweenTwitterdataandfinancialmarket
+movement, such as gold price and stock market indicators. Six different opinion time series were
+extractedfromalarge-scaleretweetsdatasetcontainingthefollowingsixkeywords: ‘‘dollar,’’
+‘‘gold,’’ ‘‘$,’’ ‘‘job,’’ ‘‘economy,’’and ‘‘oil.’’TheauthorsappliedGrangercausality
+analysis to the opinion time series versus financial market movement to show that the retweet
+information is correlated to and predictive of market movement.
+Corea [34] analyzed Twitter data, concerning Apple, Facebook, and Google, to study if tweets
+can be considered representative of investors’ sentiments. The author implemented Stepwise Re-
+gression for finding the best set of variables. The results showed that how much the public talks
+about a stock is more valuable than what they think about it. The authors observed the volume
+of tweets had a positive correlation with the stock price. In a similar study by You et al. [164],
+investors’ sentiment showed to be a significant driving force on excess stock returns. Similarly,
+López-Cabarcos [89] analyzed Twitter data to understand the influence of technical and non-
+technical investors on the stock market. The authors designed logit and probit models using the
+predictorsderivedfromTwitterprofilessuchasexperienceininvesting,numberoffollowers,hold-
+ingperiod.Thestudyshowedthattheopinionsofnon-technicalinvestorshadrelevancewiththe
+market risk, while for the technical ones, their opinions were insignificant.
+Zhang et al. [171] extracted happiness indices from Twitter data for 11 international stock mar-
+ketsandcompareditwithindexreturn.Theresultsfromtheircorrelationregressionmodelshowed
+apositiveinfluenceofhappinesssentimentonindexreturnandopening/closingpriceofatrading
+session.Similarly,NisarandYeung[ 102]presentedevidenceofacorrelationbetweenpublicopin-
+ion and stock market price. The authors collected political-related tweets created before, during,
+andafterthe2016UKlocalelectionsandperformedcorrelationandregressionanalysisonthesen-
+timentofthetweetsandthedailychangeinthepriceofFTSE100.Theirstudyshowedpromising
+results to support Twitter data as a medium for forecasting market price.
+3.3.2 Company-specific Analysis. Daniel et al. [38] proposed a system to find event popularity
+through the sentiment of tweets concerning a company. Multiple public and a custom lexicon-
+basedsentimentanalyzerswereusedtocomputesentimentscores.Eventdetectionwasdonebased
+on the peaks and drops observed in the average sentiment of the tweets. One of their case studies
+involving a Fortune 500 company showed people’s excitement during the launch of product A
+relatively higher than product B, where B was a minor upgrade to A.
+LeitchandSherif[ 86]designedregressionmodelsbasedonpredictorssuchaspublicsentiment
+during the announcement of a newChief Executive Officer (CEO), location of the company,
+number of employees, and various features associated with the CEO, including gender, degree de-
+tails,andexperience,tostudyifTwittersentimentyieldsanyrelationshipwithstockreturns.Their
+resultsreportedthatthesentimentscorehadasignificantnegativecorrelationwithstockreturns,
+whiletheageoftheCEOhadasignificantpositivecorrelation.Featuressuchasgender,experience,
+and number of employees reported positive correlation but were statistically insignificant.
+Singh et al. [129] used Twitter data to analyze the startup ecosystem in India. The authors col-
+lected tweets from 15 different startups across multiple industries and applied NB for sentiment
+analysis and LDA for topic modelling. They reported that the Indian startup ecosystem was in-
+clined towards positive sentiments, as the startups were more concerned about digital technolo-
+gies,people,planet,andprofit.Morespecifically,startupsincitieswiththeavailabilityofresources,
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 20 ---
+77:20 R. Lamsal et al.
+Fig. 7. A methodological view of the literature in “Finance” thematic area.
+connectivity, and a huge market base seemed to be finding it easy to do business. Similarly, Saura
+etal.[ 122]usedSVMforsentimentanalysisandLDAfortopicmodellingontweetsusinghashtags
+relatedtostartupstoidentifyindicatorsforasuccessfulstartupbusiness.Theirstudyshowedthat
+the founders’ attitudes and methodologies were associated with positive sentiments. In contrast,
+frameworks, and programming languages were some of the factors inducing negative sentiments.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure7.
+3.4 Physical Environment
+Whileconsideringmicroblogusersas“environmentmonitoringsensors,”researchershaveapplied
+awiderangeofanalyticalstrategiesthatexploitmicroblogdatatogeneratevaluableinsightscon-
+cerning traffic patterns, conditions, and incidents, weather situations, outdoor air pollution, cli-
+mate change, and global warming. Table5provides an overview of the literature in this theme.
+3.4.1 Weather and Climate. In Reference [48], Giuffrida et al. analyzed tweets containing
+weather-related keywords alongside meteorological data to show that Twitter can be regarded as
+an alternative data source for assessing the effect of weather on human outdoor perception. The
+authors trained an opinion-based classifier to classify tweets as relevant or irrelevant and further
+categorizetherelevantonesintoneutral,positive,ornegative.Tweetswerenextanalyzedtogether
+with meteorological data to establish comfort ranges. The ranges identified through tweets anal-
+ysis were found to be in good agreement with the ranges derived through questionnaires and
+interviews.
+Kirilenko and Stepchenkova [75] reported the US, UK, Canada, and Australia to have created
+more discourse related to climate change on Twitter than the rest of the world. The study per-
+formed spatio-temporal and network analyses to identify daily patterns of discourse, the signifi-
+cant events affecting the discourse, and the most influential media houses and Twitter users. In
+Reference [66], Jang and Hart performed a content analysis on tweets related to climate change
+originating from the US, UK, Canada, and Australia between 2012–14. The authors constructed
+five representative frames, namely, Real, Hoax, Cause, Impact, and Action, based on associated
+keywords to extract the relative prevalence of each frame, country-wise. The study summarized
+that hoaxes are common, and the Cause, Impact, and Action-based Twitter discourse are compar-
+atively lower in the US.
+Chen et al. [33] analyzed similar climate change-related tweets to explore the temporal details
+of climate change discourse and identify Twitter users that deny the existence of climate change.
+The related English keywords were translated into 34 different languages, and the resulting set of
+keywordswasusedforfilteringthetweets.Asampleof2KtweetswasannotatedtotrainanANN
+modelforclassifyingtheusersasdeniersandnon-deniers.Theirexploratoryanalysisshowedthat
+the discussion about climate change is driven by extreme weather events and changes in policies.
+3.4.2 Pollution. InReference[ 59],Hswenetal.studiedifTwitterdatacanbeusedformonitor-
+ing outdoor air pollution. The authors collected geo-tagged tweets (non-media) containing air
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 21 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:21
+Table 5. Overview of the Literature in “Physical Environment” Thematic Area
+Direction Year Study Primary Dataset Geo Scope Tasks Best outcome
+Weather
+and climate
+analysis
+2014 [ 75] 1.85M tweets Global SpTmMd,
+NetAn
+Qual. disc.
+presented
+2015 [ 66]R n d s m p . o f
+500 tweets
+Global CoFqAn Precision: 96%
+2019 [ 33] 2K tweets Global WoVec,Cf Accuracy: 88%
+2020 [ 48] 38K tweets United States SnAn Class. Accuracy:
+88%
+Pollution
+analysis
+2018 [ 118] 39K geo-tagged
+tweets
+California TpMd Stat. analysis
+presented
+2019 [ 59] 60K tweets Greater London SnAn, AdSt Corr. coef.: 0.816
+Road and
+traffic
+analysis
+2010 [ 28] 565K tweets Portugal Cf F-measure: 0.96%
+2015 [ 147] 245K tweets Chicago SpTmMd,
+AdSt
+Stat. analysis
+presented
+2015 [ 49]S y s t e m
+self-collects data
+Melbourne Clu Qual. disc.
+presented
+2015 [ 136] 200 tweets India NER F-measure: 0.918
+2015 [ 37] 1.33K/999 tweets Italy Cf F-measure: 0.957
+2016 [ 51] 10K/11K tweets Pittsburgh,
+Philadelphia
+Cf F-measure: 0.95
+2017 [ 142] 9.70K tweets United Kingdom TpMd, Cf Recall: >90%
+2019 [ 35] 51K tweets United States WoVec,Cf F-measure: 0.986
+2020 [ 44] 9K geo-tagged
+tweets
+United Kingdom Reg MAE: 5.5
+2021 [ 161] 1.78M tweets Pittsburgh SnAn, Clu Accuracy:
+0.88±0.05
+pollution terms from Greater London and performed sentiment analysis on the tweets using
+VADER.7 Next,cross-correlationanalysiswasdonetofindrelationshipsbetweensentimenttrends
+and levels of PM2.5 (particles with diameter less than 2.5 micrometers). Their results showed a
+significant correlation between negative sentiment tweets and PM2.5 data, thereby hinting that
+Twitter users from a densely populated area can be treated as “social sensors” of PM2.5 levels.
+Sachdeva and McCaffrey [118] studied the effectiveness of using Twitter data in ascertaining
+the impacts of wildfire events on air quality. The authors used structural topic model for topic
+modelling.Topicsrelatedto“smoke”werethenidentifiedfortaggingtweets.Theirspatio-temporal
+modelusedthistaggedinformationforassessingtherelationshipbetweenthefrequencyofsmoke-
+relatedtweetswithdailyPM2.5levels.Theirresultsshowedthatthetweetsrelatingtosmokewere
+better predictors of air quality than tweets related to more generic wildfire discourse.
+3.4.3 Traffic. Tejaswin et al. [136]designedanincidentalertandmappingsystembyextracting
+location entities from tweets that describe traffic situations. To deal with the sparsity of data, the
+authors created multiple grids of the overall city area and grouped traffic incidents to generate
+statistics on historical data for extracting real-time insights. Predictors such as weather data, grid
+number,andtemporaldetailwereusedfortraininganRFclassifierforpredictingtrafficincidents.
+Essien et al. [44] mined geo-tagged Twitter data together with traffic and weather information
+to study if such data can improve urban traffic flow prediction. The authors trained a biLSTM
+stackedautoencodermodelandevaluateditonanurbanroadnetworkintheUK.Theyprioritized
+7https://github.com/cjhutto/vaderSentiment.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 22 ---
+77:22 R. Lamsal et al.
+Fig. 8. A methodological view of the literature in “Physical Environment” thematic area.
+the tweets created from the official Twitter accounts of road-traffic organizations to deal with
+authenticity and veracity issues. Their results showed that combining Twitter data with traffic,
+rainfall, and temperature data assists in a design of a more accurate traffic flow prediction model.
+Wang et al. [147] proposed a traffic congestion estimation framework by using information re-
+gardingtrafficfromTwitter.Afrequent-patternspatialandtemporalanalysiswasdonetoidentify
+the road networks that are more likely to have co-occurring congestions. Their estimation ap-
+proach also considered social events within the city as supplementary information. The authors
+used the time and location of such events to model the impact on traffic in the nearby roads us-
+ingaGaussiandistribution.Similarly,YaoandQian[ 161]extractedsleep-wakestatus,localevent
+details, and traffic incidents as tweeting profiles and used the following generalizations to build a
+predictionframeworkfornextmorningcommutecongestion:(i)roadsarecongestedthefollowing
+morning if people sleep earlier, (ii) lower travel demand the following day if the earlier evening
+had social events. Their approach outperformed existing approaches that excluded Twitter data.
+Inasimilarstudy,Gongetal.[ 49]utilizedcreatedtimeandgeocoordinatesinformationextracted
+fromtweetdatadictionariestoidentifyaroadascongestedifmultipletweetssharesimilarspatial
+and temporal attributes. The authors used a density-based clustering and assumed the presence
+of congestion if four or more tweets are created in 1 km stretch of road within a 15-minute time
+window.
+Dabiri and Heaslip [35] proposed a traffic information system that processes a large volume
+of Twitter data and detects traffic events. The authors used word2vec and FastText for feature
+representationtotrainthreedeeplearningarchitectures(CNN,LSTM,andCNN+LSTM)toclassify
+traffic-relatedinformationintothreecategories:trafficincident,trafficinformationandcondition,
+andirrelevant.TheirresultsshowedtheCNNmodeltrainedonword2vecoutperformingallother
+models,includingtheSVM,RF,andMLPmodelsproposedbyCarvalhoetal.[ 28],theNB,DT,and
+SVM models proposed by D’Andrea et al. [37], and the semi-NB model proposed by Gu et al. [51].
+Identifying relevant tweets among those created by official accounts of road administration
+offices and that mention road/street is simple compared to tweets created informally from drives,
+as such tweets are likely to have a significant amount of noise. To deal with this problem, Wang
+et al. [142] first filtered the tweets based on a set of automatically generated keywords and then
+appliedLDAtoachievehigherrecallscores.BinormalseparationandNBwordweightingschemes
+were used to identify the topN set of keywords.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure8.
+3.5 Politics
+Researchers have analyzed microblog data to study the popularity of election candidates, predict
+electionoutcomes,understandvotingintentionsofanation,detectemergingpoliticaltopics,iden-
+tify probable riot events, and understand human/bot communication patterns during disruptive
+events. Table6provides an overview of the literature in this theme.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 23 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:23
+3.5.1 Election Analysis. Twitter has been reported as an essential source of data for comple-
+menting traditional polls and surveys for political forecasting. In Reference [137], Tumasjan et al.
+performedsentimentanalysisandgeneratedmultidimensionalprofilesofpoliticiansusingtweets
+related to the 2009 German Federal Election. Their results showed the tweets’ sentiments corre-
+spondingcloselywithvoters’politicalinclinationsandtherelativevolumeofparty-specifictweets
+as a strong predictor of the federal election results. Bermingham and Smeaton [19]a l s os h o w e d
+the volume of tweets as a significant predictive variable in predicting election outcomes. In Refer-
+ence [45], Gaurav et al. reported that the volume-based approach in election prediction could be
+improvedbyalsoconsideringdifferentaliasesusedforacandidatewhileconstructingdatasetsfor
+analysis.
+Wang et al. [143] designed a real-time tweets sentiment analysis system targeting the 2012 US
+PresidentialElection.Theauthorsusedaround200rulesforfilteringtweetsrelatedtotheelection
+campaign. A sample of relevant tweets was crowd-sourced for polarity labelling to train an NB
+classifier. Sentiment trend and volume of tweets associated with each candidate were aggregated
+for visualization on their dashboard. Similar sentiment-based approaches have also been used in
+forecasting the winners of the 2013 Pakistani Election, the 2014 Indian Election [70], the 2015 UK
+GeneralElection[ 26],the2016IndianGeneralStateElections[ 125],andthe2017FrenchPresiden-
+tial Election [144].
+In Reference [162], Yaqub et al. analyzed the 2016 US presidential election Twitter discourse to
+evaluate how well such data represent public opinion. The keywords‘‘trump,’’ ‘‘clinton,’’
+and ‘‘election2016’’ were used for pulling relevant tweets. The authors reported negative
+trendsforboththecandidatesandquotedreportsthattermedthe2016electionas“themostnega-
+tive campaign” to support their results. Their subsequent analysis showed that tweets containing
+only the keyword‘‘trump’’ had a lower average negative score than the tweets associated to
+‘‘clinton.’’ A similar methodology was used in an earlier study by Ibrahim et al. [60], where
+only the positive sentiment tweets were considered candidate-wise for predicting the winner of
+the 2014 Indonesian Presidential Election.
+Songetal.[ 131]analyzedtweetsrelatedtothe2012KoreanPresidentialElectiontoshowTwitter
+asanessentialmediumfortrackingtopicaltrends.TheauthorsperformedtemporalLDAfortopic
+modellingandatermco-occurrenceanalysisfortracingchronologicallyco-occurringtopics.They
+also implemented network analysis based on “user-mentions” to identify thematic connections
+amongusers.Rilletal.[ 114]designedasystemforearlydetectionofcurrentandemergingpolitical
+topics using Twitter. The authors considered Twitter hashtags as candidates for emerging topics
+by considering the temporal change in the number of tweets associated with each hashtag, i.e.,
+comparing the current number of tweetsN (H ,t ) associated with a hashtagH to the number of
+tweets in the previous periodNp (H ,t−1). Their results showed that emerging topics on Twitter
+couldbedetectedimmediatelyaftertheiroccurrence,andthesetopicsseemedtoappearearlieron
+Twitter compared to Google Trends.
+Pauletal.[ 104]designedSVMandLRclassifiersforidentifyingpoliticalandnon-politicaltweets
+andperformedsentimentanalysisonthepoliticalonesconcerningtheirpoliticalalliances(Demo-
+cratic or Republican). The authors used LDA and word2vec for extracting enriched keywords
+specifictopoliticsandpoliticalalliancesforlabellingtweets.Theytrainedunigram-andunigram-
+bigram-based models using SVM and LR. Sentiment Analysis was performed on tweets at the
+political affiliation level, for which the authors showed the FastText-based model outperforming
+SVM, LR, NB, and LSTM models.
+Barberá [15]u s e daMarkov Chain Monte Carlo (MCMC)-based method to estimate the
+political ideology of people by exploiting their “following” profiles on Twitter. The author
+used a NoU-Turn sampler and a random-walk Metropolis-Hastings algorithm for estimating the
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 24 ---
+77:24 R. Lamsal et al.
+Table 6. Overview of the Literature in “Politics” Thematic Area
+Direction Year Study Primary Dataset Geo Scope Tasks Best outcome
+Election
+Analysis
+2011 [137] 100K tweets Germany SnAn,CoFqAn MAE: 1.65%
+2011 [19] 7.2K tweets Ireland SnAn,CoFqAn, Reg MAE:
+3.67%–5.85%
+2012 [143] 17K tweets United States SnAn,Cf Accuracy: 59%
+2013 [45] 62K tweets Latin America CoFqAn Average RMS:
+<0.03
+2014 [131] 1.73M tweets South Korea TpMd,NetAn –
+2014 [114] 4M tweets Germany CoFqAn,SnAn Corr. coef.: 0.68
+2015 [15] 759K Twitter users United States AdSt Stat. analysis
+presented
+2015 [60] 10M tweets Indonesia SnAn MAE: 0.61%
+2015 [70] 23M tweets India, Pakistan SnAn Corr. coef.:
+0.83–0.986
+2016 [125] 42K tweets India SnAn Accuracy: 78.4%
+2016 [26] 13.8M United Kingdom SnAn Stat. analysis
+presented
+2017 [162] 3.1M tweets United States SnAn –
+2017 [104] 2M geo tweets United States TpMd,SnAn, SpTmMd F-measure: 0.930
+2017 [144] Not-specified France SnAn 2% difference from
+fact
+Riots
+Analysis
+2017 [12] 40M/1.6M tweets England NER,SnAn,Cf,Clu F-measure: 85.43%
+2020 [81] 4.5M tweets Germany, United
+States, Catalonia
+SnAn,NetAn Stat. analysis
+presented
+parametersαj (measureofpopularityof j)and βi (measureofpoliticalinterestof i)indexedby jand
+i,respectively,where i andj relatetoasampleof10K i-usersthatfollowatleast10 j-users.Thepro-
+posedmethoddistinguishesthepoliticalorientationofbothpoliticalfiguresandordinarycitizens
+with their location on the ideological scale associated with “left-wing” and “right-wing” politics.
+3.5.2 Riots Analysis. Alsaedi et al. [12] proposed an event detection framework for detecting
+probable disruptive events such as riots using Twitter. The framework utilizes an NB classifier to
+filterevent-relatedtweetsfromnon-eventtweets.Anonlineclusteringalgorithmthengroupsthe
+extractedevent-relatedtweetstoidentifypotentiallydisruptiveeventsbasedonspatial,temporal,
+and textual features extracted from the tweets. The textual features list also included cosine simi-
+larity, sentiment polarity, mention ratio, hashtag ratio, and URL ratio. Next, a temporal TF-IDF is
+used for summarizing and representing the topics discussed in each cluster.
+Kušen and Strembeck [81] performed lexicon-based sentiment analysis on tweets using man-
+ually selected keywords and hashtags to identify the influence of bots during riot events. The
+authors used scores computed by Botometer8 to distinguish if an account is a bot. They further
+constructedtwotypesofdirectedcommunicationnetworks,ahuman-accounts-onlynetworkand
+an all-accounts network, using the “mentions” information available in the tweets. Their findings
+showed that bot accounts were more involved in amplifying negative emotions to influence the
+overallsentimentofthediscourse.Thebotaccountswerealsonoticedreceivingsignificantsocial
+interactions from human accounts, as the bot accounts seemed to be regarded as credible sources
+of information.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure9.
+8https://botometer.osome.iu.edu/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 25 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:25
+Fig. 9. A methodological view of the literature in “Politics” thematic area.
+3.6 Health and Population
+Public health-related microblog data concerning epidemics such as Influenza, Zika, Dengue,
+prescription drug abuse, and the coronavirus disease (COVID-19) pandemic has been used for
+predicting new case counts, extracting detailed insights of the illness/abuse, tracking the flow of
+conspiracy theories and misinformation. Table7 provides an overview of the literature in this
+theme.
+3.6.1 EpidemicAnalysis. Basedonflu-relatedtweetscollectedbetween2009and2010,Achrekar
+etal.[ 4]designedauto-regressionmodelstoshowthatthevolumeoftweetshighlycorrelateswith
+the number of influenza-like illness cases. Also, Masri et al. [93] used auto-regressive models on
+weekly Zika epidemic case counts and tweets for estimating the number of cases, on a weekly
+basis, one week in advance.
+Aramaki et al. [13] trained an SVM classifier to identify true influenza tweets and used them
+asapredictorforinfluenzaepidemicsdetection.Theirmethodoutperformedapproachesthatcon-
+sidered the use of overall volume of tweets or used Google trends data. Similarly, de Almeida
+Marques-Toledo et al. [39] tracked‘‘Dengue,’’ ‘‘aedes,’’ and ‘‘aegypti’’ keywords to col-
+lecttweetsandemployedaclassifiertoidentifytweetsrelatedtopersonalexperiencewithDengue.
+The authors used the total number of captured tweets and Dengue cases to design a generalized
+additive model. Their results showed that tweets have a strong potential to be an explanatory
+variable for Dengue estimation models.
+Mamidi et al. [90] trained multiple word2vec andn-gram-based LR, SVM, and RF models for
+analyzing sentiments of tweets concerning Zika and further identified the main topics within the
+negative sentiment tweets to distinguish the significant concerns of the targeted population.
+Twitter data has been observed as useful for providing insights into the prescription drug epi-
+demic [128]. Phan et al. [107] collected tweets concerning well-known prescription and illegal
+drugs and trained SVM, DT, RF, and NB classifiers to identify signals of drug abuse in the tweets.
+Their proposed drug-abuse-detection model could identify relationships between‘‘Abuse’’ and
+‘‘Fentanyl,’’ ‘‘Addiction’’ and ‘‘Heroin’’, and so on. Similarly, Katsuki et al. [73] studied
+therelationshipbetweenTwitterdataandpromotionof non-medicaluseofprescriptionmedi-
+cations(NUPM).TheauthorstrainedanSVMclassiferonasampleoflabelleddataforidentifying
+NUPM-relevanttweets.TheirresultsshowedasignificantproportionoftweetspromotingNUPM
+that actively marketed illegal sales of prescription drugs of abuse. A similar result was reported
+by Sarker et al. [121], where NB, SVM, Maximum Entropy, and DT classifiers were trained for
+identifying tweets containing signals of medication abuse.
+3.6.2 Pandemic Analysis. Chandrasekaran et al. [30] used LDA for discovering topics and
+VADER for exploring associated sentiments of COVID-19-related tweets. They reported that the
+average sentiment for topics such as growth and spread of cases, symptoms, racism, and political
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 26 ---
+77:26 R. Lamsal et al.
+Table 7. Overview of the Literature in “Health and Population” Thematic Area
+Direction Year Study Primary Dataset Geo Scope Tasks Best outcome
+Epidemic
+Analysis
+2011 [ 4] 4.7M tweets Global CoFqAn, Reg Corr. coef.: 0.9846
+2011 [ 13] 0.4M tweets Global AdSt,CoFqAn,
+Cf
+Corr. coef.: 0.89
+2015 [ 73] 2.4M tweets United States Cf Accuracy:
+93.5%–95.1%
+2016 [ 121] 129K tweets Global Cf Accuracy: 85%
+2017 [ 39] 1.65M tweets Brazil CoFqAn, Cf,
+Reg
+MRE: 0.345
+2017 [ 107] 31K tweets United States Cf F-measure: 0.746
+2019 [ 90] 48K tweets Zika affected
+regions
+Cf,TpMd,
+WoVec
+F-measure: 0.68
+2019 [ 93]W e e k l y b a s i s
+tweets count
+United States Reg,SpTmMd R2:0 . 7 4
+Pandemic
+Analysis
+2020 [ 30] 13.9M tweets Global TpMd, SnAn Stat. analysis
+presented
+2020 [ 3] 167K tweets Global Cf,SnAn,
+TpMd
+Stat. analysis
+presented
+2020 [ 87] 115K Weibo posts Wuhan CoFqAn, Reg R2: 0.621
+2020 [ 126] 14.9M Weibo posts China Cf,CoFqAn F1-measure: 0.880
+2020 [ 158] 1M tweets Global TpMd Qual. disc.
+presented
+2020 [ 9] 10K tweets, 6.55K
+users
+United
+Kingdom
+CoFqAn,
+NetAn
+Stat. analysis
+presented
+2021 [ 47] 1.8M tweets Global Cf,SnAn,
+TpMd
+F-measure: 0.857
+2021 [ 120] 574K tweets Global SnAn Stat. analysis
+presented
+impact was negative throughout the analysis period. In contrast, the sentiment was seen shifting
+towards positivity for government response, impact on the health system, economy, and treat-
+ment and recovery. Similarly, Abd-Alrazaq et al. [3] performed topic-wise sentiment analysis us-
+ing LDA and TextBlob9 to show the presence of negative sentiment for deaths and racism-related
+topics.
+Saleh et al. [120] collected tweets containing#socialdistancing and #stayathome hashtags
+foridentifyingtweetsspecifictosocialdistancing.TheyusedTextBlobforsentimentandsubjectiv-
+ityanalysis.Basedonthedominanceofpositiveandsubjectivetweets,theauthorsconcludedthat
+Twitter users supported the social distance measures. Xue et al. [158] collected family violence-
+related tweets by tracking keywords such as‘‘family violence’’ and ‘‘child abuse’’ and
+performed topic modelling using LDA. They identified nine different topical themes, including vi-
+olence types, risk factors, victims, law enforcement responses, social awareness, and so on. The
+studyshowedtopicmodellingasanessentialtechniqueformonitoringviolence-relatedsituations
+through tweets.
+Gerts et al. [47] used an RF classifier for identifying tweets concerning COVID-19 conspiracy
+theoriesrelatedto5Gtechnology,Bill&MelindaGatesFoundation,originofthevirus,andCOVID-
+19 vaccines. They showed that a significant amount (>40% except for the “vaccines”) of tweets
+werespreadingmisinformation.Theyusedlexicon-basedmethodsforsentimentanalysistoreport
+9https://textblob.readthedocs.io/en/dev/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 27 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:27
+Fig. 10. A methodological view of the literature in “Health and Population” thematic area.
+that negative sentiment is most prevalent in the tweets classified as misinformation. Similarly,
+Ahmed et al. [9] collected tweets concerning the 5G and COVID-19 conspiracy by tracking the
+#5GCoronavirus hashtag. The results from their network analysis hinted a lack of authorities in
+combating misinformation, and content analysis revealed a significant amount (34.8%) of tweets
+containing views that 5G and COVID-19 were linked.
+The volume of socially generated data has been observed predictive of the number of COVID-
+19 cases. In Reference [87], Li et al. analyzed Chinese language Weibo posts originating from
+Wuhan and built a linear regression model to show a positive correlation between the number
+ofWeibopostsandthedailycasesofCOVID-19inWuhan.Similarly,Shenetal.[ 126]designedan
+RFclassifierforidentifyingWeibopoststhatreportedanythingrelatedtosymptomsanddiagnosis
+(“sick messages”) of COVID-19. The authors performed Granger causality test and observed that
+the number of “sick messages” could significantly predict the daily number of cases 14 days in
+advance.
+An illustrative summary of methodologies discussed in this thematic area is given in Figure10.
+4 REVISITING THE LITERATURE
+4.1 Data Corpus
+Microblogs provide multiple API endpoints for accessing the public feed generated on their plat-
+forms. For instance, Twitter allows two API types for accessing its content: asearch API for
+searching against a sample of tweets created in the past seven days (standard version) [83] and a
+streamingAPI foraccessingitsreal-timefeed.Similarly,Weiboprovidesdeveloperswitha Timeline
+API for returning the latest Weibo posts and asearch API, which is restricted to a set of approved
+developers, for searching historical Weibo posts [154]. Furthermore, microblogs typically provide
+endpoints associated with followers, friends, geo location, favorites, reshare, trends, and so on.
+In general, the literature employs two methods for curating data corpus. The first method
+involves using official API endpoints to collect near real-time microblog content or search for
+historical content. The second method involves hydrating content identifiers to gather complete
+information.Secondmethodisemployedifamicrobloggingplatformonlyallowssharingofiden-
+tifiers, such as Twitter [82], where researchers are restricted in sharing data other than tweet
+identifiers [83].
+4.2 The Deep Learning Trend
+Duringthesurvey,weobservedthatalmosteverystudyhaditsownsetofdata.Implementingthe
+same methodology on different datasets generates mixed outcomes, so quantitatively comparing
+the outcomes ofthe surveyedpapersis difficult to justify.However, the tasksimplementedby the
+surveyed papers concentrate on the textual and multimedia context of microblog data; therefore,
+the advancements in NLP and Computer Vision undeniably expand the boundary of microblog
+analytics. The ongoing radical improvements in hardware have revolutionized the deep learn-
+ing sphere. Deep models seem to consistently achieve state-of-the-art outcomes in various tasks,
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 28 ---
+77:28 R. Lamsal et al.
+including text classification [160], sentiment analysis [67, 110], short text clustering [170], image
+classification [36, 169], text summarization [7], and name entity recognition [159,165].
+Inrecenttimes,deeplearningmodelshavebecomethe“go-to”methodsforsupervisedandunsu-
+pervisedtasks involving numerical data, categoricaldata, time-series data, and text/image data. It
+isevidentfromthesurveythatthereisasurgeintheuseofdeepmodelsafter2016.Inthispart,we
+revisittheliteraturewithadditionalstudiesthatemployeddifferentdeeplearningarchitecturesfor
+analyzingmicroblogdata.Therevisitincludesonlythestudiespublishedin2019orlater.Kangand
+Kang [71] used a deep neural network for predicting crime occurrences, Han et al. [53]p r o p o s e d
+a distributed deep anti-money laundering model, and Wei et al. [153] built a CNN-LSTM model
+for hate speech detection. Neppalli et al. [99] developed a CNN model for identifying informa-
+tivedisaster-specifictweets,RayChowdhuryetal.[ 112]presentedabiLSTMmodelforkeyphrase
+extraction, Kumar and Singh [79] used a CNN model for extracting location names from tweets
+createdduringemergencies,andLamsalandKumar[ 84]trainedword2vec-basedRNNmodelsfor
+disaster response. For analyzing stock markets, Xu and Cohen [157] developed a deep generative
+model, Khan et al. [74] worked on an MLP and Shi et al. [127] proposed a text-based deep model.
+Similarly,ZhaiandCheng[ 167]proposedanLSTMmodelforpredictingairqualityusingWeibo
+posts,Alietal.[ 11]designedabiLSTMmodelfortrafficaccidentdetectionusingTwitterandFace-
+book. Beskow et al. [20] designed an LSTM-CNN model for detecting and characterizing political
+memes, and Ertugrul et al. [43] developed an LSTM model for predicting future protests. Şerban
+et al. [177] used a CNN-FastText model for detecting events and tracking disease outbreaks.
+Furthermore, neural topic models [146,150] have been proposed as opposed to mathematically
+arduous traditional methods such as LDA. Also, there are graph-based neural models [173]t h a t
+aim to infer topological relationships from message passing between nodes. These neural models
+have been explored across various domains, including Few-shot Image Classification, Text Clas-
+sification, Sequence Labelling, Semantic Extraction, Event Extraction, Fact Verification [173]. In
+general, graph representation learning methods have applications across multiple areas:unsu-
+pervised—graph reconstruction (compress graphs into low-dimensional vectors), link prediction
+(predicting friendship in social networks), clustering (discovering communities), visualization
+(qualitative understanding of graph properties);supervised—node classification (predict node la-
+bels), graph classification (predict graph labels) [29].
+4.3 A Commentative Revisit
+In this section, we carry out a commentative revisit to the six “thematic” areas.
+Crimes. Previous studies have utilized microblog conversations for predicting future crimes,
+analyzing crime rates, and studying the correlation between masses of people at different venues
+and the occurrence of real crimes at those venues. Some studies implement the “grid” strategy
+for identifying crime hot spots; changing the scale and shape of those grids can produce differ-
+ent results—trade a “hot spot” as a “neutral spot”—thus leading to inefficient spatial assignments
+of resources. Crimes such as murders and vandalism are organized in nature, and conversations
+relating to them are not reflected online. Therefore, except for such crimes, researchers have con-
+firmedthe contributionof microblog data to a betterunderstandingoffuture crime scenariosand
+also have reinforced crime-related microblog contents as “social crime sensors.” However, the lit-
+erature in this thematic area appears North America-centered; contributions from other parts of
+the world seem required.
+Disasters. Disaster-specific microblog conversations have been used for enhancement of sit-
+uational awareness and prediction and assessment of disasters such as hurricanes, earthquakes,
+floods, cyclones, and so on. The literature in this area has contributions from researchers globally
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 29 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:29
+and has the most comprehensive collections of datasets10 related to disasters and crisis events.
+The continuing research in this area has led to the design of the state-of-the-artsocial media mes-
+sages mining system, AIDR, which analyzes Twitter conversations created during humanitarian
+crises for disaster relief. The science behind the system has been detailed over a stack of research
+papers11 published through 2013, depicting the progress in the area over the years. This thematic
+area,however,hasanunexploredavenueofresearch—theapplicationofdataminingon romanized
+scripts.
+Finance. The literature in this thematic area confirms the relationship between the conversa-
+tion generated by financial communities on microblogging platforms with stock pricing, market
+movements, and sustainable business models. The majority of the studies in this area seem to be
+focused on time-series analysis, with the Granger-causality test, due to its computational simplic-
+ity, continuing as the most favored method for causality analysis. Concerning the stock market
+analysis, the literature is focused majorly on the US-based stock indexes such as NYSE, NASDAQ,
+and DJIA. The existing methodologies proposed for these indexes are yet to be verified for their
+generality to other countries’ stock indexes. Also, the current state of research seems to be in-
+corporating only a few variables out of many possible economic variables, such as supply and
+demand, company’s state (revenue, debt, an influx of investor capital, etc.), investors’ sentiment,
+centralbank’spolicyoninterestrates,politics,currentevents(protests,civilwar,etc.),andforeign
+exchange.
+Physical Environment. Earlier studies have ascertained microblog users as “environment
+monitoringsensors”;theirgeneratedonlineconversationshavebeenobservedvaluableinproduc-
+ing insights associated with traffic incidents/patterns/conditions, weather situations, air quality,
+and climate change. Physical monitoring systems cover only certain regions; however, bringing
+onlineconversationsintothepictureforextrapolationcanyieldfine-graineddetailsforareasthat
+are outside the reach of the existing monitoring systems. Next-generation systems should focus
+onaddingnewtypesofcross-domaindatarelevanttopopulationactivities.Thisresearcharea,es-
+peciallythetraffic-relatedapplications,consideringconversationsfromroadsareusuallyminimal,
+require designing an efficient geocoder for identifying the near-accurate geographical locations
+(e.g., road segments) of the origin of non-geotagged conversations.
+Politics.Politics-basedmicroblogconversationshavebeenusedacrossstudiesforstudyingthe
+popularity of election nominees, predicting election outcomes, discovering political topics, and
+understanding communication patterns of bots and humans during riots/protests. Such analyses
+get majorly influenced by rumors, spam, and misinformation. While these kinds of conversations
+are an issue across all thematic areas, the wave of misinformation content when targeted to the
+voters can fuel conspiracy theories that could impact the election outcome. Therefore, the early
+detection of such content, the analysis of the distinctive characteristics of those content, and the
+study of how they propagate should be the major concerns of future studies.
+Health and Population.The literature in this area discusses the use of public-health-related
+microblog conversations in predicting new epidemic/pandemic cases, extracting detailed insights
+regarding an illness or abuse, and tracking conspiracy theories and misinformation trails related
+to COVID-19. Studies performing early forecasts of new cases or the trend rely majorly on the
+volumeofconversationsatdifferentlevels—tweetcount,sentiment-basedcount,aspecifictheme-
+based count. The issue with the “volume” feature is its reliability; methods based on this feature
+are highly likely to generate biased forecasts during an avalanche of auto-generated conversa-
+tions.Granular-levellatenttopic-basedmodelscanaddressthisissuetosomeextent.Theliterature
+10https://crisisnlp.qcri.org/.
+11https://github.com/qcri-social/AIDR/wiki/The-science-behind-AIDR.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 30 ---
+77:30 R. Lamsal et al.
+suggests that although the conversational models show the applicability of online conversations
+as an indicator of epidemic/pandemic activity, such models should be considered a supplement
+butnotasubstituteforepidemiologicalmodels.Researchersgloballyareapplyingawiderangeof
+analysesonpubliclyavailableCOVID-19discourse.Currently,theprimaryconcernsofresearchers
+in the Crisis Computing domain is to make early forecasts of possible cases while incorporating
+socialmediavariablesintotheforecastingmodels,identifytheneedsofaregionthroughdiscourse
+mining,andstudythepropagationofmisinformationconcerningthediseaseanditsvaccines,such
+that the proposed methodologies can be generalized to future epidemic/pandemic outbreaks.
+Apart from the ones discussed above, there are a few more challenges and avenues for future
+research that are common across all “thematic” areas; we briefly outline them below:
+(a) Inadequate context and Data rate limitations.Microblog data is easily misinterpreted, espe-
+cially when context is unavailable. Inferences can be inaccurate due to biases in microblogger
+demographics towards younger and tech-savvy users, regional/local users being undistinguished
+from tourists/travellers, private posts being unavailable, and lack of multi-lingual processing.
+Freely available microblog data is usually rate-limited by the service providers, e.g., a few per-
+centofthetotalavailabledata,orafewmillionmicroblogsperday.Broadqueries,andtechniques
+like real-time query expansion, can easily saturate these limits leading to <100% recall. Precise
+queries, targeting specific information, are therefore important.
+(b) Ground truth and Multiple data sources.Establishing ground truth, to evaluate the effective-
+ness of a given approach, can be problematic and/or involve an expensive and time-intensive pro-
+cessoflabellingdata,typicallythroughcrowd-sourcingorcitizenscience.Labelleddatamaynotbe
+available in real-time as a situation unfolds nor in all required languages.Weak supervision[174]
+is an emerging direction to address this. It is increasingly important to complement microblog
+data with information received from native sensors and also include data from Google Trends,
+web-references, Reddit [91], cellular communications (SMS) [96], government agencies.
+(c) Knowledge transfer and generalization. There is a significant trend towards language-
+independent nonexclusive models for homogeneous events. E.g., a classification model designed
+for the 2015 Nepal Earthquake should be effective at analyzing other earthquake events.
+(d)Adversariesandfakeinformation. Systemsthatprocesspublicinformationcanbevulnerable
+to adversaries who attack the system by posting fabricated microblog data specifically to manipu-
+late the outcomes. The increasing deluge of fake information is a serious problem, and detection
+and resolution of adversaries is an important research direction [80,176].
+(e) Geo obfuscation/privacy.Precise geo coordinates are extremely valuable for situation aware-
+ness, but at the same time microbloggers are placing increased importance on their individual
+privacy. This leads to omissions and/or obfuscation of geo information; today <1% of tweets are
+geotagged [83]. Use of bounding boxes and toponyms to enhance geo information needs to be
+balanced with individuals’ privacy.
+(f)Geo-politicalissues. Manygovernmentsareshowinganincreasingconcernoverthevulnera-
+bility of their citizens and furthermore their national interests, when significant portions of their
+citizen population are subjected to high-level analysis of their social media activity; particularly
+when this is undertaken by companies and researchers in foreign countries.
+5 CONCLUSION
+AI techniques for processing microblog social media data have become a significant research di-
+rectionwithapplicationsoverallareasoflife.Inthissurvey,wehaveshowntheseminalworkand
+state-of-the-art approaches, from research over the past decade, in six thematic areas that cover
+the majority of compelling applications today:Crime, Disasters, Finance, Physical Environment,
+Politics,a n dHealth and Population. We provided a novel, integrated methodological perspective
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 31 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:31
+of this body of research, in terms ofPerception, Comprehension, and Visualization/Projection—the
+three stages of Situation Awareness. Our survey provides an understanding of how researchers
+collect, pre-process, and analyze microblog data, with emphasis on how text, image, and spatio-
+temporaldataisutilizedformodellingandanalysis.Weobservedasurgeofinterestindeeplearn-
+ing methods for analyzing microblog data, and we expect research efforts to continue strongly in
+this direction.
+Incorporating knowledge from microblog social media data into the three stages of Situation
+Awareness is a challenging task to automate due to a range of issues that we identified in this
+survey. Challenges stem not only from the intrinsic nature of the data, being largely raw and un-
+structured,butalsofromthefactthatpracticalsystems,havingsignificantimpactandvisibilityin
+society, inevitably become the target of cyber-attacks and information manipulation from adver-
+sarialthird-parties—fakenewsandmisinformationissurgingactivitythatneedstobeunderstood
+andovercome.AsAIsystemsbecomemorepowerfulandassocialmediadatabecomesmoreabun-
+dant and richer in semantics, we expect an increasing emphasis on the need of AI techniques to
+suppress the effect of a similarly increasingly intelligent adversarial response. Researchers must
+concurrently take into account privacy and security of individuals and requirements of govern-
+ments and law makers, nationally and internationally.
+Finally, prior to 2016, the microblog analytics domain was limited in terms of public datasets.
+However, at present, the number of datasets concerning disasters, protests, politics, propaganda,
+sports, climate change, and health appears to be growing at an unprecedented pace12 with many
+areasyettobeaddressed.Twitter’snewacademicendpointhasalsoenabledresearcherstocollect
+historical tweets at a level surpassing what has been available over the past decade. We hope that
+more researchers endeavor to curate interesting datasets to support continued research in this
+area.
+REFERENCES
+[1] Ahmed Abbasi, Donald Adjeroh, Mark Dredze, Michael J. Paul, Fatemeh Mariam Zahedi, Huimin Zhao, Nitin Walia,
+Hemant Jain, Patrick Sanvanson, Reza Shaker, et al. 2014. Social media analytics for smart health.IEEE Intell. Syst.
+29, 2 (2014), 60–80.
+[2] Zaheer Abbass, Zain Ali, Mubashir Ali, Bilal Akbar, and Ahsan Saleem. 2020. A framework to predict social crime
+through Twitter tweets by using machine learning. InProceedings of ICSC. IEEE, 363–368.
+[3] AlaaAbd-Alrazaq,DariAlhuwail,MowafaHouseh,MounirHamdi,andZubairShah.2020.Topconcernsoftweeters
+during the COVID-19 pandemic: Infoveillance study.J. Med. Internet Res.22, 4 (2020), e19016.
+[4] HarshavardhanAchrekar,AvinashGandhe,RossLazarus,Ssu-HsinYu,andBenyuanLiu.2011.Predictingflutrends
+using Twitter data. InProceedings of INFOCOM Workshops. IEEE, 702–707.
+[5] Somayyeh Aghababaei and Masoud Makrehchi. 2016. Mining social media content for crime prediction. InProceed-
+ings of WI. IEEE, 526–531.
+[6] Somayyeh Aghababaei and Masoud Makrehchi. 2018. Mining Twitter data for crime trend prediction.Intell. Data
+Anal.22, 1 (2018), 117–141.
+[7] Armen Aghajanyan, Akshat Shrivastava, Anchit Gupta, Naman Goyal, Luke Zettlemoyer, and Sonal Gupta. 2020.
+Better fine-tuning by reducing representational collapse. arXiv:2008.03156 (2020).
+[8] Nesreen K. Ahmed, Amir F. Atiya, Neamat El Gayar, and Hisham El-Shishiny. 2010. An empirical comparison of
+machine learning models for time series forecasting.Econ. Rev.29, 5–6 (2010), 594–621.
+[9] Wasim Ahmed, Josep Vidal-Alaball, Joseph Downing, and Francesc López Seguí. 2020. COVID-19 and the 5G con-
+spiracy theory: Social network analysis of Twitter data.J. Med. Internet Res.22, 5 (2020), e19458.
+[10] Firoj Alam, Ferda Ofli, Muhammad Imran, and Michael Aupetit. 2018. A Twitter tale of three hurricanes: Harvey,
+Irma, and Maria. arXiv:1805.05144 (2018).
+[11] Farman Ali, Amjad Ali, Muhammad Imran, Rizwan Ali Naqvi, Muhammad Hameed Siddiqi, and Kyung-Sup Kwak.
+2021.Trafficaccidentdetectionandconditionanalysisbasedonsocialnetworkingdata. Accid.Anal.Prev. 151(2021),
+105973.
+12https://catalog.docnow.io/.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 32 ---
+77:32 R. Lamsal et al.
+[12] Nasser Alsaedi, Pete Burnap, and Omer Rana. 2017. Can we predict a riot? Disruptive event detection using Twitter.
+ACM Trans. Internet Technol.17, 2 (2017), 1–26.
+[13] Eiji Aramaki, Sachiko Maskawa, and Mizuki Morita. 2011. Twitter catches the flu: Detecting influenza epidemics
+using Twitter. InProceedings of EMNLP. 1568–1576.
+[14] Zahra Ashktorab, Christopher Brown, Manojit Nandi, and Aron Culotta. 2014. Tweedr: Mining Twitter to inform
+disaster response. InProceedings of ISCRAM. 269–272.
+[15] Pablo Barberá. 2015. Birds of the same feather tweet together: Bayesian ideal point estimation using Twitter data.
+Polit. Anal.23, 1 (2015), 76–91.
+[16] Bogdan Batrinca and Philip C. Treleaven. 2015. Social media analytics: A survey of techniques, tools and platforms.
+AI Soc.30, 1 (2015), 89–116.
+[17] Johannes Bendler, Tobias Brandt, Sebastian Wagner, and Dirk Neumann. 2014. Investigating crime-to-Twitter rela-
+tionships in urban environments-facilitating a virtual neighborhood watch. InProceedings of ECIS.
+[18] YoshuaBengio,AaronCourville,andPascalVincent.2013.Representationlearning:Areviewandnewperspectives.
+IEEE Trans. Pattern Anal. Mach. Intell.35, 8 (2013), 1798–1828.
+[19] Adam Bermingham and Alan Smeaton. 2011. On using Twitter to monitor political sentiment and predict election
+results. InProceedings of SAAIP. 2–10.
+[20] David M. Beskow, Sumeet Kumar, and Kathleen M. Carley. 2020. The evolution of political memes: Detecting and
+characterizing internet memes with multi-modal deep learning.Inf. Process. Manag.57, 2 (2020), 102170.
+[21] Christopher M. Bishop. 2006.Pattern Recognition and Machine Learning. Springer.
+[22] Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov. 2017. Enriching word vectors with subword
+information. Trans. Comput. Linguist. Assoc. Comput. Linguist.5 (2017), 135–146.
+[23] JohanBollen,HuinaMao,andXiaojunZeng.2011.Twittermoodpredictsthestockmarket. J.Comput.Sci. 2,1(2011),
+1–8.
+[24] Béla Bollobás. 1998.Modern Graph Theory. Vol. 184. Springer Science & Business Media.
+[25] Peter F. Brown, Vincent J. Della Pietra, Peter V. Desouza, Jennifer C. Lai, and Robert L. Mercer. 1992. Class-based
+n-gram models of natural language.Comput. Linguist.18, 4 (1992), 467–480.
+[26] PeteBurnap,RachelGibson,LukeSloan,RosalyndSouthern,andMatthewWilliams.2016.140characterstovictory?:
+Using Twitter to predict the UK 2015 General Election.Elect. Stud.41 (2016), 230–233.
+[27] Cornelia Caragea, Adrian Silvescu, and Andrea H. Tapia. 2016. Identifying informative messages in disasters using
+convolutional neural networks. InProceedings of ISCRAM.
+[28] SaraCarvalho,LuisSarmento,andRosaldoRossettiJ.F.2010.Real-timesensingoftrafficinformationinTwittermes-
+sages. InProceedings of IEEE ITSC.https://www.mendeley.com/catalogue/65b509dd-f94a-33fe-9b87-612176de9bec/.
+[29] InesChami,SamiAbu-El-Haija,BryanPerozzi,ChristopherRé,andKevinMurphy.2020.Machinelearningongraphs:
+A model and comprehensive taxonomy. arXiv:2005.03675 (2020).
+[30] Ranganathan Chandrasekaran, Vikalp Mehta, Tejali Valkunde, and Evangelos Moustakas. 2020. Topics, trends, and
+sentimentsoftweetsabouttheCOVID-19pandemic:Temporalinfoveillancestudy. J.Med.InternetRes. 22,10(2020),
+e22624.
+[31] Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020. A simple framework for contrastive
+learning of visual representations. InProceedings of ICML. PMLR, 1597–1607.
+[32] XinyuChen,YoungwoonCho,andSukYoungJang.2015.CrimepredictionusingTwittersentimentandweather.In
+Proceedings of SIEDS. IEEE, 63–68.
+[33] XingyuChen,LeiZou,andBoZhao.2019.DetectingclimatechangedeniersonTwitterusingadeepneuralnetwork.
+In Proceedings of ICMLC. 204–210.
+[34] FrancescoCorea.2016.CanTwitterproxytheinvestors’sentiment?Thecaseforthetechnologysector. BigDataRes.
+4 (2016), 70–74.
+[35] Sina Dabiri and Kevin Heaslip. 2019. Developing a Twitter-based traffic event detection model using deep learning
+architectures.Expert Syst. Appl.118 (2019), 425–439.
+[36] ZihangDai,HanxiaoLiu,QuocV.Le,andMingxingTan.2021.CoAtNet:Marryingconvolutionandattentionforall
+data sizes. arXiv:2106.04803 (2021).
+[37] EleonoraD’Andrea,PietroDucange,BeatriceLazzerini,andFrancescoMarcelloni.2015.Real-timedetectionoftraffic
+from Twitter stream analysis.IEEE Trans. Intell. Transp. Syst.16, 4 (2015), 2269–2283.
+[38] Mariana Daniel, Rui Ferreira Neves, and Nuno Horta. 2017. Company event popularity for financial markets using
+Twitter and sentiment analysis.Expert Syst. Appl.71 (2017), 111–124.
+[39] Cecilia de Almeida Marques-Toledo, Carolin Marlen Degener, Livia Vinhal, Giovanini Coelho, Wagner Meira, Clau-
+dia Torres Codeço, and Mauro Martins Teixeira. 2017. Dengue prediction by the web: Tweets are a useful tool for
+estimating and forecasting Dengue at country and city level.PLoS Negl. Trop. Dis.11, 7 (2017), e0005729.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 33 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:33
+[40] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018. BERT: Pre-training of deep bidirectional
+transformers for language understanding. arXiv:1810.04805 (2018).
+[41] Michael Dewing. 2010.Social Media: An Introduction. Vol. 1. Library of Parliament Ottawa.
+[42] Mica R. Endsley. 2000. Theoretical underpinnings of situation awareness: A critical review. Situat. Awaren.
+Anal. Meas.(2000), 1. https://www.taylorfrancis.com/chapters/mono/10.1201/b12461-7/theoretical-underpinnings-
+situation-awareness-critical-review-mica-endsley-daniel-garland .
+[43] AliMertErtugrul,Yu-RuLin,Wen-TingChung,MuhengYan,andAngLi.2019.Activismviaattention:Interpretable
+spatiotemporal learning to forecast protest activities.EPJ Data Sci.8, 1 (2019), 1–26.
+[44] AniekanEssien,IliasPetrounias,PedroSampaio,andSandraSampaio.2020.Adeep-learningmodelforurbantraffic
+flow prediction with traffic events mined from Twitter.World Wide Web24, 4 (2020), 1–24.
+[45] Manish Gaurav, Amit Srivastava, Anoop Kumar, and Scott Miller. 2013. Leveraging candidate popularity on Twitter
+to predict election outcome. InProceedings of SNAKDD.1 – 8 .
+[46] Matthew S. Gerber. 2014. Predicting crime using Twitter and kernel density estimation.Decis. Supp. Syst.61 (2014),
+115–125.
+[47] DaxGerts,CourtneyD.Shelley,NidhiParikh,TravisPitts,ChrysmWatsonRoss,GeoffreyFairchild,NidiaYadriaVa-
+quera Chavez, and Ashlynn R. Daughton. 2021. “Thought I’d share first” and other conspiracy theory tweets from
+the COVID-19 infodemic: Exploratory study.JMIR Pub. Health Surveill.7, 4 (2021), e26527.
+[48] LauraGiuffrida,HannaLokys,andOttoKlemm.2020.Assessingtheeffectofweatheronhumanoutdoorperception
+using Twitter.Int. J. Biometeorol.64, 2 (2020), 205–216.
+[49] Yikai Gong, Fengmin Deng, and Richard O. Sinnott. 2015. Identification of (near) real-time traffic congestion in the
+cities of Australia through Twitter. InProceedings of UCUI. 7–12.
+[50] IanGoodfellow,JeanPouget-Abadie,MehdiMirza,BingXu,DavidWarde-Farley,SherjilOzair,AaronCourville,and
+Yoshua Bengio. 2014. Generative adversarial nets.Proc. NIPS27 (2014).
+[51] Yiming Gu, Zhen Sean Qian, and Feng Chen. 2016. From Twitter to detector: Real-time traffic incident detection
+using social media data.Transp. Res. Part C Emerg. Technol.67 (2016), 321–342.
+[52] William L. Hamilton, Rex Ying, and Jure Leskovec. 2017. Representation learning on graphs: Methods and applica-
+tions. arXiv:1709.05584 (2017).
+[53] Jingguang Han, Utsab Barman, Jer Hayes, Jinhua Du, Edward Burgin, and Dadong Wan. 2018. NextGen AML: Dis-
+tributeddeeplearningbasedlanguagetechnologiestoaugmentantimoneylaunderinginvestigation.In Proceedings
+of ACL System Demonstrations. 37–42.
+[54] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. 2016. Deep residual learning for image recognition. In
+Proceedings of CVPR. 770–778.
+[55] Olivier Henaff. 2020. Data-efficient image recognition with contrastive predictive coding. InProceedings of ICML.
+PMLR, 4182–4192.
+[56] AldoHernandez-Suarez,GabrielSanchez-Perez,KarinaToscano-Medina,HectorPerez-Meana,JosePortillo-Portillo,
+VictorSanchez,andLuisJavierGarcíaVillalba.2019.UsingTwitterdatatomonitornaturaldisastersocialdynamics:
+A recurrent neural network approach with word embeddings and kernel density estimation.Sensors 19, 7 (2019),
+1746.
+[57] Clyde Holsapple, Shih-Hui Hsiao, and Ram Pakath. 2014. Business social media analytics: Definition, benefits, and
+challenges. InProceedings of AMCIS.
+[58] Jeremy Howard and Sebastian Ruder. 2018. Universal language model fine-tuning for text classification.
+arXiv:1801.06146 (2018).
+[59] Yulin Hswen, Qiuyuan Qin, John S. Brownstein, and Jared B. Hawkins. 2019. Feasibility of using social media to
+monitor outdoor air pollution in London, England.Prev. Med.121 (2019), 86–93.
+[60] Mochamad Ibrahim, Omar Abdillah, Alfan F. Wicaksono, and Mirna Adriani. 2015. Buzzer detection and sentiment
+analysis for predicting presidential election results in a Twitter nation. InProceedings of ICDMW. IEEE, 1348–1353.
+[61] Andrew Ilyas. 2014. MicroFilters: Harnessing Twitter for disaster management. InProceedings of GHTC. IEEE,
+417–424.
+[62] Muhammad Imran, Carlos Castillo, Fernando Diaz, and Sarah Vieweg. 2015. Processing social media messages in
+mass emergency: A survey.ACM Comput. Surv.47, 4 (2015), 1–38.
+[63] MuhammadImran,Carlos Castillo,JiLucas,PatrickMeier,andSarahVieweg.2014.AIDR:Artificialintelligencefor
+disaster response. InProceedingsofWWW . 159–162.
+[64] Muhammad Imran, Shady Elbassuoni, Carlos Castillo, Fernando Diaz, and Patrick Meier. 2013. Extracting informa-
+tion nuggets from disaster-related messages in social media. InProceedings of ISCRAM.
+[65] Muhammad Imran, Shady Elbassuoni, Carlos Castillo, Fernando Diaz, and Patrick Meier. 2013. Practical extraction
+of disaster-relevant information from social media. InProceedings of WWW. 1021–1024.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 34 ---
+77:34 R. Lamsal et al.
+[66] S. Mo Jang and P. Sol Hart. 2015. Polarized frames on “climate change” and “global warming” across countries and
+states: Evidence from Twitter big data.Glob. Environ. Change32 (2015), 11–17.
+[67] Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng Gao, and Tuo Zhao. 2019. Smart: Robust
+and efficient fine-tuning for pre-trained natural language models through principled regularized optimization.
+arXiv:1911.03437 (2019).
+[68] Longlong Jing and Yingli Tian. 2020. Self-supervised visual feature learning with deep neural networks: A survey.
+IEEE Trans. Pattern Anal. Mach. Intell.43, 11 (2020).
+[69] Kenneth Joseph, Peter M. Landwehr, and Kathleen M. Carley. 2014. An approach to selecting keywords to track on
+Twitter during a disaster. InProceedings of ISCRAM.
+[70] VadimKagan,AndrewStevens,andV.S.Subrahmanian.2015.UsingTwittersentimenttoforecastthe2013Pakistani
+election and the 2014 Indian election.IEEE Intell. Syst.30, 1 (2015), 2–5.
+[71] Hyeon-Woo Kang and Hang-Bong Kang. 2017. Prediction of crime occurrence from multi-modal data using deep
+learning. PloSOne 12, 4 (2017), e0176244.
+[72] AmirKarami,VishalShah,RezaVaezi,andAmitBansal.2020.Twitterspeaks:Acaseofnationaldisastersituational
+awareness.J. Inf. Sci.46, 3 (2020), 313–324.
+[73] TakeoKatsuki,TimKenMackey,andRaphaelCuomo.2015.Establishingalinkbetweenprescriptiondrugabuseand
+illicit online pharmacies: Analysis of Twitter data.J. Med. Internet Res.17, 12 (2015), e280.
+[74] Wasiat Khan, Mustansar Ali Ghazanfar, Muhammad Awais Azam, Amin Karami, Khaled H. Alyoubi, and Ahmed S.
+Alfakeeh.2020.Stockmarketpredictionusingmachinelearningclassifiersandsocialmedia,news. JAmbient.Intell.
+Humaniz. Comput.(2020), 1–24.
+[75] AndreiP.KirilenkoandSvetlanaO.Stepchenkova.2014.Publicmicrobloggingonclimatechange:OneyearofTwitter
+worldwide.Glob. Environ. Change26 (2014), 171–182.
+[76] Igor Kononenko. 2001.Machinelearning formedicaldiagnosis: History, stateof theartandperspective. Artif.Intell.
+Med. 23, 1 (2001), 89–109.
+[77] Simon Kornblith, Jonathon Shlens, and Quoc V. Le. 2019. Do better imagenet models transfer better? InProceedings
+of CVPR. 2661–2671.
+[78] Yury Kryvasheyeu, Haohui Chen, Nick Obradovich, Esteban Moro, Pascal Van Hentenryck, James Fowler, and
+ManuelCebrian.2016.Rapidassessmentofdisasterdamageusingsocialmediaactivity. Sci.Adv. 2,3(2016),e1500779.
+[79] AbhinavKumarandJyotiPrakashSingh.2019.Locationreferenceidentificationfromtweetsduringemergencies:A
+deep learning approach.Int. J. Disast. Risk Reduct.33 (2019), 365–375.
+[80] Srijan Kumar and Neil Shah. 2018. False information on web and social media: A survey. arXiv:1804.08559 (2018).
+[81] EmaKušenandMarkStrembeck.2020.Youtalkin’tome?Exploringhuman/botcommunicationpatternsduringriot
+events.Inf. Process. Manag.57, 1 (2020), 102126.
+[82] RabindraLamsal.2020.Coronavirus(COVID-19)TweetsDataset. https://ieee-dataport.org/open-access/coronavirus-
+covid-19-tweets-dataset.
+[83] Rabindra Lamsal. 2021. Design and analysis of a large-scale COVID-19 tweets dataset.Appl. Intell.51, 5 (2021),
+2790–2804.
+[84] RabindraLamsalandT.V.VijayKumar.2021.Twitter-baseddisasterresponseusingrecurrentnets. Int.J.Sociotechnol.
+Knowl. Dev.13, 3 (2021), 133–150.
+[85] Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. 2015. Deep learning.Nature 521, 7553 (2015), 436–444.
+[86] DarrenLeitchandMohamedSherif.2017.Twittermood,CEOsuccessionannouncementsandstockreturns. J.Com-
+put. Sci.21 (2017), 1–10.
+[87] Jiawei Li, Qing Xu, Raphael Cuomo, Vidya Purushothaman, and Tim Mackey. 2020. Data mining and content anal-
+ysis of the Chinese social media platform Weibo during the early COVID-19 outbreak: Retrospective observational
+infoveillance study.JMIR Pub. Health Surveill.6, 2 (2020), e18700.
+[88] LingLiu,JingWu,PingLi,andQingLi.2015.Asocial-media-basedapproachtopredictingstockcomovement. Expert
+Syst. Appl.42, 8 (2015), 3893–3901.
+[89] M Ángeles López-Cabarcos, Juan Piñeiro-Chousa, and Ada María Pérez-Pico. 2017. The impact technical and non-
+technicalinvestorshaveonthestockmarket:Evidencefromthesentimentextractedfromsocialnetworks. J.Behav.
+Exp. Finance15 (2017), 15–20.
+[90] RavaliMamidi,MicheleMiller,TanviBanerjee,WilliamRomine,andAmitSheth.2019.Identifyingkeytopicsbearing
+negative sentiment on Twitter: Insights concerning the 2015–2016 Zika epidemic.JMIR Pub. Health Surveill.5, 2
+(2019), e11036.
+[91] Lydia Manikonda, Ghazaleh Beigi, Huan Liu, and Subbarao Kambhampati. 2018. Twitter for sparking a movement,
+Reddit for sharing the moment:# Metoo through the lens of social media. arXiv:1803.08022 (2018).
+[92] ChristopherD.Manning.2015.Computationallinguisticsanddeeplearning. Comput.Linguist. 41,4(2015),701–707.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 35 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:35
+[93] Shahir Masri, Jianfeng Jia, Chen Li, Guofa Zhou, Ming-Chieh Lee, Guiyun Yan, and Jun Wu. 2019. Use of Twitter
+data to improve Zika virus surveillance in the United States during the 2016 epidemic.BMC Pub. Health19, 1 (2019),
+1–14.
+[94] AntonyMayfield.2008.Whatissocialmedia. https://indianstrategicknowledgeonline.com/web/mayfield_strat_for_
+soc_media.pdf.
+[95] Bryan McCann, James Bradbury, Caiming Xiong, and Richard Socher. 2017. Learned in translation: Contextualized
+word vectors. arXiv:1708.00107 (2017).
+[96] Patrick Meier. 2010. The unprecedented role of SMS in disaster response: Learning from Haiti.SAIS Rev. Int. Aff.30,
+2 (2010), 91–103.
+[97] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. Efficient estimation of word representations in
+vector space. arXiv:1301.3781 (2013).
+[98] TahoraH.Nazer,GuoliangXue,YushengJi,andHuanLiu.2017.Intelligentdisasterresponseviasocialmediaanalysis
+as u rv e y .SIGKDD Explor.19, 1 (2017), 46–59.
+[99] Venkata Kishore Neppalli, Cornelia Caragea, and Doina Caragea. 2018. Deep neural networks versus naive Bayes
+classifiers for identifying informative tweets during disasters. InProceedings of ISCRAM.
+[100] Venkata K. Neppalli, Cornelia Caragea, Anna Squicciarini, Andrea Tapia, and Sam Stehle. 2017. Sentiment analysis
+during Hurricane Sandy in emergency response.Int. J. Disast. Risk Reduct.21 (2017), 213–222.
+[101] DatNguyen,KamelaAliAlMannai,ShafiqJoty,HassanSajjad,MuhammadImran,andPrasenjitMitra.2017.Robust
+classification of crisis-related data on social networks using convolutional neural networks. InProceedings of AAAI,
+Vol. 11.
+[102] Tahir M. Nisar and Man Yeung. 2018. Twitter as a tool for forecasting stock market movements: A short-window
+event study.J. Financ. Data Sci.4, 2 (2018), 101–119.
+[103] Yunmi Park, Minju Kim, and Kijin Seong. 2021. Happy neighborhoods: Investigating neighborhood conditions and
+sentiments of a shrinking city with Twitter data.Growth Change52, 1 (2021), 539–566.
+[104] Debjyoti Paul, Feifei Li, Murali Krishna Teja, Xin Yu, and Richie Frost. 2017. Compass: Spatio temporal sentiment
+analysis of US election what Twitter says! InProceedings of SIGKDD. 1585–1594.
+[105] Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global vectors for word representa-
+tion. InProceedings of EMNLP. 1532–1543.
+[106] MatthewE.Peters,MarkNeumann,MohitIyyer,MattGardner,ChristopherClark,KentonLee,andLukeZettlemoyer.
+2018. Deep contextualized word representations. InProceedings of NAACL.
+[107] Nhathai Phan, Soon Ae Chun, Manasi Bhole, and James Geller. 2017. Enabling real-time drug abuse detection in
+tweets. InProceedings of ICDE. IEEE, 1510–1514.
+[108] C.A.Piña-GarcíaandLeticiaRamírez-Ramírez.2019.ExploringcrimepatternsinMexicocity. J.BigData 6,1(2019),
+1–21.
+[109] Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. Improving language under-
+standingbygenerativepre-training. https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-
+unsupervised/language_understanding_paper.pdf.
+[110] ColinRaffel,NoamShazeer,AdamRoberts,KatherineLee,SharanNarang,MichaelMatena,YanqiZhou,WeiLi,and
+Peter J. Liu. 2019. Exploring the limits of transfer learning with a unified text-to-text transformer. arXiv:1910.10683
+(2019).
+[111] J. Rexiline Ragini, P. M. Rubesh Anand, and Vidhyacharan Bhaskar. 2018. Big data analytics for disaster response
+and recovery through sentiment analysis.Int. J. Inf. Manag.42 (2018), 13–24.
+[112] Jishnu Ray Chowdhury, Cornelia Caragea, and Doina Caragea. 2019. Keyphrase extraction from disaster-related
+tweets. InProceedings of WWW. 1555–1566.
+[113] BerndResch,FlorianUsländer,andClemensHavas.2018.Combiningmachine-learningtopicmodelsandspatiotem-
+poralanalysisofsocialmediadatafordisasterfootprintanddamageassessment. Cartogr.Geogr.Inf.Sci. 45,4(2018),
+362–376.
+[114] SvenRill,DirkReinel,JörgScheidt,andRobertoV.Zicari.2014.PoliTwi:Earlydetectionofemergingpoliticaltopics
+on Twitter and the impact on concept-level sentiment analysis.Knowl.-based Syst.69 (2014), 24–33.
+[115] Alina Ristea, Mohammad Al Boni, Bernd Resch, Matthew S. Gerber, and Michael Leitner. 2020. Spatial crime distri-
+bution and prediction for sporting events using social media.Int. J. Geogr. Inf. Sci.34, 9 (2020), 1708–1739.
+[116] Yara Rizk, Hadi Samer Jomaa, Mariette Awad, and Carlos Castillo. 2019. A computationally efficient multi-modal
+classification approach of disaster-related Twitter images. InProceedings of SIGAPP. 2050–2059.
+[117] Gonzalo A. Ruz, Pablo A. Henríquez, and Aldo Mascareño. 2020. Sentiment analysis of Twitter data during critical
+events through Bayesian networks classifiers.Fut. Gen. Comput. Syst.106 (2020), 92–104.
+[118] Sonya Sachdeva and Sarah McCaffrey. 2018. Using social media to predict air pollution during California wildfires.
+InProceedings of SMSociety. 365–369.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 36 ---
+77:36 R. Lamsal et al.
+[119] Takeshi Sakaki, Makoto Okazaki, and Yutaka Matsuo. 2012. Tweet analysis for real-time event detection and earth-
+quake reporting system development.IEEE Trans. Knowl. Data. Eng.25, 4 (2012), 919–931.
+[120] SamehN.Saleh,ChristophU.Lehmann,SamuelA.McDonald,MujeebA.Basit,andRichardJ.Medford.2021.Under-
+standing public perception of coronavirus disease 2019 (COVID-19) social distancing on Twitter.Infect. Contr. Hosp.
+Epidemiol. 42, 2 (2021), 131–138.
+[121] Abeed Sarker, Karen O’Connor, Rachel Ginn, Matthew Scotch, Karen Smith, Dan Malone, and Graciela Gonzalez.
+2016.Socialmediaminingfortoxicovigilance:AutomaticmonitoringofprescriptionmedicationabusefromTwitter.
+Drug Saf.39, 3 (2016), 231–240.
+[122] Jose Ramon Saura, Pedro Palos-Sanchez, and Antonio Grilo. 2019. Detecting indicators for startup business success:
+Sentiment analysis using text data mining.Sustainability 11, 3 (2019), 917.
+[123] Burr Settles. 2009. Active learning literature survey.https://minds.wisconsin.edu/handle/1793/60660.
+[124] Siqing Shan, Feng Zhao, Yigang Wei, and Mengni Liu. 2019. Disaster management 2.0: A real-time disaster damage
+assessment model based on mobile social media data–A case study of Weibo (Chinese Twitter).Saf. Sci.115 (2019),
+393–413.
+[125] Parul Sharma and Teng-Sheng Moh. 2016. Prediction of Indian election using sentiment analysis on Hindi Twitter.
+In Proceedings of BigData. IEEE, 1966–1971.
+[126] CuihuaShen,AnfanChen,ChenLuo,JingwenZhang,BoFeng,andWangLiao.2020.Usingreportsofsymptomsand
+diagnoses on social media to predict COVID-19 case counts in mainland China: Observational infoveillance study.
+J. Med. Internet Res.22, 5 (2020), e19421.
+[127] Lei Shi, Zhiyang Teng, Le Wang, Yue Zhang, and Alexander Binder. 2018. DeepClue: Visual interpretation of text-
+based deep stock prediction.IEEE Trans. Knowl. Data. Eng.31, 6 (2018), 1094–1108.
+[128] Lukas Shutler, Lewis S. Nelson, Ian Portelli, Courtney Blachford, and Jeanmarie Perrone. 2015. Drug use in the
+Twittersphere: A qualitative contextual analysis of tweets about prescription drugs.J. Addict. Dis.34, 4 (2015),
+303–310.
+[129] Shiwangi Singh, Akshay Chauhan, and Sanjay Dhir. 2019. Analyzing the startup ecosystem of India: A Twitter ana-
+lytics perspective.J. Adv. Manag. Res.17, 2 (2019).
+[130] Panote Siriaraya, Yihong Zhang, Yuanyuan Wang, Yukiko Kawai, Mohit Mittal, Péter Jeszenszky, and Adam Jatowt.
+2019. Witnessing crime through tweets: A crime investigation tool based on social media. InProceedings of SIGSPA-
+TIAL. 568–571.
+[131] MinSong,MeenChulKim,andYooKyungJeong.2014.Analyzingthepoliticallandscapeof2012Koreanpresidential
+election in Twitter.IEEE Intell. Syst.29, 2 (2014), 18–26.
+[132] Statista. 2021. Most Used Social Media 2021 | Statista. Retrieved fromhttps://www.statista.com/statistics/272014/
+global-social-networks-ranked-by-number-of-users/ .
+[133] Stefan Stieglitz and Linh Dang-Xuan. 2013. Social media and political communication: A social media analytics
+framework.Soc. Netw. Anal. Min.3, 4 (2013), 1277–1291.
+[134] ChristianSzegedy,VincentVanhoucke,SergeyIoffe,JonShlens,andZbigniewWojna.2016.Rethinkingtheinception
+architecture for computer vision. InProceedings of CVPR. 2818–2826.
+[135] LeiTangandHuanLiu.2010.Graphminingapplicationstosocialnetworkanalysis.In ManagingandMiningGraph
+Data. Springer, 487–513.
+[136] PriyamTejaswin,RohanKumar,andSiddharthGupta.2015.Tweetingtraffic:AnalyzingTwitterforgeneratingreal-
+time city traffic insights and predictions. InProceedings of CODS-IKDD.1 – 4 .
+[137] Andranik Tumasjan, Timm O. Sprenger, Philipp G. Sandner, and Isabell M. Welpe. 2011. Election forecasts with
+Twitter: How 140 characters reflect the political landscape.Soc. Sci. Comput. Rev.29, 4 (2011), 402–418.
+[138] AshishVaswani,NoamShazeer,NikiParmar,JakobUszkoreit,LlionJones,AidanN.Gomez,ŁukaszKaiser,andIllia
+Polosukhin. 2017. Attention is all you need. InProceedings of NIPS. 5998–6008.
+[139] ThanhVo,RohitSharma,RaghvendraKumar,LeHoangSon,BinhThaiPham,DieuTienBui,IshaaniPriyadarshini,
+ManashSarkar,andTuongLe.2020.CrimeratedetectionusingsocialmediaofdifferentcrimelocationsandTwitter
+part-of-speech tagger with Brown clustering.J. Intell. Fuzzy Syst.Preprint (2020), 1–13.
+[140] LaraVomfell,WolfgangKarlHärdle,andStefanLessmann.2018.ImprovingcrimecountforecastsusingTwitterand
+taxi data.Decis. Supp. Syst.113 (2018), 73–85.
+[141] Athanasios Voulodimos, Nikolaos Doulamis, Anastasios Doulamis, and Eftychios Protopapadakis. 2018. Deep learn-
+ing for computer vision: A brief review.Comput. Intell. Neurosci.2018 (2018).
+[142] Di Wang, Ahmad Al-Rubaie, Sandra Stinčić Clarke, and John Davies. 2017. Real-time traffic event detection from
+social media.ACM Trans. Internet Technol.18, 1 (2017), 1–23.
+[143] Hao Wang, Doğan Can, Abe Kazemzadeh, François Bar, and Shrikanth Narayanan. 2012. A system for real-time
+Twitter sentiment analysis of 2012 US presidential election cycle. InProceedings of ACL System Demonstrations.
+115–120.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 37 ---
+Socially Enhanced Situation Awareness from Microblogs using Artificial Intelligence 77:37
+[144] LeiWangandJohnQ.Gan.2017.Predictionofthe2017FrenchelectionbasedonTwitterdataanalysis.In Proceedings
+of CEEC. IEEE, 89–93.
+[145] Mingjun Wang and Matthew S. Gerber. 2015. Using Twitter for next-place prediction, with an application to crime
+prediction. InProceedings of SSCI. IEEE, 941–948.
+[146] Rui Wang, Xuemeng Hu, Deyu Zhou, Yulan He, Yuxuan Xiong, Chenchen Ye, and Haiyang Xu. 2020. Neural topic
+modeling with bidirectional adversarial training. InProceedings of ACL. 340–350.
+[147] SenzhangWang,LifangHe,LeonStenneth,PhilipS.Yu,andZhoujunLi.2015.Citywidetrafficcongestionestimation
+with social media. InProceedings SIGSPATIAL. 1–10.
+[148] Xiaofeng Wang, Donald E. Brown, and Matthew S. Gerber. 2012. Spatio-temporal modeling of criminal incidents
+using geographic, demographic, and Twitter-derived information. InProceedings of ISI. IEEE, 36–41.
+[149] XiaofengWang,MatthewS. Gerber,andDonaldE.Brown.2012.Automaticcrimepredictionusing eventsextracted
+from Twitter posts. InProceedings of SBP-BRiMS. Springer, 231–238.
+[150] XinyiWangandYiYang.2020.Neuraltopicmodelwithattentionforsupervisedlearning.In ProceedingsofAISTATS .
+PMLR, 1147–1156.
+[151] Yaqing Wang, Quanming Yao, James T. Kwok, and Lionel M. Ni. 2020. Generalizing from a few examples: A survey
+on few-shot learning.ACM Comput. Surv.53, 3 (2020), 1–34.
+[152] WeiWei,YuexinMao,andBingWang.2016.Twittervolumespikesandstockoptionspricing. Comput.Commun. 73
+(2016), 271–281.
+[153] Xiaocong Wei, Hongfei Lin, Liang Yang, and Yuhai Yu. 2017. A convolution-LSTM-based deep neural network for
+cross-domain MOOC forum post classification.Information 8, 3 (2017), 92.
+[154] Weibo. 2021. Weibo API. Retrieved fromhttps://open.weibo.com/wiki/.
+[155] Desheng Wu and Yiwen Cui. 2018. Disaster early warning and damage assessment analysis using social media data
+and geo-location information.Decis. Supp. Syst.111 (2018), 48–59.
+[156] Yingcai Wu, Nan Cao, David Gotz, Yap-Peng Tan, and Daniel A. Keim. 2016. A survey on visual analytics of social
+media data.IEEE Trans. Multim.18, 11 (2016), 2135–2148.
+[157] Yumo Xu and Shay B. Cohen. 2018. Stock movement prediction from tweets and historical prices. InProceedings of
+ACL. 1970–1979.
+[158] Jia Xue, Junxiang Chen, Chen Chen, Ran Hu, and Tingshao Zhu. 2020. The hidden pandemic of family violence
+during COVID-19: Unsupervised learning of Tweets.J. Med. Internet Res.22, 11 (2020), e24361.
+[159] IkuyaYamada,AkariAsai,HiroyukiShindo,HideakiTakeda,andYujiMatsumoto.2020.LUKE:Deepcontextualized
+entity representations with entity-aware self-attention. arXiv:2010.01057 (2020).
+[160] Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Ruslan Salakhutdinov, and Quoc V. Le. 2019. XLNet: Gener-
+alized autoregressive pretraining for language understanding. arXiv:1906.08237 (2019).
+[161] Weiran Yao and Sean Qian. 2021. From Twitter to traffic predictor: Next-day morning traffic prediction using social
+media data.Transp. Res. Part C Emerg. Technol.124 (2021), 102938.
+[162] Ussama Yaqub, Soon Ae Chun, Vijayalakshmi Atluri, and Jaideep Vaidya. 2017. Analysis of political discourse on
+Twitter in the context of the 2016 US presidential elections.Gov. Inf. Quart.34, 4 (2017), 613–626.
+[163] Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson. 2014. How transferable are features in deep neural net-
+works? arXiv:1411.1792 (2014).
+[164] Wanhai You, Yawei Guo, and Cheng Peng. 2017. Twitter’s daily happiness sentiment and the predictability of stock
+returns.Finance Res. Lett.23 (2017), 58–64.
+[165] Juntao Yu, Bernd Bohnet, and Massimo Poesio. 2020. Named entity recognition as dependency parsing.
+arXiv:2005.07150 (2020).
+[166] Kiran Zahra, Muhammad Imran, and Frank O. Ostermann. 2020. Automatic identification of eyewitness messages
+on Twitter during disasters.Inf. Process. Manag.57, 1 (2020), 102107.
+[167] WeixinZhaiandChengqiCheng.2020.Alongshort-termmemoryapproachtopredictingairqualitybasedonsocial
+media data.Atmos. Environ.237 (2020), 117411.
+[168] WeiZhai,Zhong-RenPeng,andFaxiYuan.2020.Examinetheeffectsofneighborhoodequityondisastersituational
+awareness: Harness machine learning and geotagged Twitter data.Int. J. Disast. Risk Reduct.48 (2020), 101611.
+[169] Xiaohua Zhai, Alexander Kolesnikov, Neil Houlsby, and Lucas Beyer. 2021. Scaling vision transformers.
+arXiv:2106.04560 (2021).
+[170] Dejiao Zhang, Feng Nan, Xiaokai Wei, Shangwen Li, Henghui Zhu, Kathleen McKeown, Ramesh Nallapati, Andrew
+Arnold, and Bing Xiang. 2021. Supporting clustering with contrastive learning. arXiv:2103.12953 (2021).
+[171] Wei Zhang, Xiao Li, Dehua Shen, and Andrea Teglio. 2016. Daily happiness and stock returns: Some international
+evidence.Physica A460 (2016), 201–209.
+[172] Xue Zhang, Hauke Fuehres, and Peter A. Gloor. 2012. Predicting asset value through Twitter buzz. InProceedings of
+AISC. Springer, 23–34.
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
+
+--- PAGE 38 ---
+77:38 R. Lamsal et al.
+[173] JieZhou,GanquCui,ShengdingHu,ZhengyanZhang,ChengYang,ZhiyuanLiu,LifengWang,ChangchengLi,and
+Maosong Sun. 2020. Graph neural networks: A review of methods and applications.AI Open1 (2020), 57–81.
+[174] Zhi-Hua Zhou. 2018. A brief introduction to weakly supervised learning.Nat. Sci. Rev.5, 1 (2018), 44–53.
+[175] Fuzhen Zhuang, Zhiyuan Qi, Keyu Duan, Dongbo Xi, Yongchun Zhu, Hengshu Zhu, Hui Xiong, and Qing He. 2020.
+A comprehensive survey on transfer learning.Proc. IEEE109, 1 (2020), 43–76.
+[176] Arkaitz Zubiaga, Ahmet Aker, Kalina Bontcheva, Maria Liakata, and Rob Procter. 2018. Detection and resolution of
+rumours in social media: A survey.ACM Comput. Surv.51, 2 (2018), 1–36.
+[177] OvidiuŞerban,NicholasThapen,BrendanMaginnis,ChrisHankin,andVirginiaFoot.2019.Real-timeprocessingof
+socialmediawithSENTINEL:Asyndromicsurveillancesystemincorporatingdeeplearningforhealthclassification.
+Inf. Process. Manag.56, 3 (2019), 1166–1184.
+Received 17 July 2021; revised 31 January 2022; accepted 8 March 2022
+ACM Computing Surveys, Vol. 55, No. 4, Article 77. Publication date: November 2022.
