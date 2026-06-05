@@ -128,37 +128,37 @@ OpenRelief/
 
 ## AI Safety Principles
 
-OpenRelief follows a human-in-the-loop approach for multi-hazard humanitarian information work. The system is informed not only by NCP Relief’s COVID-19 mutual-aid experience, but also by Zhuoming Info Aid’s disaster information practice across earthquakes, floods, typhoons, geological hazards, and other emergency contexts.
-
 OpenRelief treats AI as a support tool for responders, not as an autonomous decision-maker.
 
-* AI suggestions are not final decisions.
+OpenRelief follows a human-in-the-loop approach:
 
-* Critical and high-risk cases require human review.
+- AI suggestions are not final decisions.
 
-* Medical, rescue, legal, protection, and security-sensitive outputs require expert or coordinator review.
+- Critical and high-risk cases require human review.
 
-* Floods, earthquakes, landslides, typhoons, epidemics, explosions, and other hazards may involve different risks, response actors, timelines, and verification needs.
+- Medical, rescue, legal, protection, and security-sensitive outputs require expert or coordinator review.
 
-* Disaster information from social media, public help requests, field reports, volunteer submissions, and third-party sources must be verified before being used for coordination or public reporting.
+- Floods, earthquakes, landslides, typhoons, epidemics, explosions, and other hazards may involve different risks, response actors, timelines, and verification needs.
 
-* Public reports must be source-grounded, clearly attributed where appropriate, and edited by humans.
+- Disaster information from social media, public help requests, field reports, volunteer submissions, and third-party sources must be verified before being used for coordination or public reporting.
 
-* AI-generated summaries, maps, triage labels, and resource-matching suggestions must remain reviewable and reversible.
+- Public reports must be source-grounded, clearly attributed where appropriate, and edited by humans.
 
-* Personal data, contact information, household details, medical conditions, and precise sensitive locations must be protected.
+- AI-generated summaries, maps, triage labels, and resource-matching suggestions must remain reviewable and reversible.
 
-* Location data should be generalized or restricted when public disclosure could create safety, privacy, or security risks.
+- Personal data, contact information, household details, medical conditions, and precise sensitive locations must be protected.
 
-* Urgency triage should prioritize recall for life-safety cases, while clearly marking uncertainty and avoiding unsupported conclusions.
+- Location data should be generalized or restricted when public disclosure could create safety, privacy, or security risks.
 
-* Information related to stranded people, missing persons, medical needs, rescue access, shelter, supplies, and infrastructure damage should be handled with special care.
+- Urgency triage should prioritize recall for life-safety cases, while clearly marking uncertainty and avoiding unsupported conclusions.
 
-* AI should help reduce information overload, but it must not hide uncertain, conflicting, or unverified information from human reviewers.
+- Information related to stranded people, missing persons, medical needs, rescue access, shelter, supplies, and infrastructure damage should be handled with special care.
 
-* OpenRelief should preserve audit trails for high-risk AI-assisted actions, including who reviewed, edited, approved, or rejected an AI suggestion.
+- AI should help reduce information overload, but it must not hide uncertain, conflicting, or unverified information from human reviewers.
 
-* When information is incomplete, conflicting, outdated, or unverified, the system should label it clearly instead of presenting it as confirmed fact.
+- OpenRelief should preserve audit trails for high-risk AI-assisted actions, including who reviewed, edited, approved, or rejected an AI suggestion.
+
+- When information is incomplete, conflicting, outdated, or unverified, the system should label it clearly instead of presenting it as confirmed fact.
 
 See:
 
