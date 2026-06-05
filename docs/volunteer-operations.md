@@ -1,6 +1,6 @@
 # Volunteer Operations
 
-OpenRelief should support digital volunteers and NGO coordinators without assuming that volunteers replace professional responders.
+OpenRelief should support volunteers and NGO coordinators without assuming that volunteers replace professional responders.
 
 ## Volunteer Roles
 
