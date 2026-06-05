@@ -30,9 +30,6 @@ Their work helps preserve operational memory, clarify the role of self-organized
 - **[Civil Societies and Disaster Risk Reduction in China: Policy and Literature Analysis](https://www.mdpi.com/2071-1050/17/23/10644)**  
   Notes: Reviews civil society participation in disaster risk reduction in China and discusses Zhuoming Info Aid as an example of web-enabled civil society practice.
 
-- **[Building Up Alliances and Breaking Down the State Monopoly: The Rise of Non-Governmental Disaster Relief in China](https://www.cambridge.org/core/journals/china-quarterly/article/building-up-alliances-and-breaking-down-the-state-monopoly-the-rise-of-nongovernmental-disaster-relief-in-china/BB0BD19CA808472BE18A3D4EEA6FA2BE)**  
-  Notes: Analyzes the rise of non-governmental disaster relief in China and references Zhuoming Info Aid-related materials.
-
 - **[Security Governance in East Asia and China’s Response to COVID-19](https://link.springer.com/article/10.1007/s40647-020-00312-4)**  
   Notes: Provides context on China’s COVID-19 response and includes references to NCP Relief-related civic action.
 
