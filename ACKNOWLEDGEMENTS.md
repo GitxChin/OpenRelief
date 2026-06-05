@@ -1,6 +1,6 @@
 # Acknowledgements
 
-OpenRelief stands on the work of humanitarian practitioners, digital volunteers, disaster information service organizations, crisis informatics researchers, and open-source communities.
+OpenRelief stands on the work of humanitarian practitioners, volunteers, disaster information service organizations, crisis informatics researchers, and open-source communities.
 
 ## Practice Foundations
 
