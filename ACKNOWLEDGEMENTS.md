@@ -158,5 +158,5 @@ These works inform OpenRelief's emphasis on:
 
 ## Citation Maintenance
 
-
+Future versions should expand this file with complete bibliographic metadata, including authors, year, venue, and stable URLs.
 
