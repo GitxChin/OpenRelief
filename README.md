@@ -6,10 +6,8 @@ OpenRelief is an open-source humanitarian technology project for NGOs, volunteer
 
 OpenRelief builds on the practice of **[NCP Relief](https://weibo.com/u/6892480749)** and the disaster information service methodology inherited from **[Zhuoming Info Aid](https://news.un.org/zh/story/2023/08/1120742) (aka Zhuoming Disaster Information Center)**. The project also draws from research in disaster informatics, crisis computing, social media situation awareness, emergency message classification, and human-in-the-loop AI.
 
-> OpenRelief does not replace emergency services, professional responders, medical judgment, or local command systems. It is designed as decision-support infrastructure: AI assists, humans decide.
-> This project was initiated by former core volunteers of NCP Relief and Zhuoming Info Aid.  
-> It has **no legal affiliation, employment, or leadership relationship** with those teams or their members.  
-> Any negative impact or legal responsibility arising from this project will be borne solely by the project initiators.
+> OpenRelief does not replace emergency services, professional responders, medical judgment, or local command systems. It is designed as decision-support infrastructure: AI assists, humans decide.  
+> This project was initiated by former core volunteers of NCP Relief and Zhuoming Info Aid. It has **no legal affiliation, employment, or leadership relationship** with those teams or their members. Any negative impact or legal responsibility arising from this project will be borne solely by the project initiators.
 
 ## Why OpenRelief
 
