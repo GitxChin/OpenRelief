@@ -18,63 +18,63 @@ Their work helps preserve operational memory, clarify the role of self-organized
 
 ### Academic Papers and Scholarly Articles
 
-- **[Understanding the role of self-organizations in disaster relief during COVID-19](https://pmc.ncbi.nlm.nih.gov/articles/PMC8986543/)**
+- **[Understanding the role of self-organizations in disaster relief during COVID-19](https://pmc.ncbi.nlm.nih.gov/articles/PMC8986543/)**  
   Notes: Discusses self-organized disaster relief during COVID-19, including NCP Relief-related practice.
 
-- **[Digital volunteer services in emergency situations: typological characteristics, advantages, and challenges](https://www.sciencedirect.com/science/article/pii/S2666764924000389)**
+- **[Digital volunteer services in emergency situations: typological characteristics, advantages, and challenges](https://www.sciencedirect.com/science/article/pii/S2666764924000389)**  
   Notes: Studies digital volunteer services in emergency situations and includes NCP Relief-related practice as part of its case analysis.
 
-- **[Crisis crowdsourcing and China’s civic participation in disaster response: Evidence from earthquake relief](https://journals.sagepub.com/doi/10.1177/0920203X17735668)**
+- **[Crisis crowdsourcing and China’s civic participation in disaster response: Evidence from earthquake relief](https://journals.sagepub.com/doi/10.1177/0920203X17735668)**  
   Notes: Examines crisis crowdsourcing and civic participation in China’s disaster response, including Zhuoming Info Aid-related disaster information practice.
 
-- **[Civil Societies and Disaster Risk Reduction in China: Policy and Literature Analysis](https://www.mdpi.com/2071-1050/17/23/10644)**
+- **[Civil Societies and Disaster Risk Reduction in China: Policy and Literature Analysis](https://www.mdpi.com/2071-1050/17/23/10644)**  
   Notes: Reviews civil society participation in disaster risk reduction in China and discusses Zhuoming Info Aid as an example of web-enabled civil society practice.
 
-- **[Building Up Alliances and Breaking Down the State Monopoly: The Rise of Non-Governmental Disaster Relief in China](https://www.cambridge.org/core/journals/china-quarterly/article/building-up-alliances-and-breaking-down-the-state-monopoly-the-rise-of-nongovernmental-disaster-relief-in-china/BB0BD19CA808472BE18A3D4EEA6FA2BE)**
+- **[Building Up Alliances and Breaking Down the State Monopoly: The Rise of Non-Governmental Disaster Relief in China](https://www.cambridge.org/core/journals/china-quarterly/article/building-up-alliances-and-breaking-down-the-state-monopoly-the-rise-of-nongovernmental-disaster-relief-in-china/BB0BD19CA808472BE18A3D4EEA6FA2BE)**  
   Notes: Analyzes the rise of non-governmental disaster relief in China and references Zhuoming Info Aid-related materials.
 
-- **[Security Governance in East Asia and China’s Response to COVID-19](https://link.springer.com/article/10.1007/s40647-020-00312-4)**
+- **[Security Governance in East Asia and China’s Response to COVID-19](https://link.springer.com/article/10.1007/s40647-020-00312-4)**  
   Notes: Provides context on China’s COVID-19 response and includes references to NCP Relief-related civic action.
 
-- **[Virtual care facing the COVID-19 outbreak in China in the digital age: from mutual support to structural inequality](https://bristoluniversitypressdigital.com/abstract/journals/ijcc/6/1-2/article-p275.xml)**
+- **[Virtual care facing the COVID-19 outbreak in China in the digital age: from mutual support to structural inequality](https://bristoluniversitypressdigital.com/abstract/journals/ijcc/6/1-2/article-p275.xml)**  
   Notes: Discusses grassroots mutual aid and virtual care during the COVID-19 outbreak, including NCP Relief-related practice.
 
-- **[China’s Disaster Diplomacy in Southeast Asia](https://www.jstor.org/stable/48635893)**
+- **[China’s Disaster Diplomacy in Southeast Asia](https://www.jstor.org/stable/48635893)**  
   Notes: Includes references to Chinese disaster response actors and Zhuoming Info Aid-related technical support in disaster information contexts.
 
-- **[Effects of Alliance Process on Goal Achievement](https://www.jstor.org/stable/45147495)**
+- **[Effects of Alliance Process on Goal Achievement](https://www.jstor.org/stable/45147495)**  
   Notes: Uses Zhuoming Info Aid-related materials in the study of alliance processes and goal achievement.
 
 ### Chinese Academic Materials
 
-- **[应急治理中自组织如何促进合作秩序生成？——基于大规模公众众包的分析](https://pattern.swarma.org/mobile/paper/531bd3c2-fc13-11ee-a95c-0242ac170005)**
+- **[应急治理中自组织如何促进合作秩序生成？——基于大规模公众众包的分析](https://pattern.swarma.org/mobile/paper/531bd3c2-fc13-11ee-a95c-0242ac170005)**  
   Notes: Discusses self-organization and cooperative order in emergency governance through large-scale public crowdsourcing, including 卓明灾害信息中心, NCP生命支援, and related public emergency information practices.
 
-- **[应急管理中众包的理论内蕴与实践价值](https://dylc.cbpt.cnki.net/portal/journal/portal/client/paper/f44d9af6bf2a57871072a8f4bd8f59d3)**
+- **[应急管理中众包的理论内蕴与实践价值](https://dylc.cbpt.cnki.net/portal/journal/portal/client/paper/f44d9af6bf2a57871072a8f4bd8f59d3)**  
   Notes: Discusses the theoretical meaning and practical value of crowdsourcing in emergency management.
 
 ### Reports, Books, and Background Materials
 
-- **[New Impetus and New Approaches](https://southsouth-galaxy.org/wp-content/uploads/2023/05/UNOSSC-Digital-Publication-14.pdf)**
+- **[New Impetus and New Approaches](https://southsouth-galaxy.org/wp-content/uploads/2023/05/UNOSSC-Digital-Publication-14.pdf)**  
   Notes: Mentions Zhuoming Info Aid as a Chinese civil society organization focused on disaster information services and reducing information asymmetry in disaster response.
 
-- **[Comparative Research on Disaster Philanthropy Fundraising](https://daofengandangelafoundation.org/wp-content/uploads/2022/01/comparative-research-on-disaster-philanthropy-fundraising.pdf)**
+- **[Comparative Research on Disaster Philanthropy Fundraising](https://daofengandangelafoundation.org/wp-content/uploads/2022/01/comparative-research-on-disaster-philanthropy-fundraising.pdf)**  
   Notes: Includes Zhuoming Info Aid-related interview and background material in the context of disaster philanthropy and fundraising.
 
-- **[Plague Illuminates](https://chuangcn.org/books/social-contagion/ch4/)**
+- **[Plague Illuminates](https://chuangcn.org/books/social-contagion/ch4/)**  
   Notes: Provides background documentation on grassroots mutual aid and NCP Relief-related practice during the COVID-19 outbreak.
 
-- **[China and the Internet: Using New Media for Development and Social Change](https://ccsnews.ncl.edu.tw/news/218/04)**
+- **[China and the Internet: Using New Media for Development and Social Change](https://ccsnews.ncl.edu.tw/news/218/04)**  
   Notes: Includes the chapter “NCP Relief: New Media Actions against Covid-19.”
 
-- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**
+- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
   Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
 
 #### Naming Note
 
 In this repository, **“NCP Life Support Network,” “NCP life support network,” “NCP Life Support,” and “NCP生命支援”** all refer to **NCP Relief**, the predecessor practice of **OpenRelief**.
 
-Similarly, **“Zhuoming Disaster Information Service Center,” “Zhuoming Disaster Information Service Centre,” “Zhuoming Disaster Information and Service Center,” “卓明灾害信息中心,” and “卓明灾害信息服务中心”** all refer to **Zhuoming Info Aid**.
+Similarly, **“Zhuoming,” “Zhuoming Disaster Information Service Center,” “Zhuoming Disaster Information Service Centre,” “Zhuoming Disaster Information and Service Center,” “卓明灾害信息中心,” and “卓明灾害信息服务中心”** all refer to **Zhuoming Info Aid**.
 
 
 ## Research Foundations
