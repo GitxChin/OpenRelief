@@ -139,9 +139,9 @@ OpenRelief/
 │   ├── social_media_situation_awareness_text.txt
 │   └── socially_enhanced_sa_survey_text.txt
 │
-└── .github/
-    ├── ISSUE_TEMPLATE/
-    └── PULL_REQUEST_TEMPLATE.md
+└── .github/   # Planned
+    ├── ISSUE_TEMPLATE/   # Planned
+    └── PULL_REQUEST_TEMPLATE.md   #Planned
 ```
 
 ## Product Documents
