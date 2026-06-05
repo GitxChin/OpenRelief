@@ -1,6 +1,6 @@
 # OpenRelief
 
-**Human-centered AI infrastructure for disaster relief coordination.**
+**AI-enabled disaster information for humanitarian action.**
 
 OpenRelief is an open-source humanitarian technology project for NGOs, volunteer networks, community responders, and disaster information teams. It helps transform fragmented crisis information into structured, reviewable, privacy-aware records that support needs assessment, urgency triage, resource matching, and situation reporting.
 
