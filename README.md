@@ -1,6 +1,6 @@
 # OpenRelief
 
-OpenRelief is an open-source humanitarian relief coordination project for NGOs, volunteer networks, and community responders. It builds on the field experience of [NCP Relief] {https://weibo.com/u/6892480749} and the disaster information service methodology inherited from [Zhuoming Info Aid] {https://news.un.org/zh/story/2023/08/1120742} (aka Zhuoming Disaster Information Center), with the goal of using AI to improve disaster information processing, needs triage, resource matching, and collaborative response.
+OpenRelief is an open-source humanitarian relief coordination project for NGOs, volunteer networks, and community responders. It builds on the field experience of [NCP Relief]{https://weibo.com/u/6892480749} and the disaster information service methodology inherited from [Zhuoming Info Aid]{https://news.un.org/zh/story/2023/08/1120742} (aka Zhuoming Disaster Information Center), with the goal of using AI to improve disaster information processing, needs triage, resource matching, and collaborative response.
 
 OpenRelief is not intended to replace emergency services, professional responders, medical judgment, or local command systems. It is designed as human-in-the-loop infrastructure: AI helps structure, classify, summarize, prioritize, and route information, while high-risk decisions remain under human review.
 
