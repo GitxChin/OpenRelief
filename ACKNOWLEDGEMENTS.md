@@ -39,6 +39,12 @@ Their work helps preserve operational memory, clarify the role of self-organized
 - **[Effects of Alliance Process on Goal Achievement](https://www.jstor.org/stable/45147495)**  
   Notes: Uses Zhuoming Info Aid-related materials in the study of alliance processes and goal achievement.
 
+- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
+  Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
+
+- **[New Impetus and New Approaches](https://southsouth-galaxy.org/wp-content/uploads/2023/05/UNOSSC-Digital-Publication-14.pdf)**  
+  Notes: Mentions Zhuoming Info Aid as a Chinese civil society organization focused on disaster information services and reducing information asymmetry in disaster response.
+
 ### Chinese Academic Materials
 
 - **[应急治理中自组织如何促进合作秩序生成？——基于大规模公众众包的分析](https://pattern.swarma.org/mobile/paper/531bd3c2-fc13-11ee-a95c-0242ac170005)**  
@@ -46,23 +52,6 @@ Their work helps preserve operational memory, clarify the role of self-organized
 
 - **[应急管理中众包的理论内蕴与实践价值](https://dylc.cbpt.cnki.net/portal/journal/portal/client/paper/f44d9af6bf2a57871072a8f4bd8f59d3)**  
   Notes: Discusses the theoretical meaning and practical value of crowdsourcing in emergency management.
-
-### Reports, Books, and Background Materials
-
-- **[New Impetus and New Approaches](https://southsouth-galaxy.org/wp-content/uploads/2023/05/UNOSSC-Digital-Publication-14.pdf)**  
-  Notes: Mentions Zhuoming Info Aid as a Chinese civil society organization focused on disaster information services and reducing information asymmetry in disaster response.
-
-- **[Comparative Research on Disaster Philanthropy Fundraising](https://daofengandangelafoundation.org/wp-content/uploads/2022/01/comparative-research-on-disaster-philanthropy-fundraising.pdf)**  
-  Notes: Includes Zhuoming Info Aid-related interview and background material in the context of disaster philanthropy and fundraising.
-
-- **[Plague Illuminates](https://chuangcn.org/books/social-contagion/ch4/)**  
-  Notes: Provides background documentation on grassroots mutual aid and NCP Relief-related practice during the COVID-19 outbreak.
-
-- **[China and the Internet: Using New Media for Development and Social Change](https://ccsnews.ncl.edu.tw/news/218/04)**  
-  Notes: Includes the chapter “NCP Relief: New Media Actions against Covid-19.”
-
-- **[UN News: Zhuoming-related disaster information practice](https://news.un.org/zh/story/2023/08/1120742)**  
-  Notes: Provides public documentation related to Zhuoming Info Aid and disaster information service practice.
 
 #### Naming Note
 
