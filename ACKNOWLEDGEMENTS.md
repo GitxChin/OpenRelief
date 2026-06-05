@@ -30,9 +30,6 @@ Their work helps preserve operational memory, clarify the role of self-organized
 - **[Civil Societies and Disaster Risk Reduction in China: Policy and Literature Analysis](https://www.mdpi.com/2071-1050/17/23/10644)**  
   Notes: Reviews civil society participation in disaster risk reduction in China and discusses Zhuoming Info Aid as an example of web-enabled civil society practice.
 
-- **[Security Governance in East Asia and China’s Response to COVID-19](https://link.springer.com/article/10.1007/s40647-020-00312-4)**  
-  Notes: Provides context on China’s COVID-19 response and includes references to NCP Relief-related civic action.
-
 - **[Virtual care facing the COVID-19 outbreak in China in the digital age: from mutual support to structural inequality](https://bristoluniversitypressdigital.com/abstract/journals/ijcc/6/1-2/article-p275.xml)**  
   Notes: Discusses grassroots mutual aid and virtual care during the COVID-19 outbreak, including NCP Relief-related practice.
 
