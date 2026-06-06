@@ -1,4 +1,4 @@
-# Research Foundations and Acknowledgements
+# Research Foundations
 
 OpenRelief is informed by prior research in disaster informatics, crisis computing, social media analysis, AI-assisted disaster response, emergency message classification, crowdsourcing, and automated reporting. We acknowledge these works as research foundations for the project.
 
