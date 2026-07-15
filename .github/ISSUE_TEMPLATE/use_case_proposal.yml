@@ -1,0 +1,42 @@
+name: Humanitarian use case proposal
+description: Propose a real-world workflow pattern using fictional or anonymized details only.
+title: "[Use Case]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use fictional or fully anonymized details. Do not include real names, phone numbers, addresses, exact household locations, medical records, or private chat logs.
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: What situation should OpenRelief support?
+    validations:
+      required: true
+  - type: textarea
+    id: actors
+    attributes:
+      label: Actors
+      description: Who is involved?
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow
+      description: What steps happen from intake to resolution?
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks
+      description: What privacy, safety, verification, or coordination risks exist?
+    validations:
+      required: true
+  - type: checkboxes
+    id: data
+    attributes:
+      label: Data safety
+      options:
+        - label: This proposal contains only fictional or fully anonymized details.
+          required: true

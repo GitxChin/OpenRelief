@@ -1,0 +1,42 @@
+name: Safety or privacy concern
+description: Report a safety, privacy, AI, misuse, or governance concern.
+title: "[Safety/Privacy]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not disclose exploitable vulnerabilities, secrets, or sensitive personal data in a public issue. For sensitive reports, follow SECURITY.md.
+  - type: dropdown
+    id: concern_type
+    attributes:
+      label: Concern type
+      options:
+        - Personal data exposure
+        - Unsafe AI output
+        - Urgency misclassification
+        - Misuse or abuse risk
+        - Public reporting risk
+        - Volunteer safety risk
+        - Governance concern
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the concern without including sensitive details.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential impact
+      description: Who or what could be harmed?
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Suggested mitigation
+      description: What should change?
