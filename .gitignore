@@ -1,3 +1,42 @@
+# Operating system files
 .DS_Store
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local agent and engineering files
+AGENTS.md
+README.private.md
+.agents/
+.codex/
+
+# Private research and archives
 OpenRelief.zip
 papers/
+work/
+private/
+archive/
+research-work/
+
+# JavaScript and frontend builds
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+coverage/
+
+# Runtime output
+*.log
+tmp/
+temp/
