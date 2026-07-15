@@ -207,6 +207,5 @@ The MVP product definition is successful when:
 - Existing OpenRelief/NCP Relief operational knowledge.
 - Existing mini-program workflow and field forms.
 - Zhuoming Info Aid disaster information methodology and HEINA-style analysis.
-- Research foundations documented in [../docs/research-foundations.md](../docs/research-foundations.md).
-- Safety policies documented in [../ai/policies](../ai/policies).
-
+- Research foundations documented in [../research-foundations.md](../research-foundations.md).
+- Safety policies documented in [../../ai-specs/policies](../../ai-specs/policies).

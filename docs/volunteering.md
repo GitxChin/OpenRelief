@@ -45,10 +45,6 @@ OpenRelief needs both technical volunteers and practice-based humanitarian infor
 
 These roles work together to transform fragmented disaster information into structured, reviewable, privacy-aware records for humanitarian action.
 
-See:
-
-* [volunteer-operations.md](volunteer-operations.md)
-
 ### AI, Technology, and Data Roles
 
 These roles focus on AI workflows, software systems, data infrastructure, model evaluation, and technical safety.
@@ -528,4 +524,71 @@ You can start by:
 
 OpenRelief welcomes contributors from technology, humanitarian response, public health, social work, emergency management, data science, AI safety, open-source communities, and civil society organizations.
 
+## Volunteer Operations
+
+OpenRelief should support volunteers and NGO coordinators without assuming that volunteers replace professional responders.
+
+### Operational Roles
+
+- intake reviewer;
+- information verifier;
+- geolocation reviewer;
+- translation supporter;
+- map contributor;
+- resource matcher;
+- briefing assistant;
+- safety reviewer;
+- technical maintainer.
+
+### Review Workflow
+
+```text
+New record
+  ↓
+Initial relevance review
+  ↓
+Location and contact check
+  ↓
+Needs and urgency review
+  ↓
+Escalation or resource matching
+  ↓
+Follow-up log
+  ↓
+Closure and review
+```
+
+### Volunteer Safety
+
+Volunteers should not be asked to:
+
+- make final rescue decisions;
+- provide medical diagnosis;
+- contact vulnerable people without protocol;
+- publish personal data;
+- enter unsafe physical areas without authorization;
+- represent partner organizations without approval.
+
+### Training Topics
+
+- humanitarian principles;
+- privacy and consent;
+- information verification;
+- location handling;
+- urgency triage basics;
+- rumor control;
+- use of AI outputs;
+- escalation rules;
+- documentation and audit logs.
+
+### Case Closure
+
+Cases should be closed only when the responsible reviewer records:
+
+- final status;
+- last contact or evidence;
+- unresolved risks;
+- handoff organization if any;
+- closure reason;
+- follow-up need.
 
